@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerActions",
     "maps": [
         {
             "name": "Kart",
@@ -11,25 +11,16 @@
                     "id": "03b99d47-5426-470c-9611-bd238cbe6f28",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Brake",
+                    "name": "Brake/Reverse",
                     "type": "Button",
                     "id": "f99f8937-9232-453e-ab2e-4da6a06c0428",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Reverse",
-                    "type": "Button",
-                    "id": "399e9c32-47e7-4375-ae65-8ee1bbfa66f9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 },
                 {
@@ -47,7 +38,7 @@
                     "id": "331f9340-c9e8-4521-9105-f9811d266ef3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 },
                 {
@@ -56,7 +47,7 @@
                     "id": "e049e036-9e92-4989-b65d-6dd289ffa762",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 }
             ],
@@ -90,7 +81,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Brake",
+                    "action": "Brake/Reverse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -101,29 +92,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Brake",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fc64179e-2ea9-4d7c-9b60-7ef113714fad",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reverse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d2332717-8d19-4d49-bcae-d52f6d437bf8",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Reverse",
+                    "action": "Brake/Reverse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
