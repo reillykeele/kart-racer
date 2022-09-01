@@ -1,6 +1,6 @@
+using Util.EditorHelpers;
 using UnityEditor;
 using UnityEngine;
-using Util.EditorHelpers;
 
 namespace Util.Editor
 {

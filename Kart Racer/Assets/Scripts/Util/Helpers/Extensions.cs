@@ -190,6 +190,12 @@ namespace Util.Helpers
 
         #endregion
 
+        #region float
+
+        public static bool IsZero(this float x, double precision = 0.000001) => Mathf.Abs(x) <= precision;
+
+        #endregion
+
         #region IEnumerable
 
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
