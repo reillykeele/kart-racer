@@ -7,7 +7,7 @@ namespace UI
 {
     public class UILoader : MonoBehaviour
     {
-        public List<Util.Enums.UI> UIToLoad;
+        public List<Util.Enums.UIType> UIToLoad;
         public List<Scene> ScenesToLoad;
 
         void Start()

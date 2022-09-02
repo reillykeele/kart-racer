@@ -1,26 +1,15 @@
+using Data.Player;
 using Util.Helpers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Actor.Player
 {
+    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(PlayerInputController))]
     public class PlayerMovementController : MonoBehaviour
     {
-        [Header("Speed")]
-        public float AccelerationSpeed;
-        public float MaxSpeed;
-
-        public float ReverseAccelerationSpeed;
-        public float MaxReverseSpeed;
-
-        public float DeccelerationSpeed;
-        public float BrakeSpeed;
-
-        [Header("Handling")]
-        public float TurningSpeed;
-
-        [Header("Gravity")]
-        public float GravitySpeed;
-        public float ConstantGravitySpeed;
+        [SerializeField] public PlayerMovementData PlayerMovement;
 
         private CharacterController _characterController;
         private PlayerInputController _input;
@@ -35,44 +24,44 @@ namespace Actor.Player
 
         void FixedUpdate()
         {
-            if (_input.IsAccelerating == _input.IsBraking)
+            if (_input.PlayerInput.IsAccelerating == _input.PlayerInput.IsBraking)
             {
                 Debug.Log($"{_currSpeed} Deccelerating");
-                var newSpeed = _currSpeed + (_currSpeed > 0 ? -1 : 1) * DeccelerationSpeed;
+                var newSpeed = _currSpeed + (_currSpeed > 0 ? -1 : 1) * PlayerMovement.DeccelerationSpeed;
                 _currSpeed = _currSpeed.IsZero() || _currSpeed * newSpeed < 0 ? 0 : newSpeed;
             }
-            else if (_input.IsAccelerating)
+            else if (_input.PlayerInput.IsAccelerating)
             {
                 Debug.Log($"{_currSpeed} Accelerating");
-                _currSpeed = _currSpeed >= MaxSpeed ? MaxSpeed : _currSpeed + AccelerationSpeed;
+                _currSpeed = _currSpeed >= PlayerMovement.MaxSpeed ? PlayerMovement.MaxSpeed : _currSpeed + PlayerMovement.AccelerationSpeed;
             } 
-            else if (_input.IsBraking)
+            else if (_input.PlayerInput.IsBraking)
             {
                 // if moving forward, slow down, else reverse
                 if (_currSpeed > 0)
                 {
                     Debug.Log($"{_currSpeed} Braking");
-                    _currSpeed = _currSpeed <= 0 ? 0 : _currSpeed - BrakeSpeed;
+                    _currSpeed = _currSpeed <= 0 ? 0 : _currSpeed - PlayerMovement.BrakeSpeed;
                 }
                 else
                 {
                     Debug.Log($"{_currSpeed} Reversing");
-                    _currSpeed = _currSpeed <= -MaxReverseSpeed ? -MaxReverseSpeed : _currSpeed - ReverseAccelerationSpeed;
+                    _currSpeed = _currSpeed <= -PlayerMovement.MaxReverseSpeed ? -PlayerMovement.MaxReverseSpeed : _currSpeed - PlayerMovement.ReverseAccelerationSpeed;
                 }
             }                
 
             var forward = _characterController.transform.forward;
             Debug.DrawRay(transform.position, 3 * forward, Color.yellow);
-            var steerDirection = _input.Steering.x * TurningSpeed;
+            var steerDirection = _input.PlayerInput.Steering.x * PlayerMovement.TurningSpeed;
 
             if (!_currSpeed.IsZero())
                 _characterController.transform.Rotate(Vector3.up * steerDirection * Time.fixedDeltaTime);
 
             var movement = forward * _currSpeed * Time.fixedDeltaTime;
             if (!_characterController.isGrounded)
-                movement.y -= GravitySpeed;
+                movement.y -= PlayerMovement.GravitySpeed;
             else
-                movement.y -= ConstantGravitySpeed;
+                movement.y -= PlayerMovement.ConstantGravitySpeed;
 
             _characterController.Move(movement);
         }

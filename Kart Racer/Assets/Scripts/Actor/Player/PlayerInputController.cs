@@ -1,26 +1,23 @@
+using Data.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Vector2 = UnityEngine.Vector2;
 
 namespace Actor.Player
 {
+    [RequireComponent(typeof(PlayerInput))]
     public class PlayerInputController : MonoBehaviour
     {
-        public bool IsAccelerating { get; set; }
-        public bool IsBraking { get; set; }
-        public bool IsDrifting { get; set; }
-        public bool IsUsingItem { get; set; }
-        public Vector2 Steering { get; set; }
+        public PlayerInputData PlayerInput;
 
-        public void OnAccelerate(InputValue val) => IsAccelerating = val.isPressed;
+        public void OnAccelerate(InputValue val) => PlayerInput.IsAccelerating = val.isPressed;
 
-        public void OnBrakeReverse(InputValue val) => IsBraking = val.isPressed;
+        public void OnBrakeReverse(InputValue val) => PlayerInput.IsBraking = val.isPressed;
 
-        public void OnDrift(InputValue val) => IsDrifting = val.isPressed;
+        public void OnDrift(InputValue val) => PlayerInput.IsDrifting = val.isPressed;
 
-        public void OnItem(InputValue val) => IsUsingItem = val.isPressed;
+        public void OnItem(InputValue val) => PlayerInput.IsUsingItem = val.isPressed;
 
-        public void OnSteer(InputValue val) => Steering = val.Get<Vector2>();
+        public void OnSteer(InputValue val) => PlayerInput.Steering = val.Get<Vector2>();
 
     }
 }

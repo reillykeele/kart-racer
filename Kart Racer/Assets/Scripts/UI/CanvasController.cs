@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Scene = Util.Enums.Scene;
 
@@ -9,12 +10,12 @@ namespace UI
 {
     public class CanvasController : MonoBehaviour
     {
-        public Util.Enums.UI DefaultUI;
+        public Util.Enums.UIType DefaultUI;
 
         private List<UIController> uiControllers;
         private Hashtable uiHashtable;
 
-        private Util.Enums.UI lastActiveUI;
+        private Util.Enums.UIType lastActiveUI;
 
         void Awake()
         {
@@ -22,6 +23,12 @@ namespace UI
             uiHashtable = new Hashtable();
 
             RegisterUIControllers(uiControllers);
+        }
+
+        void Update()
+        {
+            if (Gamepad.current.buttonEast.wasPressedThisFrame)
+                GetUI(lastActiveUI)?.ReturnToUI();
         }
 
         void Start()
@@ -32,22 +39,22 @@ namespace UI
             EnableUI(DefaultUI);
         }
 
-        public void EnableUI(Util.Enums.UI target)
+        public void EnableUI(Util.Enums.UIType target)
         {
-            if (target == Util.Enums.UI.None) return;
+            if (target == Util.Enums.UIType.None) return;
         
             GetUI(target)?.Enable();
             lastActiveUI = target;
         }
 
-        public void DisableUI(Util.Enums.UI target)
+        public void DisableUI(Util.Enums.UIType target)
         {
-            if (target == Util.Enums.UI.None) return;
+            if (target == Util.Enums.UIType.None) return;
 
             GetUI(target)?.Disable();
         }
 
-        public void SwitchUI(Util.Enums.UI target)
+        public void SwitchUI(Util.Enums.UIType target)
         {
             if (lastActiveUI == target) return;
 
@@ -60,11 +67,11 @@ namespace UI
         {
             if (scene == Scene.None) return;
 
-            SwitchUI(Util.Enums.UI.LoadingScreen);
+            SwitchUI(Util.Enums.UIType.LoadingScreen);
             StartCoroutine(LoadingScreen(scene));
         }
 
-        private UIController GetUI(Util.Enums.UI ui) => (UIController) uiHashtable[ui];
+        private UIController GetUI(Util.Enums.UIType uiType) => (UIController) uiHashtable[uiType];
 
         private void RegisterUIControllers(IEnumerable<UIController> controllers)
         {
@@ -75,7 +82,7 @@ namespace UI
             }
         }
 
-        private bool UIExists(Util.Enums.UI ui) => uiHashtable.ContainsKey(ui);
+        private bool UIExists(Util.Enums.UIType uiType) => uiHashtable.ContainsKey(uiType);
 
         IEnumerator LoadingScreen(Scene scene)
         {

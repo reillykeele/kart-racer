@@ -4,12 +4,14 @@ using UI.ButtonControllers;
 using Util.Helpers;
 using UnityEngine;
 using UnityEngine.UI;
+using Util.Enums;
 
 namespace UI
 {
     public class UIController : MonoBehaviour
     {
-        public Util.Enums.UI UIType;
+        public UIType UIType;
+        public UIType ReturnUI;
 
         public Button initialSelectedButton = null;
 
@@ -34,5 +36,11 @@ namespace UI
         }
 
         public virtual void Disable() => gameObject.Disable();
+
+        public virtual void ReturnToUI()
+        {
+            if (ReturnUI != UIType.None) _canvasController.SwitchUI(ReturnUI);
+        }
+
     }
 }

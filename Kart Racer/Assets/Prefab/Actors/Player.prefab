@@ -79,15 +79,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7017a3bc1797f94b83594ef399fe42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeccelerationSpeed: 0.1
-  AccelerationSpeed: 0.5
-  MaxSpeed: 10
-  BrakeSpeed: 0.2
-  ReverseAccelerationSpeed: 5
-  MaxReverseSpeed: 4
-  TurningSpeed: 50
-  GravitySpeed: 8
-  ConstantGravitySpeed: 0.5
+  PlayerMovement:
+    AccelerationSpeed: 1
+    MaxSpeed: 10
+    ReverseAccelerationSpeed: 1
+    MaxReverseSpeed: 5
+    DeccelerationSpeed: 0.2
+    BrakeSpeed: 0.4
+    TurningSpeed: 50
+    GravitySpeed: 4
+    ConstantGravitySpeed: 1
 --- !u!114 &9113864802107751731
 MonoBehaviour:
   m_ObjectHideFlags: 0
