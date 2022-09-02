@@ -39,27 +39,27 @@ namespace UI
             EnableUI(DefaultUI);
         }
 
-        public void EnableUI(Util.Enums.UIType target)
+        public void EnableUI(Util.Enums.UIType target, bool resetOnSwitch = false)
         {
             if (target == Util.Enums.UIType.None) return;
         
-            GetUI(target)?.Enable();
+            GetUI(target)?.Enable(resetOnSwitch);
             lastActiveUI = target;
         }
 
-        public void DisableUI(Util.Enums.UIType target)
+        public void DisableUI(Util.Enums.UIType target, bool resetOnSwitch = false)
         {
             if (target == Util.Enums.UIType.None) return;
 
-            GetUI(target)?.Disable();
+            GetUI(target)?.Disable(resetOnSwitch);
         }
 
-        public void SwitchUI(Util.Enums.UIType target)
+        public void SwitchUI(Util.Enums.UIType target, bool resetCurrentOnSwitch = false, bool resetTargetOnSwitch = true)
         {
             if (lastActiveUI == target) return;
 
-            DisableUI(lastActiveUI);
-            EnableUI(target);
+            DisableUI(lastActiveUI, resetCurrentOnSwitch);
+            EnableUI(target, resetTargetOnSwitch);
             lastActiveUI = target;
         }
 

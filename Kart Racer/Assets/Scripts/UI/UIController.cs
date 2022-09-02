@@ -3,6 +3,7 @@ using System.Linq;
 using UI.ButtonControllers;
 using Util.Helpers;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Util.Enums;
 
@@ -18,28 +19,44 @@ namespace UI
         protected CanvasController _canvasController;
         protected List<AButtonController> _buttonControllers;
 
+        protected Button lastSelectedButton = null;
+
         void Awake()
         {
             _canvasController = GetComponentInParent<CanvasController>();
             _buttonControllers = GetComponentsInChildren<AButtonController>().ToList();
         }
 
-        public virtual void Enable()
+        public virtual void Reset()
         {
-            // Select the first button, if there are any            
-            if (initialSelectedButton == null)
-                _buttonControllers.FirstOrDefault()?.Select();
+            lastSelectedButton = null;
+        }
+
+        public virtual void Enable(bool resetOnSwitch = false)
+        {
+            if (resetOnSwitch)
+                Reset();
+
+            if (lastSelectedButton != null)
+                lastSelectedButton.Select();
+            else if (initialSelectedButton != null)
+                initialSelectedButton.Select();
             else
-                initialSelectedButton?.Select();
+                _buttonControllers.FirstOrDefault()?.Select();
 
             gameObject.Enable();
         }
 
-        public virtual void Disable() => gameObject.Disable();
+        public virtual void Disable(bool resetOnSwitch = false)
+        {
+            lastSelectedButton = EventSystem.current.currentSelectedGameObject?.GetComponent<Button>();
+                
+            gameObject.Disable();
+        }
 
         public virtual void ReturnToUI()
         {
-            if (ReturnUI != UIType.None) _canvasController.SwitchUI(ReturnUI);
+            if (ReturnUI != UIType.None) {_canvasController.SwitchUI(ReturnUI, resetTargetOnSwitch: false);}
         }
 
     }
