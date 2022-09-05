@@ -1,6 +1,6 @@
 using Actor.Player;
+using Manager;
 using UnityEngine;
-using Util.Coroutine;
 using Util.Helpers;
 
 namespace Environment.Item
@@ -15,6 +15,11 @@ namespace Environment.Item
             _collider = GetComponent<Collider>();
         }
 
+        void OnCollisionEnter(Collision col)
+        {
+            Debug.Log("Collision");
+        }
+
         void OnTriggerEnter(Collider collider)
         {
 
@@ -25,7 +30,7 @@ namespace Environment.Item
             
             gameObject.Disable();
 
-            Invoke("Respawn", 3f);
+            Invoke("Respawn", GameManager.Instance.Config.ItemConfig.TimeToRespawn);
         }
 
         public void Respawn()

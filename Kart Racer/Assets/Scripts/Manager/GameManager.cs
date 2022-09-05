@@ -1,12 +1,16 @@
 using System.Collections;
+using Data.Item;
+using ScriptableObject.Config;
 using UnityEngine;
+using Util.Helpers;
 using Util.Singleton;
 
 namespace Manager
 {
     public class GameManager : Singleton<GameManager>
     {
-        public GameState CurrentGameState { get; set; }
+        public GameConfigScriptableObject Config;
+        public GameState CurrentGameState;
 
         // number of racers
         // positions
@@ -35,6 +39,6 @@ namespace Manager
             CurrentGameState = GameState.Playing;
         }
 
-
+        public ItemData GetRandomItem() => Config.ItemConfig.Items.GetRandomElement().Item;
     }
 }

@@ -1,3 +1,5 @@
+using Data.Item;
+using Manager;
 using UnityEngine;
 
 namespace Actor.Player
@@ -10,7 +12,7 @@ namespace Actor.Player
         public int Position { get; set; }
         public int Lap { get; set; }
 
-        public int Item { get; set; }
+        public ItemData Item { get; set; }
 
         public void Awake()
         {
@@ -19,11 +21,19 @@ namespace Actor.Player
 
         public void PickupItem()
         {
-            Debug.Log("Get Item");
             // OnPickupItem event
 
             // Set item based on position
-            // Create a helper ?
+            if (Item == null)
+            {
+                Item = GameManager.Instance.GetRandomItem();
+
+                Debug.Log($"Player picked up {Item.Name}.");
+            }
+            else
+            {
+                Debug.Log("Player already has an item.");
+            }
         }
     }
 }

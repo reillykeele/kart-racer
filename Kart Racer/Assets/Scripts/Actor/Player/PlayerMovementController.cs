@@ -2,24 +2,25 @@ using Data.Player;
 using Manager;
 using Util.Helpers;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Actor.Player
 {
-    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(PlayerInputController))]
     public class PlayerMovementController : MonoBehaviour
     {
         [SerializeField] public PlayerMovementData PlayerMovement;
 
-        private CharacterController _characterController;
+        // private CharacterController _characterController;
+        private Collider _collider;
         private PlayerInputController _input;
 
         private float _currSpeed;
 
         void Awake()
         {
-            _characterController = GetComponent<CharacterController>();
+            // _characterController = GetComponent<CharacterController>();
+            _collider = GetComponent<Collider>();
             _input = GetComponent<PlayerInputController>();
         }
 
@@ -53,20 +54,32 @@ namespace Actor.Player
                 }
             }                
 
-            var forward = _characterController.transform.forward;
+            var forward = transform.forward;
             Debug.DrawRay(transform.position, 3 * forward, Color.yellow);
             var steerDirection = _input.PlayerInput.Steering.x * PlayerMovement.TurningSpeed;
 
             if (!_currSpeed.IsZero())
-                _characterController.transform.Rotate(Vector3.up * steerDirection * Time.fixedDeltaTime);
+                transform.Rotate(Vector3.up * steerDirection * Time.fixedDeltaTime);
 
             var movement = forward * _currSpeed * Time.fixedDeltaTime;
-            if (!_characterController.isGrounded)
+            if (!IsGrounded())
+            {
                 movement.y -= PlayerMovement.GravitySpeed;
+                Debug.Log("Not grounded");
+            }
             else
+            {
                 movement.y -= PlayerMovement.ConstantGravitySpeed;
+                Debug.Log("Not grounded");
+            }
+            
+            transform.position += movement;
+        }
 
-            _characterController.Move(movement);
+        public bool IsGrounded()
+        {
+            Debug.DrawRay(_collider.bounds.center, Vector3.down * (_collider.bounds.extents.y + 0.05f));
+            return Physics.Raycast(_collider.bounds.center, Vector3.down, _collider.bounds.extents.y + 0.05f);
         }
     }
 }

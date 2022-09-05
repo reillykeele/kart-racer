@@ -209,6 +209,11 @@ namespace Util.Helpers
             return !enumerable.Any();
         }
 
+        public static T GetRandomElement<T>(this IEnumerable<T> enumerable)
+        {
+            return enumerable.ElementAtOrDefault(UnityEngine.Random.Range(0, enumerable.Count()));
+        }
+
         #endregion
 
     }

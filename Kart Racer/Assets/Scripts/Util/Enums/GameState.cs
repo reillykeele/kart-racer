@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public enum GameState 
 {
     None = 0,
