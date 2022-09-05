@@ -1,4 +1,5 @@
 using Data.Player;
+using Manager;
 using Util.Helpers;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -24,15 +25,17 @@ namespace Actor.Player
 
         void FixedUpdate()
         {
+            if (!GameManager.Instance.IsPlaying()) return;
+
             if (_input.PlayerInput.IsAccelerating == _input.PlayerInput.IsBraking)
             {
-                Debug.Log($"{_currSpeed} Deccelerating");
+                // Debug.Log($"{_currSpeed} Deccelerating");
                 var newSpeed = _currSpeed + (_currSpeed > 0 ? -1 : 1) * PlayerMovement.DeccelerationSpeed;
                 _currSpeed = _currSpeed.IsZero() || _currSpeed * newSpeed < 0 ? 0 : newSpeed;
             }
             else if (_input.PlayerInput.IsAccelerating)
             {
-                Debug.Log($"{_currSpeed} Accelerating");
+                // Debug.Log($"{_currSpeed} Accelerating");
                 _currSpeed = _currSpeed >= PlayerMovement.MaxSpeed ? PlayerMovement.MaxSpeed : _currSpeed + PlayerMovement.AccelerationSpeed;
             } 
             else if (_input.PlayerInput.IsBraking)
@@ -40,12 +43,12 @@ namespace Actor.Player
                 // if moving forward, slow down, else reverse
                 if (_currSpeed > 0)
                 {
-                    Debug.Log($"{_currSpeed} Braking");
+                    // Debug.Log($"{_currSpeed} Braking");
                     _currSpeed = _currSpeed <= 0 ? 0 : _currSpeed - PlayerMovement.BrakeSpeed;
                 }
                 else
                 {
-                    Debug.Log($"{_currSpeed} Reversing");
+                    // Debug.Log($"{_currSpeed} Reversing");
                     _currSpeed = _currSpeed <= -PlayerMovement.MaxReverseSpeed ? -PlayerMovement.MaxReverseSpeed : _currSpeed - PlayerMovement.ReverseAccelerationSpeed;
                 }
             }                

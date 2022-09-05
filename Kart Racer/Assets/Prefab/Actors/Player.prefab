@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 9113864802107751741}
   - component: {fileID: 9113864802107751736}
   - component: {fileID: 9113864802107751730}
+  - component: {fileID: 4197210456238808655}
   - component: {fileID: 9113864802107751729}
   - component: {fileID: 9113864802107751731}
   - component: {fileID: 9113864802107751740}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +48,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 1, z: 3.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 1.9664474, z: 3.5}
+  m_Center: {x: -0, y: 0.48322368, z: 0}
 --- !u!143 &9113864802107751730
 CharacterController:
   m_ObjectHideFlags: 0
@@ -67,6 +68,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4197210456238808655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113864802107751737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d589598c614f87f44ad3644fda41ea4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9113864802107751729
 MonoBehaviour:
   m_ObjectHideFlags: 0
