@@ -22,7 +22,7 @@ namespace Manager
 
         public void StartCountdown()
         {
-            StartCoroutine(Countdown(3));
+            StartCoroutine(Countdown(Config.CountdownLength));
         }
 
         IEnumerator Countdown(int seconds)
