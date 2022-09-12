@@ -8,6 +8,6 @@ namespace Data.Item
     public class ItemConfigData
     {
         public float TimeToRespawn;
-        public List<ItemScriptableObject> Items;
+        public List<ItemDataScriptableObject> Items;
     }
 }

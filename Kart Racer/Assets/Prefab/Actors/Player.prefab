@@ -95,7 +95,7 @@ MonoBehaviour:
     MaxSpeed: 10
     ReverseAccelerationSpeed: 1
     MaxReverseSpeed: 5
-    DeccelerationSpeed: 0.2
+    DecelerationSpeed: 0.3
     BrakeSpeed: 0.4
     TurningSpeed: 50
     GravitySpeed: 0.5
@@ -112,6 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a29d01fe56ef744eafd12abfb971c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnItemEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &9113864802107751740
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ namespace Data.Player
         public float ReverseAccelerationSpeed;
         public float MaxReverseSpeed;
 
-        public float DeccelerationSpeed;
+        public float DecelerationSpeed;
         public float BrakeSpeed;
 
         [Header("Handling")]
@@ -22,5 +22,8 @@ namespace Data.Player
         [Header("Gravity")]
         public float GravitySpeed;
         public float ConstantGravitySpeed;
+
+        [Header("Boost")] 
+        public float BoostDuration;
     }
 }

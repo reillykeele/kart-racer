@@ -1,5 +1,7 @@
 using System.Collections;
-using Data.Item;
+using System.Collections.Generic;
+using System.Linq;
+using Actor.Item;
 using ScriptableObject.Config;
 using UnityEngine;
 using Util.Helpers;
@@ -17,6 +19,15 @@ namespace Manager
         // map ? (show people as percentage of the track maybe???)
         // countdown
         // timer
+
+        private List<Item> _itemPool;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _itemPool = Config.ItemConfig.Items.Select(x => ItemHelper.GetItemFromData(x.ItemData)).ToList();
+        }
 
         public bool IsPlaying() => CurrentGameState == GameState.Playing;
 
@@ -39,6 +50,6 @@ namespace Manager
             CurrentGameState = GameState.Playing;
         }
 
-        public ItemData GetRandomItem() => Config.ItemConfig.Items.GetRandomElement().Item;
+        public Item GetRandomItem() => _itemPool.GetRandomElement();
     }
 }
