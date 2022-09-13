@@ -1,7 +1,7 @@
 using Manager;
 using UnityEngine;
 
-namespace Actor.Player
+namespace Actor.Racer.Player
 {
     [RequireComponent(typeof(PlayerInputController))]
     [RequireComponent(typeof(PlayerMovementController))]

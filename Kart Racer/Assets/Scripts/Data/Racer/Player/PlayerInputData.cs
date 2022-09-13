@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Data.Player
+namespace Data.Racer.Player
 {
     [Serializable]
     public struct PlayerInputData

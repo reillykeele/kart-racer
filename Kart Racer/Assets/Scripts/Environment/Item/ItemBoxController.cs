@@ -1,4 +1,4 @@
-using Actor.Player;
+using Actor.Racer.Player;
 using Manager;
 using UnityEngine;
 using Util.Helpers;

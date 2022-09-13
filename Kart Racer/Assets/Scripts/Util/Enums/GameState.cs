@@ -1,6 +1,9 @@
-public enum GameState 
+namespace Util.Enums
 {
-    None = 0,
-    Paused = 1,
-    Playing = 2,
+    public enum GameState 
+    {
+        None = 0,
+        Paused = 1,
+        Playing = 2,
+    }
 }

@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-namespace Data.Player
+namespace Data.Racer
 {
     [Serializable]
-    public struct PlayerMovementData
+    public struct RacerMovementData
     {
         [Header("Speed")]
         public float AccelerationSpeed;

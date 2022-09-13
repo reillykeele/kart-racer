@@ -90,16 +90,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7017a3bc1797f94b83594ef399fe42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerMovement:
-    AccelerationSpeed: 1
-    MaxSpeed: 10
-    ReverseAccelerationSpeed: 1
-    MaxReverseSpeed: 5
-    DecelerationSpeed: 0.3
-    BrakeSpeed: 0.4
-    TurningSpeed: 50
-    GravitySpeed: 0.5
+  _racerMovementData: {fileID: 11400000, guid: d6894ca7bc974c24e8f1db998c979d94, type: 2}
+  RacerMovement:
+    AccelerationSpeed: 0
+    MaxSpeed: 0
+    ReverseAccelerationSpeed: 0
+    MaxReverseSpeed: 0
+    DecelerationSpeed: 0
+    BrakeSpeed: 0
+    TurningSpeed: 0
+    GravitySpeed: 0
     ConstantGravitySpeed: 0
+    BoostDuration: 0
 --- !u!114 &9113864802107751731
 MonoBehaviour:
   m_ObjectHideFlags: 0

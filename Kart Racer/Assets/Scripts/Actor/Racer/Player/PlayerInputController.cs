@@ -1,9 +1,9 @@
-using Data.Player;
+using Data.Racer.Player;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace Actor.Player
+namespace Actor.Racer.Player
 {
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerInputController : MonoBehaviour

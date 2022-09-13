@@ -4,6 +4,7 @@ using System.Linq;
 using Actor.Item;
 using ScriptableObject.Config;
 using UnityEngine;
+using Util.Enums;
 using Util.Helpers;
 using Util.Singleton;
 

@@ -1,10 +1,12 @@
-using Environment.Scene;
 using Manager;
 
-public class CourseController : AOnSceneLoad
+namespace Environment.Scene
 {
-    protected override void OnSceneLoad()
+    public class CourseController : AOnSceneLoad
     {
-        GameManager.Instance.StartCountdown();
+        protected override void OnSceneLoad()
+        {
+            GameManager.Instance.StartCountdown();
+        }
     }
 }

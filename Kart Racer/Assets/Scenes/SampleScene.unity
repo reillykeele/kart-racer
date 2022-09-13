@@ -1683,10 +1683,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 804062505}
     m_Modifications:
-    - target: {fileID: 9113864802107751729, guid: f9b1cc5740134be4c9857bcd3099eb0e, type: 3}
-      propertyPath: PlayerMovement.BoostDuration
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9113864802107751737, guid: f9b1cc5740134be4c9857bcd3099eb0e, type: 3}
       propertyPath: m_Name
       value: Player
