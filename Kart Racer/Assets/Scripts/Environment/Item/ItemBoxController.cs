@@ -14,12 +14,7 @@ namespace Environment.Item
         {
             _collider = GetComponent<Collider>();
         }
-
-        void OnCollisionEnter(Collision col)
-        {
-            Debug.Log("Collision");
-        }
-
+        
         void OnTriggerEnter(Collider collider)
         {
 

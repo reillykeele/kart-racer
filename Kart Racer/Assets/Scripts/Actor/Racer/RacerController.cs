@@ -1,6 +1,8 @@
+using Data.Item;
 using Manager;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Actor.Racer
 {
@@ -24,15 +26,16 @@ namespace Actor.Racer
             MovementController = GetComponent<RacerMovementController>();
         }
 
+        public UnityEvent<ItemData> PickupItemEvent;
         public virtual void PickupItem()
         {
-            // OnPickupItem event
-
             // Set item based on position
             if (Item == null)
             {
                 Item = GameManager.Instance.GetRandomItem();
                 Item.SetOwner(this);
+
+                PickupItemEvent.Invoke(Item.ItemData);
 
                 Debug.Log($"{Name} picked up {Item.ItemData.Name}.");
             }
@@ -42,14 +45,20 @@ namespace Actor.Racer
             }
         }
 
+        // public UnityEvent UseItemEvent;
+        public UnityEvent ClearItemEvent;
         public virtual void UseItem()
         {
             if (Item == null) return;
 
             Debug.Log($"Using {Item.ItemData.Name}");
+            // UseItemEvent.Invoke();
             Item.UseItem();
             if (Item.Uses <= 0)
+            {
                 Item = null;
+                ClearItemEvent.Invoke();
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using Data.Config;
 using Data.Item;
 using UnityEngine;
 
@@ -8,5 +9,6 @@ namespace ScriptableObject.Config
     {
         public int CountdownLength = 3;
         public ItemConfigData ItemConfig;
+        public UIConfigData UIConfig;
     }
 }
