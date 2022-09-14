@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71a00f508605ade4ab3a1152fd970351, type: 3}
-  m_Name: Mushroom
+  m_Name: Banana
   m_EditorClassIdentifier: 
   ItemData:
-    Name: Mushroom
-    Icon: {fileID: 21300000, guid: 1263fa5116ab31c459dbc0221ebb3dcb, type: 3}
-    ItemType: 1
+    Name: Banana
+    Icon: {fileID: 21300000, guid: 2be96fa0a07536444a1dffbd26917b02, type: 3}
+    ItemType: 3

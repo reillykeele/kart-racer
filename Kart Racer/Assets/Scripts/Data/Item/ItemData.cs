@@ -7,11 +7,10 @@ namespace Data.Item
     [Serializable]
     public class ItemData
     {
-        public string Name;
+        [SerializeField] public string Name;
+        [SerializeField] public Sprite Icon;
+        [SerializeField] public ItemType ItemType;
 
-        public Sprite Icon;
-
-        public ItemType ItemType;
         // range of positions you can get the item
         // frequency
         // number of uses ?

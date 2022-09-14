@@ -1,4 +1,5 @@
 using Manager;
+using UnityEditor;
 using UnityEngine;
 
 namespace Actor.Racer
@@ -6,6 +7,9 @@ namespace Actor.Racer
     [RequireComponent(typeof(RacerMovementController))]
     public abstract class RacerController : MonoBehaviour
     {
+        public string Name;
+        public GUID RacerId;
+
         public RacerMovementController MovementController { get; protected set; }
 
         public int Position { get; set; }
@@ -15,6 +19,8 @@ namespace Actor.Racer
 
         protected virtual void Awake()
         {
+            RacerId = GUID.Generate();
+
             MovementController = GetComponent<RacerMovementController>();
         }
 
@@ -28,11 +34,11 @@ namespace Actor.Racer
                 Item = GameManager.Instance.GetRandomItem();
                 Item.SetOwner(this);
 
-                Debug.Log($"Player picked up {Item.ItemData.Name}.");
+                Debug.Log($"{Name} picked up {Item.ItemData.Name}.");
             }
             else
             {
-                Debug.Log("Player already has an item.");
+                Debug.Log($"{Name} already has {Item.ItemData.Name}.");
             }
         }
 

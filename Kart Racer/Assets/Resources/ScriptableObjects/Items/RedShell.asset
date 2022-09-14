@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71a00f508605ade4ab3a1152fd970351, type: 3}
-  m_Name: Mushroom
+  m_Name: RedShell
   m_EditorClassIdentifier: 
   ItemData:
-    Name: Mushroom
-    Icon: {fileID: 21300000, guid: 1263fa5116ab31c459dbc0221ebb3dcb, type: 3}
-    ItemType: 1
+    Name: Red Shell
+    Icon: {fileID: 21300000, guid: 72f0bc21da3cba743866e2f62da5c5f8, type: 3}
+    ItemType: 6
