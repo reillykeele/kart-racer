@@ -17,5 +17,7 @@ MonoBehaviour:
     TimeToRespawn: 3
     Items:
     - {fileID: 11400000, guid: c6428ad164b0b0443bfdf2b82eb9f380, type: 2}
+    MushroomBoostPower: 0.75
+    MushroomBoostDuration: 1.5
   UIConfig:
     NoneSprite: {fileID: 21300000, guid: 799305cc823f4d541bfb1a4d569ba83a, type: 3}

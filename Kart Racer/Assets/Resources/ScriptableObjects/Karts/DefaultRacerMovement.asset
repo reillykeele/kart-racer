@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DefaultRacerMovement
   m_EditorClassIdentifier: 
   RacerMovement:
-    AccelerationSpeed: 0.3
-    MaxSpeed: 10
+    AccelerationSpeed: 0.5
+    MaxSpeed: 15
     ReverseAccelerationSpeed: 0.1
     MaxReverseSpeed: 4
     DecelerationSpeed: 0.1

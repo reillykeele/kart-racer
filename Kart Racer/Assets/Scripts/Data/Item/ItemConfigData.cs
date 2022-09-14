@@ -9,5 +9,8 @@ namespace Data.Item
     {
         public float TimeToRespawn;
         public List<ItemDataScriptableObject> Items;
+
+        public float MushroomBoostPower;
+        public float MushroomBoostDuration;
     }
 }
