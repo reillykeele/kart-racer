@@ -14,12 +14,16 @@ namespace UI.UIControllers
         private GameObject _itemUiGroup;
         private Image _itemImage;
 
+        private TextMeshProUGUI _positionText;
+        
         private TextMeshProUGUI _lapText;
 
         void Awake()
         {
             _itemUiGroup = gameObject.GetChildObject("ItemGroup");
             _itemImage = _itemUiGroup.GetChildObject("ItemImage").GetComponent<Image>();
+
+            _positionText = gameObject.GetChildObject("PositionText").GetComponent<TextMeshProUGUI>();
 
             _lapText = gameObject.GetChildObject("LapText").GetComponent<TextMeshProUGUI>();
         }
@@ -48,7 +52,7 @@ namespace UI.UIControllers
 
         public void ChangePosition(int position)
         {
-            
+            _positionText.text = "" + position;
         }
 
         public void ChangeLap(int lap)
