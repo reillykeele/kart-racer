@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Actor.Item;
+using Actor.Racer;
 using Environment.Scene;
 using ScriptableObject.Config;
 using UnityEngine;
@@ -19,28 +20,32 @@ namespace Manager
         // number of racers
         // positions
         // map ? (show people as percentage of the track maybe???)
-        // countdown
-        // timer
 
         // Course information
-        public int NumLaps { get; set; }
-        public int NumCheckpoints { get; set; }
+        private CourseController _course;
+        public int NumLaps { get; private set; }
+        public int NumCheckpoints { get; private set; }
+
+        // Racer information
+        private List<RacerController> _racers;
+        public int NumRacers => _racers.Count;
+
 
         private List<Item> _itemPool;
-
-        private CourseController _course;
 
         protected override void Awake()
         {
             base.Awake();
 
             _itemPool = Config.ItemConfig.Items.Select(x => ItemHelper.GetItemFromData(x.ItemData)).ToList();
-
-            _course = FindObjectOfType<CourseController>();
         }
 
         void Start()
         {
+            // Find objects in scene
+            _course = FindObjectOfType<CourseController>();
+            _racers = FindObjectsOfType<RacerController>().ToList();
+
             if (_course != null)
             {
                 NumLaps = _course.Laps;
