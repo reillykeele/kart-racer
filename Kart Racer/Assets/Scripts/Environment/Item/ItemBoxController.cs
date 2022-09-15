@@ -1,3 +1,4 @@
+using Actor.Racer;
 using Actor.Racer.Player;
 using Manager;
 using UnityEngine;
@@ -17,15 +18,15 @@ namespace Environment.Item
         
         void OnTriggerEnter(Collider collider)
         {
-
-            if (collider.tag == "Player")
+            var racer = collider.gameObject.GetComponent<RacerController>();
+            if (racer != null)
             {
-                collider.gameObject.GetComponent<PlayerController>().PickupItem();
-            }
-            
-            gameObject.Disable();
+                racer.PickupItem();
 
-            Invoke("Respawn", GameManager.Instance.Config.ItemConfig.TimeToRespawn);
+                gameObject.Disable();
+
+                Invoke("Respawn", GameManager.Instance.Config.ItemConfig.TimeToRespawn);
+            }
         }
 
         public void Respawn()
