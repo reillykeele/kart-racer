@@ -12,10 +12,10 @@ namespace Actor.Racer
         public string Name;
         public GUID RacerId;
 
-        public RacerMovementController MovementController { get; protected set; }
+        public RacerMovementController MovementController { get; private set; }
 
-        public int Position { get; set; } // 1 through number of racers
-        public int CurrentLap { get; set; } = 1; // starting at 1
+        public int Position { get; set; } = 1; // 1 through number of racers
+        public int CurrentLap { get; private set; } = 1; // starting at 1
         protected int _checkpointsReached { get; set; } = 0;
 
         public Item.Item Item { get; set; }

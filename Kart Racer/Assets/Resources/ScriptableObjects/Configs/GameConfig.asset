@@ -21,3 +21,13 @@ MonoBehaviour:
     MushroomBoostDuration: 1.5
   UIConfig:
     NoneSprite: {fileID: 21300000, guid: 799305cc823f4d541bfb1a4d569ba83a, type: 3}
+    PositionSprites:
+    - {fileID: 21300000, guid: 799305cc823f4d541bfb1a4d569ba83a, type: 3}
+    - {fileID: 21300000, guid: 0aacf1b04df37b84193048f289c21f79, type: 3}
+    - {fileID: 21300000, guid: 541fc2680d93f40439f5842cbcfdab1b, type: 3}
+    - {fileID: 21300000, guid: 8a5133cd000dbf949baa48e46e716932, type: 3}
+    - {fileID: 21300000, guid: a0a6be185979e3f4bb44adc67a2d66ff, type: 3}
+    - {fileID: 21300000, guid: 1fc40aaae88457a40b2d4038fb03582c, type: 3}
+    - {fileID: 21300000, guid: d4191f01af2c8ad488892b33c5fbbfa0, type: 3}
+    - {fileID: 21300000, guid: b3d2393011ed40b45aa82d74176617f1, type: 3}
+    - {fileID: 21300000, guid: 8bd52bbb15a0b6d489f67ed3145778eb, type: 3}

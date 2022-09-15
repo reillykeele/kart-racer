@@ -6,6 +6,7 @@ using Actor.Racer;
 using Environment.Scene;
 using ScriptableObject.Config;
 using UnityEngine;
+using UnityEngine.Events;
 using Util.Enums;
 using Util.Helpers;
 using Util.Singleton;
@@ -62,17 +63,22 @@ namespace Manager
             StartCoroutine(Countdown(Config.CountdownLength));
         }
 
+        public UnityEvent<int> CountdownTickEvent;
+        public UnityEvent CountdownEndEvent;
         IEnumerator Countdown(int seconds)
         {
-            var count = seconds;
+            var count = seconds + 1;
             while (count > 0)
             {
                 Debug.Log(count);
                 yield return new WaitForSeconds(1);
+                
                 --count;
+                CountdownTickEvent.Invoke(count);
             }
 
             // Start Event
+            CountdownEndEvent.Invoke();
             CurrentGameState = GameState.Playing;
         }
 

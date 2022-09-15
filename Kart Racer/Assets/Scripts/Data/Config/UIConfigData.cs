@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Data.Config
@@ -7,5 +8,6 @@ namespace Data.Config
     public struct UIConfigData
     {
         public Sprite NoneSprite;
+        public List<Sprite> PositionSprites;
     }
 }
