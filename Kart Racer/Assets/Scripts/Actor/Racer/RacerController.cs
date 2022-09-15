@@ -18,6 +18,8 @@ namespace Actor.Racer
         public int CurrentLap { get; private set; } = 1; // starting at 1
         protected int _checkpointsReached { get; set; } = 0;
 
+        public float RaceFinishTime { get; private set; }
+
         public Item.Item Item { get; set; }
 
         protected virtual void Awake()
@@ -100,7 +102,14 @@ namespace Actor.Racer
                 if (CurrentLap > GameManager.Instance.NumLaps)
                 {
                     Debug.Log("Race is over!");
+                    RaceFinishTime = Time.time;
                     FinishRaceEvent.Invoke();
+
+                    var t = RaceFinishTime - GameManager.Instance.RaceStartTime;
+                    var minutes = ((int) t / 60).ToString();
+                    var seconds = (t % 60).ToString("f0");
+
+                    Debug.Log(minutes + " : " + seconds);
                 }
                 else
                 {

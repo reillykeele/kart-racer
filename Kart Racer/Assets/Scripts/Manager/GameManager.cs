@@ -26,11 +26,11 @@ namespace Manager
         private CourseController _course;
         public int NumLaps { get; private set; }
         public int NumCheckpoints { get; private set; }
+        public double RaceStartTime { get; set; }
 
         // Racer information
         private List<RacerController> _racers;
         public int NumRacers => _racers.Count;
-
 
         private List<Item> _itemPool;
 
@@ -79,6 +79,7 @@ namespace Manager
 
             // Start Event
             CountdownEndEvent.Invoke();
+            RaceStartTime = Time.time;
             CurrentGameState = GameState.Playing;
         }
 

@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 1a201faed8c15374b9c57e06fc31abd7, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.49840122, g: 0.7228595, b: 0.88373995, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -168,6 +168,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Config: {fileID: 11400000, guid: 3d84f3f617acad0499872e3042cf38bf, type: 2}
   CurrentGameState: 0
+  CountdownTickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  CountdownEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &53846067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -438,7 +444,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103977370}
-  m_LocalRotation: {x: 0.06447369, y: 0.70416135, z: -0.064473696, w: 0.70416135}
+  m_LocalRotation: {x: 0.06447367, y: 0.70416135, z: -0.06447367, w: 0.70416135}
   m_LocalPosition: {x: -5.9999995, y: 5, z: 0.00000071525574}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1198,6 +1204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lawn_plane_15m_free_obs (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6183146645456561391, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ac7d9a97c8bd19c4199840392bcb00b3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
 --- !u!4 &1049053292 stripped
@@ -1645,7 +1655,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518836817}
-  m_LocalRotation: {x: 0.06447369, y: 0.70416135, z: -0.064473696, w: 0.70416135}
+  m_LocalRotation: {x: 0.06447367, y: 0.70416135, z: -0.06447367, w: 0.70416135}
   m_LocalPosition: {x: -5.9999995, y: 5, z: 0.00000071525574}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
