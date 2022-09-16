@@ -26,7 +26,7 @@ namespace Manager
         private CourseController _course;
         public int NumLaps { get; private set; }
         public int NumCheckpoints { get; private set; }
-        public double RaceStartTime { get; set; }
+        public float RaceStartTime { get; private set; }
 
         // Racer information
         private List<RacerController> _racers;

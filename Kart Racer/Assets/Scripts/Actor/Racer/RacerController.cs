@@ -3,6 +3,7 @@ using Manager;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using Util.Helpers;
 
 namespace Actor.Racer
 {
@@ -91,7 +92,7 @@ namespace Actor.Racer
         }
 
         public UnityEvent<int> ChangeLapEvent;
-        public UnityEvent FinishRaceEvent;
+        public UnityEvent<float> FinishRaceEvent;
         public virtual void TriggerFinishLine()
         {
             if (_checkpointsReached >= GameManager.Instance.NumCheckpoints)
@@ -103,13 +104,7 @@ namespace Actor.Racer
                 {
                     Debug.Log("Race is over!");
                     RaceFinishTime = Time.time;
-                    FinishRaceEvent.Invoke();
-
-                    var t = RaceFinishTime - GameManager.Instance.RaceStartTime;
-                    var minutes = ((int) t / 60).ToString();
-                    var seconds = (t % 60).ToString("f0");
-
-                    Debug.Log(minutes + " : " + seconds);
+                    FinishRaceEvent.Invoke(RaceFinishTime);
                 }
                 else
                 {

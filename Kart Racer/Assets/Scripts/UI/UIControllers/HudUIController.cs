@@ -11,14 +11,18 @@ namespace UI.UIControllers
 {
     public class HudUIController : UIController
     {
+        public bool DisplayTimer = true;
+
         // Item
         private GameObject _itemUiGroup;
         private Image _itemImage;
 
+        // Race Countdown
         private TextMeshProUGUI _countdownText;
 
+        // Race Information
         private Image _positionImage;
-        
+        private TextMeshProUGUI _timeText;
         private TextMeshProUGUI _lapText;
 
         void Awake()
@@ -29,7 +33,7 @@ namespace UI.UIControllers
             _countdownText = gameObject.GetChildObject("CountdownText").GetComponent<TextMeshProUGUI>();
 
             _positionImage = gameObject.GetChildObject("PositionImage").GetComponent<Image>();
-
+            _timeText = gameObject.GetChildObject("TimeText").GetComponent<TextMeshProUGUI>();
             _lapText = gameObject.GetChildObject("LapText").GetComponent<TextMeshProUGUI>();
         }
 
@@ -45,9 +49,20 @@ namespace UI.UIControllers
                 racerController.PickupItemEvent.AddListener(PickupItem);
                 racerController.ClearItemEvent.AddListener(ClearItem);
                 racerController.ChangeLapEvent.AddListener(ChangeLap);
+                racerController.FinishRaceEvent.AddListener(FinishRace);
 
                 ChangePosition(racerController.Position);
                 ChangeLap(racerController.CurrentLap);
+            }
+        }
+
+        void Update()
+        {
+            // Update race timer
+            var startTime = GameManager.Instance.RaceStartTime;
+            if (DisplayTimer && startTime > 0)
+            {
+                _timeText.text = TimeHelper.FormatTime(startTime, Time.time);
             }
         }
 
@@ -81,6 +96,12 @@ namespace UI.UIControllers
         public void ChangeLap(int lap)
         {
             _lapText.text = $"Lap {lap} / {GameManager.Instance.NumLaps}";
+        }
+
+        public void FinishRace(float time)
+        {
+            _timeText.text = TimeHelper.FormatTime(GameManager.Instance.RaceStartTime, Time.time);
+            DisplayTimer = false;
         }
     }
 }
