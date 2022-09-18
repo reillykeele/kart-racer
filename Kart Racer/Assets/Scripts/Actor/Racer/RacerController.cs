@@ -3,6 +3,7 @@ using Manager;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.PlayerLoop;
 using Util.Helpers;
 
 namespace Actor.Racer
@@ -15,19 +16,44 @@ namespace Actor.Racer
 
         public RacerMovementController MovementController { get; private set; }
 
-        public int Position { get; set; } = 1; // 1 through number of racers
+        public UnityEvent<int> PositionChangeEvent;
+        private int _position = 1;
+        public int Position
+        {
+            get => _position;
+            set
+            {
+                _position = value;
+                PositionChangeEvent.Invoke(_position);
+            }
+        }
+
         public int CurrentLap { get; private set; } = 1; // starting at 1
-        protected int _checkpointsReached { get; set; } = 0;
+        public int CheckpointsReached { get; set; } = 0;
 
         public float RaceFinishTime { get; private set; }
 
         public Item.Item Item { get; set; }
+
+        protected Vector3 CourseForward { get; set; }
+        protected GameObject CoursePlane { get; private set; }
 
         protected virtual void Awake()
         {
             RacerId = GUID.Generate();
 
             MovementController = GetComponent<RacerMovementController>();
+            CoursePlane = gameObject.GetChildObject("PositionPlane");
+        }
+
+        protected virtual void Start()
+        {
+            CourseForward = GameManager.Instance.CourseController.GetFinishLine().transform.forward;
+        }
+
+        protected virtual void LateUpdate()
+        {
+            CoursePlane.transform.forward = CourseForward;
         }
 
         public UnityEvent<ItemData> PickupItemEvent;
@@ -41,11 +67,11 @@ namespace Actor.Racer
 
                 PickupItemEvent.Invoke(Item.ItemData);
 
-                Debug.Log($"{Name} picked up {Item.ItemData.Name}.");
+                // Debug.Log($"{Name} picked up {Item.ItemData.Name}.");
             }
             else
             {
-                Debug.Log($"{Name} already has {Item.ItemData.Name}.");
+                // Debug.Log($"{Name} already has {Item.ItemData.Name}.");
             }
         }
 
@@ -65,29 +91,31 @@ namespace Actor.Racer
             }
         }
 
-        public virtual void TriggerCheckpoint(int checkpointIndex)
+        public virtual void TriggerCheckpoint(int checkpointIndex,Vector3 courseForward)
         {
-            if (_checkpointsReached == checkpointIndex - 1)
+            if (CheckpointsReached == checkpointIndex - 1)
             {
-                ++_checkpointsReached;
-                Debug.Log($"Crossed checkpoint #{checkpointIndex}");
+                ++CheckpointsReached;
+                // Debug.Log($"Crossed checkpoint #{checkpointIndex}");
+
+                CourseForward = courseForward;
             }
             else
             {
-                Debug.Log($"Crossed checkpoint #{checkpointIndex} but not in order. {_checkpointsReached} checkpoints reached.");
+                // Debug.Log($"Crossed checkpoint #{checkpointIndex} but not in order. {CheckpointsReached} checkpoints reached.");
             }
         }
 
         public virtual void TriggerShortcut(int checkpointIndex)
         {
-            if (_checkpointsReached < checkpointIndex)
+            if (CheckpointsReached < checkpointIndex)
             {
-                _checkpointsReached = checkpointIndex;
-                Debug.Log($"Crossed shortcut checkpoint #{checkpointIndex}");
+                CheckpointsReached = checkpointIndex;
+                // Debug.Log($"Crossed shortcut checkpoint #{checkpointIndex}");
             }
             else
             {
-                Debug.Log($"Crossed shortcut checkpoint #{checkpointIndex} but not in order. {_checkpointsReached} checkpoints reached.");
+                // Debug.Log($"Crossed shortcut checkpoint #{checkpointIndex} but not in order. {CheckpointsReached} checkpoints reached.");
             }
         }
 
@@ -95,26 +123,26 @@ namespace Actor.Racer
         public UnityEvent<float> FinishRaceEvent;
         public virtual void TriggerFinishLine()
         {
-            if (_checkpointsReached >= GameManager.Instance.NumCheckpoints)
+            if (CheckpointsReached >= GameManager.Instance.NumCheckpoints - 1)
             {
                 ++CurrentLap;
-                _checkpointsReached = 0;
+                CheckpointsReached = 0;
 
                 if (CurrentLap > GameManager.Instance.NumLaps)
                 {
-                    Debug.Log("Race is over!");
+                    Debug.Log($"{name} finished the race!");
                     RaceFinishTime = Time.time;
                     FinishRaceEvent.Invoke(RaceFinishTime);
                 }
                 else
                 {
                     ChangeLapEvent.Invoke(CurrentLap);
-                    Debug.Log($"Lap {CurrentLap}");
+                    Debug.Log($"{name} advances to lap #{CurrentLap}");
                 }
             }
             else
             {
-                Debug.Log("Crossed finish line but not in order.");
+                // Debug.Log("Crossed finish line but not in order.");
             }
         }
     }

@@ -23,7 +23,7 @@ namespace Manager
         // map ? (show people as percentage of the track maybe???)
 
         // Course information
-        private CourseController _course;
+        public CourseController CourseController;
         public int NumLaps { get; private set; }
         public int NumCheckpoints { get; private set; }
         public float RaceStartTime { get; private set; }
@@ -44,16 +44,18 @@ namespace Manager
         void Start()
         {
             // Find objects in scene
-            _course = FindObjectOfType<CourseController>();
+            CourseController = FindObjectOfType<CourseController>();
             _racers = FindObjectsOfType<RacerController>().ToList();
 
-            if (_course != null)
+            if (CourseController != null)
             {
-                NumLaps = _course.Laps;
-                NumCheckpoints = _course.Checkpoints.Count();
+                NumLaps = CourseController.Laps;
+                NumCheckpoints = CourseController.Checkpoints.Count();
             }
             else 
                 Debug.LogWarning("No course controller found.");
+
+            CalculatePositions();
         }
 
         public bool IsPlaying() => CurrentGameState == GameState.Playing;
@@ -84,5 +86,19 @@ namespace Manager
         }
 
         public Item GetRandomItem() => _itemPool.GetRandomElement();
+
+        public void CalculatePositions()
+        {
+            var i = 1;
+            foreach (var racer in _racers
+                         .OrderByDescending(x => x.CurrentLap)
+                         .ThenByDescending(x => x.CheckpointsReached)
+                         .ThenBy(x => MathHelper.Distance2(
+                             x.transform.position,
+                             CourseController.GetNextPositionCheckpoint(x.CheckpointsReached))))
+            {
+                racer.Position = i++;
+            }
+        }
     }
 }

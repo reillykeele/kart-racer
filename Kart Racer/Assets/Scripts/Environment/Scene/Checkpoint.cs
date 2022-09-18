@@ -11,10 +11,7 @@ namespace Environment.Scene
         protected virtual void OnTriggerEnter(Collider collider)
         {
             var racer = collider.gameObject.GetComponent<RacerController>();
-            if (racer != null)
-            {
-                racer.TriggerCheckpoint(CheckpointIndex);
-            }
+            racer?.TriggerCheckpoint(CheckpointIndex, transform.forward);
         }
     }
 }

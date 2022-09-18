@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 709354049}
   - component: {fileID: 709354048}
   - component: {fileID: 709354047}
-  - component: {fileID: 2218578319823580298}
+  - component: {fileID: 8689996553043307928}
   m_Layer: 0
   m_Name: PositionPlane
   m_TagString: Untagged
@@ -97,7 +97,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2218578319823580298
+--- !u!114 &8689996553043307928
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,12 +120,10 @@ GameObject:
   - component: {fileID: 9113864802107751741}
   - component: {fileID: 1068481758}
   - component: {fileID: 9113864802107751736}
-  - component: {fileID: 4197210456238808655}
-  - component: {fileID: 9113864802107751729}
-  - component: {fileID: 9113864802107751731}
-  - component: {fileID: 9113864802107751740}
+  - component: {fileID: 4095729901601206001}
+  - component: {fileID: 923461616}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Computer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,7 +174,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 3.5}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &4197210456238808655
+--- !u!114 &4095729901601206001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,10 +183,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9113864802107751737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d589598c614f87f44ad3644fda41ea4b, type: 3}
+  m_Script: {fileID: 11500000, guid: f622f5bd19b7b0942a3dd8944a51125a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Player
+  Name: Computer
   PositionChangeEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -204,7 +202,7 @@ MonoBehaviour:
   FinishRaceEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9113864802107751729
+--- !u!114 &923461616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,7 +211,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9113864802107751737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7017a3bc1797f94b83594ef399fe42c, type: 3}
+  m_Script: {fileID: 11500000, guid: a101ff33fbcb40444b1382d1e7fd8ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _racerMovementData: {fileID: 11400000, guid: d6894ca7bc974c24e8f1db998c979d94, type: 2}
@@ -228,51 +226,6 @@ MonoBehaviour:
     GravitySpeed: 0
     ConstantGravitySpeed: 0
     BoostDuration: 0
---- !u!114 &9113864802107751731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9113864802107751737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a29d01fe56ef744eafd12abfb971c03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnItemEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &9113864802107751740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9113864802107751737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 9b901aa6fbeae304f89f2e647d9e5f7d, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Kart
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &9113864803433742044
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +285,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b403aa4e0f8972547b20e0d5066ab75d, type: 2}
+  - {fileID: 2100000, guid: 842e444c91912fc428504c319eea21f9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

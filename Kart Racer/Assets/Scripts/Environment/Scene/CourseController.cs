@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Manager;
+using UnityEngine;
 
 namespace Environment.Scene
 {
@@ -20,5 +21,13 @@ namespace Environment.Scene
         {
             GameManager.Instance.StartCountdown();
         }
+
+        public Checkpoint GetFinishLine() => Checkpoints.Single(x => x.CheckpointIndex == 0);
+        public Checkpoint GetCheckpoint(int index) => Checkpoints.Single(x => x.CheckpointIndex == index);
+        public Checkpoint GetNextCheckpoint(int index) => 
+            index + 1 >= Checkpoints.Count ? 
+            GetFinishLine() :
+            GetCheckpoint(index + 1);
+        public Vector3 GetNextPositionCheckpoint(int index) => GetNextCheckpoint(index).transform.position;
     }
 }

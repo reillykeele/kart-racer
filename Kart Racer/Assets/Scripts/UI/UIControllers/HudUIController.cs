@@ -1,4 +1,5 @@
 using Actor.Racer;
+using Actor.Racer.Player;
 using Data.Item;
 using Manager;
 using TMPro;
@@ -39,7 +40,7 @@ namespace UI.UIControllers
 
         void Start()
         {
-            var racerController = FindObjectOfType<RacerController>();
+            var racerController = FindObjectOfType<PlayerController>() ?? FindObjectOfType<RacerController>();
 
             GameManager.Instance.CountdownTickEvent.AddListener(CountdownTick);
             GameManager.Instance.CountdownEndEvent.AddListener(CountdownEnd);
@@ -50,6 +51,7 @@ namespace UI.UIControllers
                 racerController.ClearItemEvent.AddListener(ClearItem);
                 racerController.ChangeLapEvent.AddListener(ChangeLap);
                 racerController.FinishRaceEvent.AddListener(FinishRace);
+                racerController.PositionChangeEvent.AddListener(ChangePosition);
 
                 ChangePosition(racerController.Position);
                 ChangeLap(racerController.CurrentLap);

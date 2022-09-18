@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Environment.Scene
 {
     [RequireComponent(typeof(Collider))]
-    public class FinishLine : MonoBehaviour
+    public class FinishLine : Checkpoint
     {
-        void OnTriggerEnter(Collider collider)
+        protected override void OnTriggerEnter(Collider collider)
         {
             var racer = collider.gameObject.GetComponent<RacerController>();
             if (racer != null)
