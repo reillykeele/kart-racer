@@ -81,7 +81,7 @@ namespace Actor.Racer
         {
             if (Item == null) return;
 
-            Debug.Log($"Using {Item.ItemData.Name}");
+            // Debug.Log($"Using {Item.ItemData.Name}");
             // UseItemEvent.Invoke();
             Item.UseItem();
             if (Item.Uses <= 0)

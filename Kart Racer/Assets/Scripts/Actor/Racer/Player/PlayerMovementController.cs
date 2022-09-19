@@ -22,46 +22,46 @@ namespace Actor.Racer.Player
             if (!GameManager.Instance.IsPlaying()) return;
 
             // Handle acceleration and deceleration 
-            if (_isBoosting)
+            if (IsBoosting)
             {
                 // Boosting
-                _currSpeed = RacerMovement.MaxSpeed + RacerMovement.MaxSpeed * _currBoostPower;
+                CurrSpeed = RacerMovement.MaxSpeed + RacerMovement.MaxSpeed * CurrBoostPower;
             }
-            if (_input.PlayerInput.IsAccelerating == _input.PlayerInput.IsBraking || _currSpeed >= RacerMovement.MaxSpeed)
+            if (_input.PlayerInput.IsAccelerating == _input.PlayerInput.IsBraking || CurrSpeed >= RacerMovement.MaxSpeed)
             {
                 // Coasting
-                var newSpeed = _currSpeed + (_currSpeed > 0 ? -1 : 1) * RacerMovement.DecelerationSpeed;
-                _currSpeed = _currSpeed.IsZero() || _currSpeed * newSpeed < 0 ? 0 : newSpeed;
+                var newSpeed = CurrSpeed + (CurrSpeed > 0 ? -1 : 1) * RacerMovement.DecelerationSpeed;
+                CurrSpeed = CurrSpeed.IsZero() || CurrSpeed * newSpeed < 0 ? 0 : newSpeed;
             }
             else if (_input.PlayerInput.IsAccelerating)
             {
                 // Acceleration
-                _currSpeed = _currSpeed >= RacerMovement.MaxSpeed
+                CurrSpeed = CurrSpeed >= RacerMovement.MaxSpeed
                     ? RacerMovement.MaxSpeed
-                    : _currSpeed + RacerMovement.AccelerationSpeed;
+                    : CurrSpeed + RacerMovement.AccelerationSpeed;
             } 
             else if (_input.PlayerInput.IsBraking)
             {
                 // Braking or reversing
-                if (_currSpeed > 0)
-                    _currSpeed = _currSpeed <= 0 ? 
+                if (CurrSpeed > 0)
+                    CurrSpeed = CurrSpeed <= 0 ? 
                         0 : 
-                        _currSpeed - RacerMovement.BrakeSpeed;
+                        CurrSpeed - RacerMovement.BrakeSpeed;
                 else
-                    _currSpeed = _currSpeed <= -RacerMovement.MaxReverseSpeed
+                    CurrSpeed = CurrSpeed <= -RacerMovement.MaxReverseSpeed
                         ? -RacerMovement.MaxReverseSpeed
-                        : _currSpeed - RacerMovement.ReverseAccelerationSpeed;
-            }                
+                        : CurrSpeed - RacerMovement.ReverseAccelerationSpeed;
+            }
 
             // Calculate direction
             var forward = transform.forward;
             Debug.DrawRay(transform.position, 3 * forward, Color.yellow);
             var steerDirection = _input.PlayerInput.Steering.x * RacerMovement.TurningSpeed;
 
-            if (!_currSpeed.IsZero())
+            if (!CurrSpeed.IsZero())
                 transform.Rotate(Vector3.up * steerDirection * Time.fixedDeltaTime);
 
-            var movement = forward * _currSpeed * Time.fixedDeltaTime;
+            var movement = forward * CurrSpeed * Time.fixedDeltaTime;
             
             // Apply gravity
             movement.y -= !IsGrounded() ? RacerMovement.GravitySpeed : RacerMovement.ConstantGravitySpeed;

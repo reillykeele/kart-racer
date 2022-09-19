@@ -8,5 +8,7 @@ namespace Util.Helpers
 
         public static float Distance2(Vector3 a, Vector3 b) =>
             Mathf.Pow(a.x - b.x, 2) + Mathf.Pow(a.y - b.y, 2) + Mathf.Pow(a.z - b.z, 2);
+
+        public static float PercentOfRange(float percent, float min, float max) => percent * max + (1 - percent) * min;
     }
 }

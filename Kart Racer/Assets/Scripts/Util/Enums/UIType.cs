@@ -7,8 +7,8 @@ namespace Util.Enums
         StartMenu = 2,
         MainMenu = 3,
         SettingsMenu = 4,
-        LoadingScreen = 5,
-        LoadingScreen2 = 6,
+        LoadingScreen = 5, // Scene Transitions
+        LoadingScreen2 = 6, // ?
         ModeSelect = 7,
         CharacterSelect = 8,
         KartSelect = 9,

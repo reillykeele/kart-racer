@@ -21,7 +21,7 @@ namespace Actor.Racer.Computer
         {
             if (!GameManager.Instance.IsPlaying()) return;
 
-            _currSpeed = 10;
+            CurrSpeed = RacerMovement.MaxSpeed;
 
             var targetCheckpoint = GameManager.Instance.CourseController.GetNextCheckpoint(_computerController.CheckpointsReached);
             _target = targetCheckpoint.gameObject;
@@ -37,7 +37,7 @@ namespace Actor.Racer.Computer
 
             // var forward = transform.forward;
             Debug.DrawRay(transform.position, 3 * forward, Color.yellow);
-            var movement = forward * _currSpeed * Time.fixedDeltaTime;
+            var movement = forward * CurrSpeed * Time.fixedDeltaTime;
 
             // Apply gravity
             movement.y -= !IsGrounded() ? RacerMovement.GravitySpeed : RacerMovement.ConstantGravitySpeed;
