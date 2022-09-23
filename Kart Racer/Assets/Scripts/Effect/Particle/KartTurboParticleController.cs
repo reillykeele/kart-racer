@@ -13,6 +13,11 @@ public class KartTurboParticleController : ParticleController
         base.Awake();
 
         _racerMovementController = GetComponentInParent<RacerMovementController>();
+        if (_racerMovementController == null)
+        {
+            enabled = false;
+            return;
+        }
 
         _racerMovementController.OnIsBoostingChangedEvent.AddListener(SetTurbo);
     }

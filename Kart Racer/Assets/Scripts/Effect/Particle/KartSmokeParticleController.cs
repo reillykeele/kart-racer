@@ -17,6 +17,11 @@ namespace Effect.Particle
             base.Awake();
 
             _racerMovementController = GetComponentInParent<RacerMovementController>();
+            if (_racerMovementController == null)
+            {
+                SetParticle(1f);
+                enabled = false;
+            }
         }
 
         void Update()
