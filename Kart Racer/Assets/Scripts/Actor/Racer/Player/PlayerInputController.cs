@@ -10,7 +10,7 @@ namespace Actor.Racer.Player
     {
         public PlayerInputData PlayerInput;
 
-        public UnityEvent OnItemEvent;
+        
 
         public void OnAccelerate(InputValue val) => PlayerInput.IsAccelerating = val.isPressed;
 
@@ -18,6 +18,7 @@ namespace Actor.Racer.Player
 
         public void OnDrift(InputValue val) => PlayerInput.IsDrifting = val.isPressed;
 
+        public UnityEvent OnItemEvent;
         public void OnItem(InputValue val)
         {
             PlayerInput.IsUsingItem = val.isPressed;
@@ -26,5 +27,11 @@ namespace Actor.Racer.Player
 
         public void OnSteer(InputValue val) => PlayerInput.Steering = val.Get<Vector2>();
 
+        public UnityEvent<bool> OnLookBehindEvent;
+        public void OnLookBehind(InputValue val)
+        {
+            PlayerInput.IsLookingBehind = val.isPressed;
+            OnLookBehindEvent.Invoke(PlayerInput.IsLookingBehind);
+        }
     }
 }

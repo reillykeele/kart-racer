@@ -11,5 +11,6 @@ namespace Data.Racer.Player
         public bool IsDrifting { get; set; }
         public bool IsUsingItem { get; set; }
         public Vector2 Steering { get; set; }
+        public bool IsLookingBehind { get; set; }
     }
 }

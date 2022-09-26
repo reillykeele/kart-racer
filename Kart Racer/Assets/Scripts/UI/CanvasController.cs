@@ -27,7 +27,7 @@ namespace UI
 
         void Update()
         {
-            if (Gamepad.current.buttonEast.wasPressedThisFrame)
+            if (Gamepad.current?.buttonEast.wasPressedThisFrame == true)
                 GetUI(lastActiveUI)?.ReturnToUI();
         }
 
