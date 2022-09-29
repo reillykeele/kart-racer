@@ -2,10 +2,10 @@ using Actor.Racer;
 
 namespace Effect.Particle
 {
-    public class KartTurboParticleController : ParticleController
+    public class KartDriftSmokeParticleController : ParticleController
     {
         private RacerMovementController _racerMovementController;
-    
+
         protected override void Awake()
         {
             base.Awake();
@@ -17,12 +17,12 @@ namespace Effect.Particle
                 return;
             }
 
-            _racerMovementController.OnIsBoostingChangedEvent.AddListener(SetTurbo);
+            _racerMovementController.OnIsDriftingChangedEvent.AddListener(SetDriftSmoke);
         }
 
-        private void SetTurbo(bool isBoosting)
+        private void SetDriftSmoke(bool isDrifting)
         {
-            if (isBoosting) 
+            if (isDrifting) 
                 StartSystem(); 
             else 
                 StopSystem();
