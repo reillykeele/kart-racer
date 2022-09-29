@@ -10,13 +10,16 @@ namespace Actor.Racer.Player
     {
         public PlayerInputData PlayerInput;
 
-        
-
         public void OnAccelerate(InputValue val) => PlayerInput.IsAccelerating = val.isPressed;
 
         public void OnBrakeReverse(InputValue val) => PlayerInput.IsBraking = val.isPressed;
 
-        public void OnDrift(InputValue val) => PlayerInput.IsDrifting = val.isPressed;
+        public UnityEvent<bool> OnDriftEvent;
+        public void OnDrift(InputValue val)
+        {
+            PlayerInput.IsDrifting = val.isPressed;
+            OnDriftEvent.Invoke(PlayerInput.IsDrifting);
+        }
 
         public UnityEvent OnItemEvent;
         public void OnItem(InputValue val)

@@ -16,25 +16,29 @@ namespace Actor.Racer
 
         protected Collider _collider;
 
+        // Movement
+        public Vector3 ControllerForward { get; protected set; }
+        public Vector3 ControllerRotation { get; protected set; }
         public float CurrSpeed { get; protected set; }
 
         // Drift
         public UnityEvent<bool> OnIsDriftingChangedEvent;
-        private bool _isDrifting;
+        protected bool _isDrifting;
         public bool IsDrifting
         {
             get => _isDrifting;
             protected set
             {
                 _isDrifting = value;
-                OnIsBoostingChangedEvent.Invoke(_isDrifting);
+                OnIsDriftingChangedEvent.Invoke(_isDrifting);
             }
         }
         public int DriftLevel { get; protected set; }
+        public int DriftDirection { get; protected set; }
 
         // Boost
         public UnityEvent<bool> OnIsBoostingChangedEvent;
-        private bool _isBoosting;
+        protected bool _isBoosting;
         public bool IsBoosting
         {
             get => _isBoosting;

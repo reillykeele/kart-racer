@@ -15,6 +15,7 @@ namespace Actor.Racer.Player
             base.Awake();
 
             _input = GetComponent<PlayerInputController>();
+            _input.OnDriftEvent.AddListener(isDrifting => IsDrifting = isDrifting);
         }
 
         void FixedUpdate()
@@ -56,13 +57,35 @@ namespace Actor.Racer.Player
             // Calculate direction
             var forward = transform.forward;
             Debug.DrawRay(transform.position, 3 * forward, Color.yellow);
-            var steerDirection = _input.PlayerInput.Steering.x * RacerMovement.TurningSpeed;
+
+            var movement = forward * CurrSpeed * Time.fixedDeltaTime;
+
+            float steerDirection;
+            var steeringX = _input.PlayerInput.Steering.x;
+            if (_isDrifting)
+            {
+                if (DriftDirection == 0)
+                    DriftDirection = steeringX == 0 ? 0 : (int) Mathf.Sign(steeringX);
+                
+                steerDirection = 
+                    DriftDirection * (RacerMovement.TurningSpeed * 1.25f) + 
+                    steeringX * (RacerMovement.TurningSpeed * 0.75f);
+                
+                // transform.Rotate(Vector3.up * steerDirection * Time.fixedDeltaTime);
+
+                movement += transform.right * (CurrSpeed * 0.01f) * -DriftDirection;
+            }
+            else
+            {
+                DriftDirection = 0;
+                steerDirection = steeringX * RacerMovement.TurningSpeed;
+                // if (!CurrSpeed.IsZero())
+                //     transform.Rotate(Vector3.up * steerDirection * Time.fixedDeltaTime);
+            }
 
             if (!CurrSpeed.IsZero())
                 transform.Rotate(Vector3.up * steerDirection * Time.fixedDeltaTime);
 
-            var movement = forward * CurrSpeed * Time.fixedDeltaTime;
-            
             // Apply gravity
             movement.y -= !IsGrounded() ? RacerMovement.GravitySpeed : RacerMovement.ConstantGravitySpeed;
 
