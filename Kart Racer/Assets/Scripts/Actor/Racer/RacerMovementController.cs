@@ -1,3 +1,4 @@
+using System.Collections;
 using Data.Racer;
 using Effect.Particle;
 using ScriptableObject.Racer;
@@ -33,7 +34,18 @@ namespace Actor.Racer
                 OnIsDriftingChangedEvent.Invoke(_isDrifting);
             }
         }
-        public int DriftLevel { get; protected set; }
+        public UnityEvent<int> OnDriftLevelChangedEvent;
+        protected int _driftProgress;
+        protected int _driftLevel;
+        public int DriftLevel
+        {
+            get => _driftLevel;
+            protected set
+            {
+                _driftLevel = value;
+                OnDriftLevelChangedEvent.Invoke(_driftLevel);
+            }
+        }
         public int DriftDirection { get; protected set; }
 
         // Boost
@@ -55,20 +67,51 @@ namespace Actor.Racer
             RacerMovement = _racerMovementData?.RacerMovement ?? new RacerMovementData();
 
             _collider = GetComponent<Collider>();
+
+            OnIsDriftingChangedEvent.AddListener(OnDriftChange);
         }
 
-        public bool IsGrounded()
+        public bool IsGrounded() => IsGrounded(out _);
+        public bool IsGrounded(out RaycastHit hitInfo)
         {
-            Debug.DrawRay(_collider.bounds.center, Vector3.down * (_collider.bounds.extents.y + 0.05f));
-            return Physics.Raycast(_collider.bounds.center, Vector3.down, _collider.bounds.extents.y + 0.05f);
+            var dist = 0.15f;
+            Debug.DrawRay(_collider.bounds.center, Vector3.down * (_collider.bounds.extents.y/* + dist*/), Color.red);
+            var hit = Physics.Raycast(
+                _collider.bounds.center, 
+                Vector3.down, 
+                out hitInfo,
+                _collider.bounds.extents.y + dist,
+                LayerMask.GetMask("Track"));
+
+            return hit;
         }
 
+        private IEnumerator _boostCoroutine;
         public void Boost(float boostPower = 1f, float boostDuration = 1f)
         {
             IsBoosting = true;
-            CurrBoostPower = boostPower;
+            CurrBoostPower = Mathf.Max(boostPower, CurrBoostPower);
 
-            StartCoroutine(CoroutineUtil.WaitForExecute(() => IsBoosting = false, RacerMovement.BoostDuration));
+            if (_boostCoroutine != null)
+                StopCoroutine(_boostCoroutine);
+
+            _boostCoroutine = CoroutineUtil.WaitForExecute(() =>
+                {
+                    IsBoosting = false;
+                    _boostCoroutine = null;
+                }, 
+                boostDuration);
+
+            StartCoroutine(_boostCoroutine);
+        }
+
+        protected  virtual void OnDriftChange(bool isDrifting)
+        {
+            if (isDrifting == false && DriftLevel > 0)
+                Boost(0.5f, 1f + 0.25f * (DriftLevel - 1));
+
+            _driftProgress = 0;
+            DriftLevel = 0;
         }
     }
 }

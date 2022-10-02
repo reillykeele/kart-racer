@@ -7,5 +7,6 @@ namespace Util.Enums
         Game = 2,
         SampleScene = 3,
         Track1 = 4,
+        Track2 = 5,
     }
 }

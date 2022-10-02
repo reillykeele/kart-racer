@@ -129,7 +129,7 @@ namespace Actor.Racer
                 CheckpointsReached = 0;
 
                 if (CurrentLap > GameManager.Instance.NumLaps)
-                {
+                { 
                     Debug.Log($"{name} finished the race!");
                     RaceFinishTime = Time.time;
                     FinishRaceEvent.Invoke(RaceFinishTime);

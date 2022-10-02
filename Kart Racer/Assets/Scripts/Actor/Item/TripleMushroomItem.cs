@@ -1,4 +1,5 @@
 using Data.Item;
+using Manager;
 
 namespace Actor.Item
 {
@@ -13,7 +14,8 @@ namespace Actor.Item
         {
 
             --Uses;
-            _owner.MovementController.Boost();
+            _owner.MovementController.Boost(GameManager.Instance.Config.ItemConfig.MushroomBoostPower, 
+                                            GameManager.Instance.Config.ItemConfig.MushroomBoostDuration);
         }
     }
 }

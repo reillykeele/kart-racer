@@ -60,6 +60,7 @@ namespace Actor.Racer.Player
 
             var movement = forward * CurrSpeed * Time.fixedDeltaTime;
 
+            // Calculate and apply steering
             float steerDirection;
             var steeringX = _input.PlayerInput.Steering.x;
             if (_isDrifting)
@@ -70,27 +71,52 @@ namespace Actor.Racer.Player
                 steerDirection = 
                     DriftDirection * (RacerMovement.TurningSpeed * 1.25f) + 
                     steeringX * (RacerMovement.TurningSpeed * 0.75f);
-                
-                // transform.Rotate(Vector3.up * steerDirection * Time.fixedDeltaTime);
 
+                // Add outward velocity 
                 movement += transform.right * (CurrSpeed * 0.01f) * -DriftDirection;
+                
+                // Calculate turbo progress
+                ++_driftProgress;
+                if (DriftLevel < 3 && _driftProgress >= 225)
+                    DriftLevel = 3;
+                else if (DriftLevel < 2 && _driftProgress >= 150)
+                    DriftLevel = 2;
+                else if (DriftLevel < 1 && _driftProgress >= 75)
+                    DriftLevel = 1;
             }
             else
             {
                 DriftDirection = 0;
                 steerDirection = steeringX * RacerMovement.TurningSpeed;
-                // if (!CurrSpeed.IsZero())
-                //     transform.Rotate(Vector3.up * steerDirection * Time.fixedDeltaTime);
             }
 
+            var rotation = Vector3.zero;
             if (!CurrSpeed.IsZero())
-                transform.Rotate(Vector3.up * steerDirection * Time.fixedDeltaTime);
+                rotation.y =  steerDirection;
 
             // Apply gravity
-            movement.y -= !IsGrounded() ? RacerMovement.GravitySpeed : RacerMovement.ConstantGravitySpeed;
+            var pos = transform.position;
+            if (IsGrounded(out var hitInfo))
+            {
+                pos.y = hitInfo.point.y + 0.5f; // TODO: Change to some "dist to ground" var
+
+                var groundNormal = hitInfo.normal;
+                var forwardDirection = forward.normalized;
+                
+                // Project the forward & surface normal using the dot product
+                // Set the rotation w/ relative forward and up axes
+                var rotForward = forwardDirection - groundNormal * Vector3.Dot (forwardDirection, groundNormal);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation, 
+                    Quaternion.LookRotation(rotForward.normalized, groundNormal), 
+                    8f * Time.fixedDeltaTime);
+            }
+            else
+                movement.y -= RacerMovement.GravitySpeed;
 
             // Move player
-            transform.position += movement;
+            transform.Rotate(transform.up, steerDirection * Time.fixedDeltaTime);
+            transform.position = pos + movement;
         }
     }
 }

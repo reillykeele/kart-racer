@@ -9,7 +9,6 @@ namespace Actor.Item
         public override void UseItem()
         {
             --Uses;
-            _owner.MovementController.Boost();
         }
     }
 }

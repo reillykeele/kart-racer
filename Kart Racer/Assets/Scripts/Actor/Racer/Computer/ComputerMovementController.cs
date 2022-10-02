@@ -40,10 +40,28 @@ namespace Actor.Racer.Computer
             var movement = forward * CurrSpeed * Time.fixedDeltaTime;
 
             // Apply gravity
-            movement.y -= !IsGrounded() ? RacerMovement.GravitySpeed : RacerMovement.ConstantGravitySpeed;
+            var pos = transform.position;
+            if (IsGrounded(out var hitInfo))
+            {
+                pos.y = hitInfo.point.y + 0.5f; // TODO: Change to some "dist to ground" var
+
+                var groundNormal = hitInfo.normal;
+                var forwardDirection = forward.normalized;
+                
+                // Project the forward & surface normal using the dot product
+                // Set the rotation w/ relative forward and up axes
+                var rotForward = forwardDirection - groundNormal * Vector3.Dot (forwardDirection, groundNormal);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation, 
+                    Quaternion.LookRotation(rotForward.normalized, groundNormal), 
+                    8f * Time.fixedDeltaTime);
+            }
+            else
+                movement.y -= RacerMovement.GravitySpeed;
 
             // Move player
-            transform.position += movement;
+            // transform.Rotate(transform.up, steerDirection * Time.fixedDeltaTime);
+            transform.position = pos + movement;
         }
     }
 }
