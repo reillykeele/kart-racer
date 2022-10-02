@@ -20,6 +20,6 @@ MonoBehaviour:
     DecelerationSpeed: 0.1
     BrakeSpeed: 0.3
     TurningSpeed: 60
-    GravitySpeed: 0.1
+    GravitySpeed: 0.4
     ConstantGravitySpeed: 0
     BoostDuration: 1.5

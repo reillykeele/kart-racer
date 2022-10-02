@@ -1,5 +1,8 @@
-﻿namespace Data.Environment
+﻿using System;
+
+namespace Data.Environment
 {
+    [Serializable]
     public class TrackSurfaceModifierData
     {
         public float SpeedModifier = 1f;
