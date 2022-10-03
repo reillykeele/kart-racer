@@ -35,7 +35,6 @@ namespace Effect.Particle
                 return;
             }
 
-            Debug.Log("DRIFT SPARK CONTROLLER " + level);
             StartSystem();
             SetStartColor(TurboLevelColors[level - 1]);
         }

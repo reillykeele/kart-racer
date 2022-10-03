@@ -17,7 +17,7 @@ MonoBehaviour:
     MaxSpeed: 30
     ReverseAccelerationSpeed: 0.3
     MaxReverseSpeed: 10
-    DecelerationSpeed: 0.1
+    DecelerationSpeed: 0.2
     BrakeSpeed: 0.3
     TurningSpeed: 60
     GravitySpeed: 0.4

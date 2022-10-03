@@ -7,5 +7,6 @@ namespace Data.Environment
     {
         public float SpeedModifier = 1f;
         public float AccelerationModifier = 1f;
+        public float DeccelerationModifier = 1f;
     }
 }

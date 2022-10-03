@@ -1,3 +1,5 @@
+using Data.Environment;
+using Environment.Track;
 using Manager;
 using UnityEngine;
 using Util.Coroutine;
@@ -22,32 +24,44 @@ namespace Actor.Racer.Player
         {
             if (!GameManager.Instance.IsPlaying()) return;
 
+            var isGrounded = IsGrounded(out var hitInfo);
+
+            // Check the surface we are on 
+            var trackSurfaceModifier = new TrackSurfaceModifierData();
+            if (isGrounded)
+            {
+                var trackSurface = hitInfo.collider.GetComponent<TrackSurface>();
+                if (trackSurface != null)
+                    trackSurfaceModifier = trackSurface.TrackSurfaceModifierData;
+            }
+
             // Handle acceleration and deceleration 
             if (IsBoosting)
             {
                 // Boosting
                 CurrSpeed = RacerMovement.MaxSpeed + RacerMovement.MaxSpeed * CurrBoostPower;
             }
-            if (_input.PlayerInput.IsAccelerating == _input.PlayerInput.IsBraking || CurrSpeed >= RacerMovement.MaxSpeed)
+
+            if (_input.PlayerInput.IsAccelerating == _input.PlayerInput.IsBraking ||
+                CurrSpeed >= RacerMovement.MaxSpeed)
             {
                 // Coasting
-                var newSpeed = CurrSpeed + (CurrSpeed > 0 ? -1 : 1) * RacerMovement.DecelerationSpeed;
+                var newSpeed = CurrSpeed + (CurrSpeed > 0 ? -1 : 1) * RacerMovement.DecelerationSpeed *
+                    trackSurfaceModifier.DeccelerationModifier;
                 CurrSpeed = CurrSpeed.IsZero() || CurrSpeed * newSpeed < 0 ? 0 : newSpeed;
             }
             else if (_input.PlayerInput.IsAccelerating)
             {
                 // Acceleration
-                CurrSpeed = CurrSpeed >= RacerMovement.MaxSpeed
-                    ? RacerMovement.MaxSpeed
-                    : CurrSpeed + RacerMovement.AccelerationSpeed;
-            } 
+                CurrSpeed = CurrSpeed >= RacerMovement.MaxSpeed * trackSurfaceModifier.SpeedModifier
+                    ? RacerMovement.MaxSpeed * trackSurfaceModifier.SpeedModifier
+                    : CurrSpeed + RacerMovement.AccelerationSpeed * trackSurfaceModifier.AccelerationModifier;
+            }
             else if (_input.PlayerInput.IsBraking)
             {
                 // Braking or reversing
                 if (CurrSpeed > 0)
-                    CurrSpeed = CurrSpeed <= 0 ? 
-                        0 : 
-                        CurrSpeed - RacerMovement.BrakeSpeed;
+                    CurrSpeed = CurrSpeed <= 0 ? 0 : CurrSpeed - RacerMovement.BrakeSpeed;
                 else
                     CurrSpeed = CurrSpeed <= -RacerMovement.MaxReverseSpeed
                         ? -RacerMovement.MaxReverseSpeed
@@ -66,15 +80,15 @@ namespace Actor.Racer.Player
             if (_isDrifting)
             {
                 if (DriftDirection == 0)
-                    DriftDirection = steeringX == 0 ? 0 : (int) Mathf.Sign(steeringX);
-                
-                steerDirection = 
-                    DriftDirection * (RacerMovement.TurningSpeed * 1.25f) + 
+                    DriftDirection = steeringX == 0 ? 0 : (int)Mathf.Sign(steeringX);
+
+                steerDirection =
+                    DriftDirection * (RacerMovement.TurningSpeed * 1.25f) +
                     steeringX * (RacerMovement.TurningSpeed * 0.75f);
 
                 // Add outward velocity 
-                movement += transform.right * (CurrSpeed * 0.01f) * -DriftDirection;
-                
+                movement += transform.right * (CurrSpeed * 0.0125f) * -DriftDirection;
+
                 // Calculate turbo progress
                 ++_driftProgress;
                 if (DriftLevel < 3 && _driftProgress >= 225)
@@ -90,33 +104,45 @@ namespace Actor.Racer.Player
                 steerDirection = steeringX * RacerMovement.TurningSpeed;
             }
 
-            var rotation = Vector3.zero;
-            if (!CurrSpeed.IsZero())
-                rotation.y =  steerDirection;
-
             // Apply gravity
             var pos = transform.position;
-            if (IsGrounded(out var hitInfo))
+            if (isGrounded)
             {
                 pos.y = hitInfo.point.y + 0.5f; // TODO: Change to some "dist to ground" var
 
                 var groundNormal = hitInfo.normal;
                 var forwardDirection = forward.normalized;
-                
+
                 // Project the forward & surface normal using the dot product
                 // Set the rotation w/ relative forward and up axes
-                var rotForward = forwardDirection - groundNormal * Vector3.Dot (forwardDirection, groundNormal);
+                var rotForward = forwardDirection - groundNormal * Vector3.Dot(forwardDirection, groundNormal);
                 transform.rotation = Quaternion.Slerp(
-                    transform.rotation, 
-                    Quaternion.LookRotation(rotForward.normalized, groundNormal), 
+                    transform.rotation,
+                    Quaternion.LookRotation(rotForward.normalized, groundNormal),
                     8f * Time.fixedDeltaTime);
             }
             else
                 movement.y -= RacerMovement.GravitySpeed;
 
-            // Move player
-            transform.Rotate(transform.up, steerDirection * Time.fixedDeltaTime);
-            transform.position = pos + movement;
+            // Move & rotate player
+            if (!CurrSpeed.IsZero())
+                transform.Rotate(transform.up, steerDirection * Time.fixedDeltaTime);
+
+            if (Physics.BoxCast(
+                    _collider.bounds.center + movement,
+                    _collider.bounds.extents,
+                    forward,
+                    out var boxHit,
+                    transform.rotation,
+                    _collider.bounds.extents.z,
+                    LayerMask.GetMask("Walls")))
+            {
+                Debug.Log(boxHit.transform.name);
+            }
+            else
+            {
+                transform.position = pos + movement;
+            }
         }
     }
 }

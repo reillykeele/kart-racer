@@ -10,9 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f06a4123acdfa5d4cb76a55856c04a4b, type: 3}
-  m_Name: OffroadSurfaceModifier
+  m_Name: DefaultTrackSurfaceModifier
   m_EditorClassIdentifier: 
-  ModifierData:
-    SpeedModifier: 0.5
-    AccelerationModifier: 0.5
-    DeccelerationModifier: 2
