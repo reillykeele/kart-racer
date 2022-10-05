@@ -11,7 +11,12 @@ namespace Environment.Scene
         protected virtual void OnTriggerEnter(Collider collider)
         {
             var racer = collider.gameObject.GetComponent<RacerController>();
-            racer?.TriggerCheckpoint(CheckpointIndex, transform.forward);
+            if (racer == null)
+                return;
+
+            // Check if a racer is heading in the correct direction of the checkpoint
+            if (Vector3.Dot(racer.transform.forward, transform.forward) > 0)
+                racer.TriggerCheckpoint(CheckpointIndex, transform.forward);
         }
     }
 }
