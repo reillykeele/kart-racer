@@ -230,6 +230,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_line_type_01_30m_free_obs (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
 --- !u!4 &35331144 stripped
@@ -237,6 +241,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 467173554205048545, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
   m_PrefabInstance: {fileID: 35331143}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &35331145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+  m_PrefabInstance: {fileID: 35331143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &35331146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35331145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &51388458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -292,6 +318,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_line_type_01_start_finish_15m_free_obs
       objectReference: {fileID: 0}
+    - target: {fileID: 8049907621329533821, guid: 419b5557461398443a4b99d9496015fc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 419b5557461398443a4b99d9496015fc, type: 3}
 --- !u!4 &51388459 stripped
@@ -299,6 +329,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7276925260861940167, guid: 419b5557461398443a4b99d9496015fc, type: 3}
   m_PrefabInstance: {fileID: 51388458}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &51388460 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8049907621329533821, guid: 419b5557461398443a4b99d9496015fc, type: 3}
+  m_PrefabInstance: {fileID: 51388458}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &51388461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51388460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &53846067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -586,7 +638,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 2000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -755,6 +807,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_Corner_90d_type_01_30x30m_quad_free_obs
       objectReference: {fileID: 0}
+    - target: {fileID: 7599908097705747875, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
 --- !u!4 &144478607 stripped
@@ -762,6 +818,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7076171558262013721, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
   m_PrefabInstance: {fileID: 144478606}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &144478608 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7599908097705747875, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
+  m_PrefabInstance: {fileID: 144478606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &144478609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144478608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &159214217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -817,6 +895,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_Corner_90d_type_01_30x30m_quad_free_obs (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7599908097705747875, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
 --- !u!4 &159214218 stripped
@@ -824,6 +906,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7076171558262013721, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
   m_PrefabInstance: {fileID: 159214217}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &159214219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7599908097705747875, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
+  m_PrefabInstance: {fileID: 159214217}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &159214220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159214219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1 &284370900
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +1049,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_Corner_90d_type_01_15x15m_quad_free_obs
       objectReference: {fileID: 0}
+    - target: {fileID: 7469099903034017270, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7848721253946826572, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -996,6 +1104,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7848721253946826572, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
   m_PrefabInstance: {fileID: 348410818}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &348410820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7469099903034017270, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
+  m_PrefabInstance: {fileID: 348410818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &348410821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348410820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1 &362125626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,6 +1303,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lawn_plane_15m_free_obs (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
 --- !u!4 &387122593 stripped
@@ -1180,6 +1314,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5009656184442576768, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
   m_PrefabInstance: {fileID: 387122592}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &387122594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+  m_PrefabInstance: {fileID: 387122592}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &387122595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387122594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: ba0afc5a738e0d247bde8afee90786ec, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1 &416433472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,7 +1496,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 443002180}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Track2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1425,6 +1581,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_line_type_01_15m_free_obs
       objectReference: {fileID: 0}
+    - target: {fileID: 2927259199662858590, guid: 1060f28bab45ab94eb490830df68466e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1060f28bab45ab94eb490830df68466e, type: 3}
 --- !u!4 &450663498 stripped
@@ -1432,6 +1592,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2581800735424805860, guid: 1060f28bab45ab94eb490830df68466e, type: 3}
   m_PrefabInstance: {fileID: 450663497}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &450663499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2927259199662858590, guid: 1060f28bab45ab94eb490830df68466e, type: 3}
+  m_PrefabInstance: {fileID: 450663497}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &450663500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450663499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &588452650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1442,6 +1624,10 @@ PrefabInstance:
     - target: {fileID: 7469099903034017270, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
       propertyPath: m_Name
       value: Track_Corner_90d_type_01_15x15m_quad_free_obs (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469099903034017270, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7848721253946826572, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
       propertyPath: m_RootOrder
@@ -1494,6 +1680,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7848721253946826572, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
   m_PrefabInstance: {fileID: 588452650}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &588452652 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7469099903034017270, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
+  m_PrefabInstance: {fileID: 588452650}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &588452653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588452652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1 &658741693
 GameObject:
   m_ObjectHideFlags: 0
@@ -2226,6 +2434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lawn_plane_15m_free_obs (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6183146645456561391, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2237,6 +2449,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5009656184442576768, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
   m_PrefabInstance: {fileID: 1049053291}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1049053293 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+  m_PrefabInstance: {fileID: 1049053291}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1049053294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049053293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: ba0afc5a738e0d247bde8afee90786ec, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &1067031755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2247,6 +2481,10 @@ PrefabInstance:
     - target: {fileID: 7469099903034017270, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
       propertyPath: m_Name
       value: Track_Corner_90d_type_01_15x15m_quad_free_obs (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469099903034017270, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7848721253946826572, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
       propertyPath: m_RootOrder
@@ -2299,6 +2537,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7848721253946826572, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
   m_PrefabInstance: {fileID: 1067031755}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1067031757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7469099903034017270, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
+  m_PrefabInstance: {fileID: 1067031755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1067031758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067031757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1 &1103488025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2476,6 +2736,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lawn_plane_15m_free_obs
       objectReference: {fileID: 0}
+    - target: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
 --- !u!4 &1144450271 stripped
@@ -2483,6 +2747,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5009656184442576768, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
   m_PrefabInstance: {fileID: 1144450270}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1144450272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+  m_PrefabInstance: {fileID: 1144450270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1144450273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144450272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: ba0afc5a738e0d247bde8afee90786ec, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &1191612781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2538,6 +2824,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_line_type_01_30m_free_obs
       objectReference: {fileID: 0}
+    - target: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
 --- !u!4 &1191612782 stripped
@@ -2545,6 +2835,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 467173554205048545, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
   m_PrefabInstance: {fileID: 1191612781}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1191612783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+  m_PrefabInstance: {fileID: 1191612781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1191612784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191612783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &1255337583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2600,6 +2912,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_line_type_01_30m_free_obs (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
 --- !u!4 &1255337584 stripped
@@ -2607,6 +2923,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 467173554205048545, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
   m_PrefabInstance: {fileID: 1255337583}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1255337585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+  m_PrefabInstance: {fileID: 1255337583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1255337586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255337585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1 &1257554889
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,6 +3111,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lawn_plane_15m_free_obs (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
 --- !u!4 &1389073311 stripped
@@ -2780,6 +3122,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5009656184442576768, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
   m_PrefabInstance: {fileID: 1389073310}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1389073312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+  m_PrefabInstance: {fileID: 1389073310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1389073313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389073312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: ba0afc5a738e0d247bde8afee90786ec, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!4 &1401825996 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2581800735424805860, guid: 1060f28bab45ab94eb490830df68466e, type: 3}
@@ -2950,6 +3314,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_line_type_01_30m_free_obs (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
 --- !u!4 &1591219673 stripped
@@ -2957,6 +3325,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 467173554205048545, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
   m_PrefabInstance: {fileID: 1591219672}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1591219674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+  m_PrefabInstance: {fileID: 1591219672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1591219675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591219674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &1637144467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3086,6 +3476,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lawn_plane_15m_free_obs (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
 --- !u!4 &1665404919 stripped
@@ -3093,6 +3487,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5009656184442576768, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
   m_PrefabInstance: {fileID: 1665404918}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1665404920 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+  m_PrefabInstance: {fileID: 1665404918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1665404921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665404920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: ba0afc5a738e0d247bde8afee90786ec, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &1677894170
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3148,8 +3564,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_line_type_01_15m_free_obs
       objectReference: {fileID: 0}
+    - target: {fileID: 2927259199662858590, guid: 1060f28bab45ab94eb490830df68466e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1060f28bab45ab94eb490830df68466e, type: 3}
+--- !u!1 &1677894171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2927259199662858590, guid: 1060f28bab45ab94eb490830df68466e, type: 3}
+  m_PrefabInstance: {fileID: 1677894170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1677894172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677894171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &1753387238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3223,6 +3665,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_Corner_90d_type_01_15x15m_quad_free_obs (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7469099903034017270, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7848721253946826572, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -3274,6 +3720,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7848721253946826572, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
   m_PrefabInstance: {fileID: 1781509130}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781509132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7469099903034017270, guid: e5ade76ec6dcf6140937231635f92c06, type: 3}
+  m_PrefabInstance: {fileID: 1781509130}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1781509133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781509132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1 &1823018116
 GameObject:
   m_ObjectHideFlags: 0
@@ -3444,6 +3912,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_line_type_01_30m_free_obs
       objectReference: {fileID: 0}
+    - target: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
 --- !u!4 &1997011015 stripped
@@ -3451,6 +3923,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 467173554205048545, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
   m_PrefabInstance: {fileID: 1997011014}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1997011016 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+  m_PrefabInstance: {fileID: 1997011014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1997011017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997011016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &2006384630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3506,6 +4000,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_Corner_90d_type_01_30x30m_quad_free_obs (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7599908097705747875, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
 --- !u!4 &2006384631 stripped
@@ -3513,6 +4011,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7076171558262013721, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
   m_PrefabInstance: {fileID: 2006384630}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2006384632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7599908097705747875, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
+  m_PrefabInstance: {fileID: 2006384630}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2006384633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006384632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &2013251438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3580,6 +4100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lawn_plane_15m_free_obs (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
 --- !u!4 &2013251439 stripped
@@ -3587,6 +4111,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5009656184442576768, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
   m_PrefabInstance: {fileID: 2013251438}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2013251440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5678493142902998330, guid: d9ab2401bf6839744952d1947386d8b3, type: 3}
+  m_PrefabInstance: {fileID: 2013251438}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2013251441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013251440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: ba0afc5a738e0d247bde8afee90786ec, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &2030483054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3642,6 +4188,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_line_type_01_30m_free_obs (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
 --- !u!4 &2030483055 stripped
@@ -3649,6 +4199,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 467173554205048545, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
   m_PrefabInstance: {fileID: 2030483054}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2030483056 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 950377666402935899, guid: 18ab59e03c7a63c4dbfb26d2ca862d41, type: 3}
+  m_PrefabInstance: {fileID: 2030483054}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2030483057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030483056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1 &2030783885
 GameObject:
   m_ObjectHideFlags: 0
@@ -3768,7 +4340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2043131281}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Track
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3853,6 +4425,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_Corner_90d_type_01_30x30m_quad_free_obs (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7599908097705747875, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
 --- !u!4 &2112318830 stripped
@@ -3860,6 +4436,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7076171558262013721, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
   m_PrefabInstance: {fileID: 2112318829}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2112318831 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7599908097705747875, guid: ac0f6076afd4dde4f82fd5097f69adc9, type: 3}
+  m_PrefabInstance: {fileID: 2112318829}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2112318832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112318831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1 &2120213706
 GameObject:
   m_ObjectHideFlags: 0
@@ -3869,7 +4467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2120213707}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3948,6 +4546,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track_line_type_01_start_finish_15m_free_obs
       objectReference: {fileID: 0}
+    - target: {fileID: 8049907621329533821, guid: 419b5557461398443a4b99d9496015fc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 419b5557461398443a4b99d9496015fc, type: 3}
 --- !u!4 &2131803766 stripped
@@ -3955,6 +4557,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7276925260861940167, guid: 419b5557461398443a4b99d9496015fc, type: 3}
   m_PrefabInstance: {fileID: 2131803765}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2131803767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8049907621329533821, guid: 419b5557461398443a4b99d9496015fc, type: 3}
+  m_PrefabInstance: {fileID: 2131803765}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2131803768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131803767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1 &2132565349
 GameObject:
   m_ObjectHideFlags: 0
@@ -3964,7 +4588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2132565350}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
