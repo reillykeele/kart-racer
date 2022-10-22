@@ -2,7 +2,6 @@ using Data.Environment;
 using Environment.Track;
 using Manager;
 using UnityEngine;
-using Util.Coroutine;
 using Util.Helpers;
 
 namespace Actor.Racer.Player
@@ -72,7 +71,7 @@ namespace Actor.Racer.Player
             var forward = transform.forward;
             Debug.DrawRay(transform.position, 3 * forward, Color.yellow);
 
-            var movement = forward * CurrSpeed * Time.fixedDeltaTime;
+            Vector3 movement;
 
             // Calculate and apply steering
             float steerDirection;
@@ -87,7 +86,8 @@ namespace Actor.Racer.Player
                     steeringX * (RacerMovement.TurningSpeed * 0.75f);
 
                 // Add outward velocity 
-                movement += transform.right * (CurrSpeed * 0.0125f) * -DriftDirection;
+                var dir = (forward + transform.right * RacerMovement.OutwardDriftPercentage * -DriftDirection).normalized;
+                movement = dir * CurrSpeed;
 
                 // Calculate turbo progress
                 ++_driftProgress;
@@ -100,6 +100,8 @@ namespace Actor.Racer.Player
             }
             else
             {
+                movement = forward * CurrSpeed;
+
                 DriftDirection = 0;
                 steerDirection = steeringX * RacerMovement.TurningSpeed;
             }
@@ -127,6 +129,8 @@ namespace Actor.Racer.Player
             // Move & rotate player
             if (!CurrSpeed.IsZero())
                 transform.Rotate(transform.up, steerDirection * Time.fixedDeltaTime);
+
+            movement *= Time.fixedDeltaTime;
 
             if (Physics.BoxCast(
                     _collider.bounds.center + movement,

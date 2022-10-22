@@ -11,8 +11,8 @@ namespace UI
 {
     public class UIController : MonoBehaviour
     {
-        public UIType UIType;
-        public UIType ReturnUI;
+        public UIPageType UiPageType;
+        public UIPageType ReturnUiPage;
 
         public Button initialSelectedButton = null;
 
@@ -21,10 +21,14 @@ namespace UI
 
         protected Button lastSelectedButton = null;
 
+        protected IEnumerable<Animator> _animators;
+
         void Awake()
         {
             _canvasController = GetComponentInParent<CanvasController>();
             _buttonControllers = GetComponentsInChildren<AButtonController>().ToList();
+
+            _animators = GetComponentsInChildren<Animator>();
         }
 
         public virtual void Reset()
@@ -45,6 +49,9 @@ namespace UI
                 _buttonControllers.FirstOrDefault()?.Select();
 
             gameObject.Enable();
+
+            foreach (var animator in _animators)
+                animator.TrySetBool("transitionIn", resetOnSwitch);
         }
 
         public virtual void Disable(bool resetOnSwitch = false)
@@ -56,7 +63,7 @@ namespace UI
 
         public virtual void ReturnToUI()
         {
-            if (ReturnUI != UIType.None) {_canvasController.SwitchUI(ReturnUI, resetTargetOnSwitch: false);}
+            if (ReturnUiPage != UIPageType.None) {_canvasController.SwitchUI(ReturnUiPage, resetTargetOnSwitch: false);}
         }
 
     }

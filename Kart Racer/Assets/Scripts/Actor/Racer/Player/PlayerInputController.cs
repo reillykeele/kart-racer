@@ -25,7 +25,8 @@ namespace Actor.Racer.Player
         public void OnItem(InputValue val)
         {
             PlayerInput.IsUsingItem = val.isPressed;
-            OnItemEvent.Invoke();
+            if (val.isPressed)
+                OnItemEvent.Invoke();
         }
 
         public void OnSteer(InputValue val) => PlayerInput.Steering = val.Get<Vector2>();

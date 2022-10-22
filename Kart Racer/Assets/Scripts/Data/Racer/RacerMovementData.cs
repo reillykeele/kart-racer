@@ -16,6 +16,8 @@ namespace Data.Racer
         public float DecelerationSpeed;
         public float BrakeSpeed;
 
+        public float OutwardDriftPercentage;
+
         [Header("Handling")]
         public float TurningSpeed;
 

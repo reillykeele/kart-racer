@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f36a6ab3c9e5d846bc61723d5c62117, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  CountdownLength: 0
+  CountdownLength: 3
   ItemConfig:
     TimeToRespawn: 3
     Items:
     - {fileID: 11400000, guid: c6428ad164b0b0443bfdf2b82eb9f380, type: 2}
+    - {fileID: 11400000, guid: 54a2d4e11b909db48a07fa3a572122e3, type: 2}
     MushroomBoostPower: 0.75
     MushroomBoostDuration: 1.5
   UIConfig:

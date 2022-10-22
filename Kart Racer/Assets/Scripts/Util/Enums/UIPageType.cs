@@ -1,6 +1,6 @@
 namespace Util.Enums
 {
-    public enum UIType
+    public enum UIPageType
     {
         None = 0,
         GameUI = 1,

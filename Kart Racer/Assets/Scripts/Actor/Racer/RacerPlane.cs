@@ -22,7 +22,7 @@ public class RacerPlane : MonoBehaviour
         if (collider?.GetComponent<RacerPlane>() != null)
         {
             // RacerExitsPlaneEvent.Invoke();
-            GameManager.Instance.CalculatePositions();
+            GameManager.Instance.RaceManager.CalculatePositions();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Actor.Racer.Computer
 
             CurrSpeed = RacerMovement.MaxSpeed;
 
-            var targetCheckpoint = GameManager.Instance.CourseController.GetNextCheckpoint(_computerController.CheckpointsReached);
+            var targetCheckpoint = GameManager.Instance.RaceManager.GetNextCheckpoint(_computerController.CheckpointsReached);
             _target = targetCheckpoint.gameObject;
 
             var targetDirection = (_target.transform.position - transform.position);

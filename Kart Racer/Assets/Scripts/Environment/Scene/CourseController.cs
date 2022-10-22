@@ -19,7 +19,10 @@ namespace Environment.Scene
 
         protected override void OnSceneLoad()
         {
-            GameManager.Instance.StartCountdown();
+            GameManager.Instance.InitRace();
+            GameManager.Instance.RaceManager.LoadUI();
+
+            GameManager.Instance.RaceManager.StartCountdown();
         }
 
         public Checkpoint GetFinishLine() => Checkpoints.Single(x => x.CheckpointIndex == 0);

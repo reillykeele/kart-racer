@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Util.Helpers;
 
 namespace Effect.Particle
 {
@@ -16,8 +15,6 @@ namespace Effect.Particle
         {
             _particleSystems = GetComponentsInChildren<ParticleSystem>().ToList();
             _particleSystemMains = _particleSystems.Select(x => x.main).ToList();
-
-            Debug.Log("mains: " + _particleSystemMains.Count);
         }
 
         public void StartSystem() => _particleSystems.ForEach(x => x.Play());

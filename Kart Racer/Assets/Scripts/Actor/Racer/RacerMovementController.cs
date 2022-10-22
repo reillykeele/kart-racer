@@ -1,6 +1,5 @@
 using System.Collections;
 using Data.Racer;
-using Effect.Particle;
 using ScriptableObject.Racer;
 using UnityEngine;
 using UnityEngine.Events;

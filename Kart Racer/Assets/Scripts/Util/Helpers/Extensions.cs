@@ -216,5 +216,25 @@ namespace Util.Helpers
 
         #endregion
 
+        #region Animator
+
+        public static bool HasParam(this Animator animator, string name) => animator.parameters.Any(x => x.name == name);
+
+        public static void TrySetBool(this Animator animator, string name, bool value)
+        {
+            if (animator.HasParam(name)) animator.SetBool(name, value);
+        }
+
+        public static void TrySetFloat(this Animator animator, string name, float value)
+        {
+            if (animator.HasParam(name)) animator.SetFloat(name, value);
+        }
+
+        public static void TrySetTrigger(this Animator animator, string name)
+        {
+            if (animator.HasParam(name)) animator.SetTrigger(name);
+        }
+
+        #endregion
     }
 }

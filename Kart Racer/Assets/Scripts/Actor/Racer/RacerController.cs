@@ -3,7 +3,6 @@ using Manager;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.PlayerLoop;
 using Util.Helpers;
 
 namespace Actor.Racer
@@ -30,10 +29,28 @@ namespace Actor.Racer
 
         public int CurrentLap { get; private set; } = 1; // starting at 1
         public int CheckpointsReached { get; set; } = 0;
+        public int KeyCheckpointsReached { get; set; } = 0;
 
         public float RaceFinishTime { get; private set; }
 
-        public Item.Item Item { get; set; }
+        private Item.Item _item;
+        public Item.Item Item
+        {
+            get => _item;
+            set
+            {
+                Debug.Log("SETTING ITEM");
+                _item = value;
+
+                if (_item == null)
+                    ClearItemEvent.Invoke();
+                else
+                {
+                    _item.SetOwner(this);
+                    PickupItemEvent.Invoke(_item.ItemData);
+                }
+            }
+        }
 
         protected Vector3 CourseForward { get; set; }
         protected GameObject CoursePlane { get; private set; }
@@ -48,7 +65,7 @@ namespace Actor.Racer
 
         protected virtual void Start()
         {
-            CourseForward = GameManager.Instance.CourseController.GetFinishLine().transform.forward;
+            CourseForward = GameManager.Instance.RaceManager.GetFinishLineForward();
         }
 
         protected virtual void LateUpdate()
@@ -62,10 +79,7 @@ namespace Actor.Racer
             // Set item based on position
             if (Item == null)
             {
-                Item = GameManager.Instance.GetRandomItem();
-                Item.SetOwner(this);
-
-                PickupItemEvent.Invoke(Item.ItemData);
+                Item = GameManager.Instance.RaceManager.GetRandomItem();
 
                 // Debug.Log($"{Name} picked up {Item.ItemData.Name}.");
             }
@@ -83,11 +97,11 @@ namespace Actor.Racer
 
             // Debug.Log($"Using {Item.ItemData.Name}");
             // UseItemEvent.Invoke();
+            Debug.Log($"USE ITEM {Item.Uses}");
             Item.UseItem();
             if (Item.Uses <= 0)
             {
                 Item = null;
-                ClearItemEvent.Invoke();
             }
         }
 
@@ -104,6 +118,15 @@ namespace Actor.Racer
             {
                 // Debug.Log($"Crossed checkpoint #{checkpointIndex} but not in order. {CheckpointsReached} checkpoints reached.");
             }
+        }
+
+        public virtual void TriggerKeyCheckpoint(int checkpointIndex, int keyCheckpointIndex, Vector3 courseForward)
+        {
+            if (KeyCheckpointsReached == keyCheckpointIndex - 1)
+                ++KeyCheckpointsReached;
+
+            if (CheckpointsReached < checkpointIndex)
+                CheckpointsReached = checkpointIndex;
         }
 
         public virtual void TriggerShortcut(int checkpointIndex)
@@ -123,12 +146,14 @@ namespace Actor.Racer
         public UnityEvent<float> FinishRaceEvent;
         public virtual void TriggerFinishLine()
         {
-            if (CheckpointsReached >= GameManager.Instance.NumCheckpoints - 1)
+            Debug.Log("Num Key Checkpoints: " + GameManager.Instance.RaceManager.NumKeyCheckpoints +
+                      ", Key Checkpoints Reached: " + KeyCheckpointsReached);
+            if (KeyCheckpointsReached >= GameManager.Instance.RaceManager.NumKeyCheckpoints)
             {
                 ++CurrentLap;
                 CheckpointsReached = 0;
 
-                if (CurrentLap > GameManager.Instance.NumLaps)
+                if (CurrentLap > GameManager.Instance.RaceManager.NumLaps)
                 { 
                     Debug.Log($"{name} finished the race!");
                     RaceFinishTime = Time.time;

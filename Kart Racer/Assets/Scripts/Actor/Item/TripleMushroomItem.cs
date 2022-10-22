@@ -12,7 +12,6 @@ namespace Actor.Item
 
         public override void UseItem()
         {
-
             --Uses;
             _owner.MovementController.Boost(GameManager.Instance.Config.ItemConfig.MushroomBoostPower, 
                                             GameManager.Instance.Config.ItemConfig.MushroomBoostDuration);

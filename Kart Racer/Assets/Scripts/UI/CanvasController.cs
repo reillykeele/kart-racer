@@ -10,12 +10,12 @@ namespace UI
 {
     public class CanvasController : MonoBehaviour
     {
-        public Util.Enums.UIType DefaultUI;
+        public Util.Enums.UIPageType DefaultUiPage;
 
         private List<UIController> uiControllers;
         private Hashtable uiHashtable;
 
-        private Util.Enums.UIType lastActiveUI;
+        private Util.Enums.UIPageType _lastActiveUiPage;
 
         void Awake()
         {
@@ -28,7 +28,7 @@ namespace UI
         void Update()
         {
             if (Gamepad.current?.buttonEast.wasPressedThisFrame == true)
-                GetUI(lastActiveUI)?.ReturnToUI();
+                GetUI(_lastActiveUiPage)?.ReturnToUI();
         }
 
         void Start()
@@ -36,53 +36,53 @@ namespace UI
             foreach (var controller in uiControllers)
                 controller.Disable();
 
-            EnableUI(DefaultUI);
+            EnableUI(DefaultUiPage);
         }
 
-        public void EnableUI(Util.Enums.UIType target, bool resetOnSwitch = false)
+        public void EnableUI(Util.Enums.UIPageType target, bool resetOnSwitch = false)
         {
-            if (target == Util.Enums.UIType.None) return;
+            if (target == Util.Enums.UIPageType.None) return;
         
             GetUI(target)?.Enable(resetOnSwitch);
-            lastActiveUI = target;
+            _lastActiveUiPage = target;
         }
 
-        public void DisableUI(Util.Enums.UIType target, bool resetOnSwitch = false)
+        public void DisableUI(Util.Enums.UIPageType target, bool resetOnSwitch = false)
         {
-            if (target == Util.Enums.UIType.None) return;
+            if (target == Util.Enums.UIPageType.None) return;
 
             GetUI(target)?.Disable(resetOnSwitch);
         }
 
-        public void SwitchUI(Util.Enums.UIType target, bool resetCurrentOnSwitch = false, bool resetTargetOnSwitch = true)
+        public void SwitchUI(Util.Enums.UIPageType target, bool resetCurrentOnSwitch = false, bool resetTargetOnSwitch = true)
         {
-            if (lastActiveUI == target) return;
+            if (_lastActiveUiPage == target) return;
 
-            DisableUI(lastActiveUI, resetCurrentOnSwitch);
+            DisableUI(_lastActiveUiPage, resetCurrentOnSwitch);
             EnableUI(target, resetTargetOnSwitch);
-            lastActiveUI = target;
+            _lastActiveUiPage = target;
         }
 
         public void SwitchScene(Scene scene)
         {
             if (scene == Scene.None) return;
 
-            SwitchUI(Util.Enums.UIType.LoadingScreen);
+            SwitchUI(Util.Enums.UIPageType.LoadingScreen);
             StartCoroutine(LoadingScreen(scene));
         }
 
-        private UIController GetUI(Util.Enums.UIType uiType) => (UIController) uiHashtable[uiType];
+        private UIController GetUI(Util.Enums.UIPageType uiPageType) => (UIController) uiHashtable[uiPageType];
 
         private void RegisterUIControllers(IEnumerable<UIController> controllers)
         {
             foreach (var controller in controllers)
             {
-                if (!UIExists(controller.UIType))
-                    uiHashtable.Add(controller.UIType, controller);
+                if (!UIExists(controller.UiPageType))
+                    uiHashtable.Add(controller.UiPageType, controller);
             }
         }
 
-        private bool UIExists(Util.Enums.UIType uiType) => uiHashtable.ContainsKey(uiType);
+        private bool UIExists(Util.Enums.UIPageType uiPageType) => uiHashtable.ContainsKey(uiPageType);
 
         IEnumerator LoadingScreen(Scene scene)
         {

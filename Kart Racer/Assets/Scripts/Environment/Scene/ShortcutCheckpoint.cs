@@ -1,4 +1,5 @@
 using Actor.Racer;
+using Data.Environment;
 using UnityEngine;
 
 namespace Environment.Scene
@@ -16,5 +17,7 @@ namespace Environment.Scene
             if (Vector3.Dot(racer.transform.forward, transform.forward) > 0)
                 racer.TriggerShortcut(CheckpointIndex);
         }
+
+        public override CheckpointType GetCheckpointType() => CheckpointType.Shortcut;
     }
 }

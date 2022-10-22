@@ -1,6 +1,5 @@
 using System;
 using Actor.Racer;
-using Actor.Racer.Player;
 using Data.Item;
 
 namespace Actor.Item

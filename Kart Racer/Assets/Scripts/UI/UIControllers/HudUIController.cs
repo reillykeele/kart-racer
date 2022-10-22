@@ -42,11 +42,12 @@ namespace UI.UIControllers
         {
             var racerController = FindObjectOfType<PlayerController>() ?? FindObjectOfType<RacerController>();
 
-            GameManager.Instance.CountdownTickEvent.AddListener(CountdownTick);
-            GameManager.Instance.CountdownEndEvent.AddListener(CountdownEnd);
+            GameManager.Instance.RaceManager.CountdownTickEvent.AddListener(CountdownTick);
+            GameManager.Instance.RaceManager.CountdownEndEvent.AddListener(CountdownEnd);
 
             if (racerController)
             {
+                Debug.Log("SETTING EVENT LISTENERS ON RACER CONTROLLER");
                 racerController.PickupItemEvent.AddListener(PickupItem);
                 racerController.ClearItemEvent.AddListener(ClearItem);
                 racerController.ChangeLapEvent.AddListener(ChangeLap);
@@ -55,13 +56,14 @@ namespace UI.UIControllers
 
                 ChangePosition(racerController.Position);
                 ChangeLap(racerController.CurrentLap);
+                PickupItem(racerController.Item?.ItemData);
             }
         }
 
         void Update()
         {
             // Update race timer
-            var startTime = GameManager.Instance.RaceStartTime;
+            var startTime = GameManager.Instance.RaceManager.RaceStartTime;
             if (DisplayTimer && startTime > 0)
             {
                 _timeText.text = TimeHelper.FormatTime(startTime, Time.time);
@@ -97,12 +99,12 @@ namespace UI.UIControllers
 
         public void ChangeLap(int lap)
         {
-            _lapText.text = $"Lap {lap} / {GameManager.Instance.NumLaps}";
+            _lapText.text = $"Lap {lap} / {GameManager.Instance.RaceManager.NumLaps}";
         }
 
         public void FinishRace(float time)
         {
-            _timeText.text = TimeHelper.FormatTime(GameManager.Instance.RaceStartTime, Time.time);
+            _timeText.text = TimeHelper.FormatTime(GameManager.Instance.RaceManager.RaceStartTime, Time.time);
             DisplayTimer = false;
         }
     }
