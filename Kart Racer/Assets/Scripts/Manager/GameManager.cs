@@ -57,7 +57,6 @@ namespace Manager
 
         public void SpawnRaceManager()
         {
-            Debug.Log("SpawnRaceManager");
             var raceManagerGameObject = new GameObject("Race Manager");
 
             switch(GameMode)

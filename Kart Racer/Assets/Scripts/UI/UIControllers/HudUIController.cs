@@ -47,7 +47,6 @@ namespace UI.UIControllers
 
             if (racerController)
             {
-                Debug.Log("SETTING EVENT LISTENERS ON RACER CONTROLLER");
                 racerController.PickupItemEvent.AddListener(PickupItem);
                 racerController.ClearItemEvent.AddListener(ClearItem);
                 racerController.ChangeLapEvent.AddListener(ChangeLap);
