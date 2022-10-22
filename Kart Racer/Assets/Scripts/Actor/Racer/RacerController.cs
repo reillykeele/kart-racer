@@ -39,7 +39,6 @@ namespace Actor.Racer
             get => _item;
             set
             {
-                Debug.Log("SETTING ITEM");
                 _item = value;
 
                 if (_item == null)
@@ -95,9 +94,6 @@ namespace Actor.Racer
         {
             if (Item == null) return;
 
-            // Debug.Log($"Using {Item.ItemData.Name}");
-            // UseItemEvent.Invoke();
-            Debug.Log($"USE ITEM {Item.Uses}");
             Item.UseItem();
             if (Item.Uses <= 0)
             {
@@ -146,8 +142,6 @@ namespace Actor.Racer
         public UnityEvent<float> FinishRaceEvent;
         public virtual void TriggerFinishLine()
         {
-            Debug.Log("Num Key Checkpoints: " + GameManager.Instance.RaceManager.NumKeyCheckpoints +
-                      ", Key Checkpoints Reached: " + KeyCheckpointsReached);
             if (KeyCheckpointsReached >= GameManager.Instance.RaceManager.NumKeyCheckpoints)
             {
                 ++CurrentLap;
