@@ -8,7 +8,7 @@ namespace Actor.Racer.Computer
     {
         private ComputerController _computerController;
 
-        private GameObject _target;
+        // private GameObject _target;
 
         protected override void Awake()
         {
@@ -17,7 +17,7 @@ namespace Actor.Racer.Computer
             _computerController = GetComponent<ComputerController>();
         }
 
-        void FixedUpdate()
+        protected override void FixedUpdate()
         {
             if (!GameManager.Instance.IsPlaying()) return;
 

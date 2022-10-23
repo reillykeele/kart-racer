@@ -30,6 +30,7 @@ namespace Actor.Racer
         public int CurrentLap { get; private set; } = 1; // starting at 1
         public int CheckpointsReached { get; set; } = 0;
         public int KeyCheckpointsReached { get; set; } = 0;
+        public bool IsFinishedRace { get; set; }
 
         public float RaceFinishTime { get; private set; }
 
@@ -147,8 +148,12 @@ namespace Actor.Racer
                 ++CurrentLap;
                 CheckpointsReached = 0;
 
+                if (IsFinishedRace)
+                    return;
+
                 if (CurrentLap > GameManager.Instance.RaceManager.NumLaps)
-                { 
+                {
+                    IsFinishedRace = true;
                     Debug.Log($"{name} finished the race!");
                     RaceFinishTime = Time.time;
                     FinishRaceEvent.Invoke(RaceFinishTime);

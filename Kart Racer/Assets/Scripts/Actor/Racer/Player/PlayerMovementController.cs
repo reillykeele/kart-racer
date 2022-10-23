@@ -11,6 +11,8 @@ namespace Actor.Racer.Player
     {
         private PlayerInputController _input;
 
+        [SerializeField] public bool UseAutopilot = false;
+
         protected override void Awake()
         {
             base.Awake();
@@ -19,9 +21,15 @@ namespace Actor.Racer.Player
             _input.OnDriftEvent.AddListener(isDrifting => IsDrifting = isDrifting);
         }
 
-        void FixedUpdate()
+        protected override void FixedUpdate()
         {
             if (!GameManager.Instance.IsPlaying()) return;
+
+            if (UseAutopilot)
+            {
+                base.FixedUpdate();
+                return;
+            }
 
             var isGrounded = IsGrounded(out var hitInfo);
 
@@ -75,15 +83,15 @@ namespace Actor.Racer.Player
 
             // Calculate and apply steering
             float steerDirection;
-            var steeringX = _input.PlayerInput.Steering.x;
+            Steering = _input.PlayerInput.Steering.x;
             if (_isDrifting)
             {
                 if (DriftDirection == 0)
-                    DriftDirection = steeringX == 0 ? 0 : (int)Mathf.Sign(steeringX);
+                    DriftDirection = Steering == 0 ? 0 : (int)Mathf.Sign(Steering);
 
                 steerDirection =
                     DriftDirection * (RacerMovement.TurningSpeed * 1.25f) +
-                    steeringX * (RacerMovement.TurningSpeed * 0.75f);
+                    Steering * (RacerMovement.TurningSpeed * 0.75f);
 
                 // Add outward velocity 
                 var dir = (forward + transform.right * RacerMovement.OutwardDriftPercentage * -DriftDirection).normalized;
@@ -103,7 +111,7 @@ namespace Actor.Racer.Player
                 movement = forward * CurrSpeed;
 
                 DriftDirection = 0;
-                steerDirection = steeringX * RacerMovement.TurningSpeed;
+                steerDirection = Steering * RacerMovement.TurningSpeed;
             }
 
             // Apply gravity

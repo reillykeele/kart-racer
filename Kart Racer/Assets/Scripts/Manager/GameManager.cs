@@ -25,31 +25,6 @@ namespace Manager
 
         public bool IsPlaying() => CurrentGameState == GameState.Playing;
 
-        // public void StartCountdown()
-        // {
-        //     // StartCoroutine(Countdown(Config.CountdownLength));
-        // }
-        //
-        // public UnityEvent<int> CountdownTickEvent;
-        // public UnityEvent CountdownEndEvent;
-        // IEnumerator Countdown(int seconds)
-        // {
-        //     var count = seconds + 1;
-        //     while (count > 0)
-        //     {
-        //         Debug.Log(count);
-        //         yield return new WaitForSeconds(1);
-        //         
-        //         --count;
-        //         CountdownTickEvent.Invoke(count);
-        //     }
-        //
-        //     // Start Event
-        //     CountdownEndEvent.Invoke();
-        //     RaceManager.RaceStartTime = Time.time;
-        //     CurrentGameState = GameState.Playing;
-        // }
-
         public void InitRace()
         {
             SpawnRaceManager();
