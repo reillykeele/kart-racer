@@ -115,7 +115,7 @@ namespace Actor.Racer
                 transform.rotation = Quaternion.Slerp(
                     transform.rotation, 
                     Quaternion.LookRotation(rotForward.normalized, groundNormal), 
-                    8f * Time.fixedDeltaTime);
+                    2f * Time.fixedDeltaTime);
             }
             else
                 movement.y -= RacerMovement.GravitySpeed;

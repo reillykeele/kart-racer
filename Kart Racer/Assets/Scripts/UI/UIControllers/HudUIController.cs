@@ -62,10 +62,16 @@ namespace UI.UIControllers
         void Update()
         {
             // Update race timer
-            var startTime = GameManager.Instance.RaceManager.RaceStartTime;
-            if (DisplayTimer && startTime > 0)
+            // var startTime = GameManager.Instance.RaceManager.RaceStartTime;
+            // if (DisplayTimer && startTime > 0)
+            // {
+            //     _timeText.text = TimeHelper.FormatTime(startTime, Time.time);
+            // }
+
+            var raceTime = GameManager.Instance.RaceManager.RaceTime;
+            if (DisplayTimer && raceTime > 0)
             {
-                _timeText.text = TimeHelper.FormatTime(startTime, Time.time);
+                _timeText.text = TimeHelper.FormatTime(raceTime);
             }
         }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,8 @@ namespace UI
     public class CanvasController : MonoBehaviour
     {
         public Util.Enums.UIPageType DefaultUiPage;
+
+        public float MinLoadingScreenTime = 0f;
 
         private List<UIController> uiControllers;
         private Hashtable uiHashtable;
@@ -39,27 +42,27 @@ namespace UI
             EnableUI(DefaultUiPage);
         }
 
-        public void EnableUI(Util.Enums.UIPageType target, bool resetOnSwitch = false)
+        public void EnableUI(Util.Enums.UIPageType target, bool resetOnSwitch = false, bool fadeIn = false)
         {
             if (target == Util.Enums.UIPageType.None) return;
-        
-            GetUI(target)?.Enable(resetOnSwitch);
+
+            GetUI(target)?.Enable(resetOnSwitch, fadeIn);
             _lastActiveUiPage = target;
         }
 
-        public void DisableUI(Util.Enums.UIPageType target, bool resetOnSwitch = false)
+        public void DisableUI(Util.Enums.UIPageType target, bool resetOnSwitch = false, bool fadeOut = false)
         {
             if (target == Util.Enums.UIPageType.None) return;
 
-            GetUI(target)?.Disable(resetOnSwitch);
+            GetUI(target)?.Disable(resetOnSwitch, fadeOut);
         }
 
-        public void SwitchUI(Util.Enums.UIPageType target, bool resetCurrentOnSwitch = false, bool resetTargetOnSwitch = true)
+        public void SwitchUI(Util.Enums.UIPageType target, bool resetCurrentOnSwitch = false, bool resetTargetOnSwitch = true, bool fadeIn = false, bool fadeOut = false)
         {
             if (_lastActiveUiPage == target) return;
 
-            DisableUI(_lastActiveUiPage, resetCurrentOnSwitch);
-            EnableUI(target, resetTargetOnSwitch);
+            DisableUI(_lastActiveUiPage, resetCurrentOnSwitch, fadeOut);
+            EnableUI(target, resetTargetOnSwitch, fadeIn);
             _lastActiveUiPage = target;
         }
 
@@ -67,8 +70,9 @@ namespace UI
         {
             if (scene == Scene.None) return;
 
-            SwitchUI(Util.Enums.UIPageType.LoadingScreen);
-            StartCoroutine(LoadingScreen(scene));
+            // SwitchUI(Util.Enums.UIPageType.LoadingScreen, fadeIn:true);
+            // StartCoroutine(LoadingScreen(scene));
+            LoadingManager.Instance.LoadScene(scene);
         }
 
         private UIController GetUI(Util.Enums.UIPageType uiPageType) => (UIController) uiHashtable[uiPageType];
@@ -86,8 +90,9 @@ namespace UI
 
         IEnumerator LoadingScreen(Scene scene)
         {
+            var minEndTime = Time.time + MinLoadingScreenTime;
             var result = SceneManager.LoadSceneAsync(scene.ToString());
-            while (!result.isDone)
+            while (result.isDone == false || Time.time <= minEndTime)
             {
                 yield return null;
             }

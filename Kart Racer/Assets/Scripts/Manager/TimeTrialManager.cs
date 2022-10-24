@@ -28,7 +28,7 @@ namespace Manager
         public override void LoadUI()
         {
             if (SceneManager.GetSceneByName("TimeTrialGameUI").isLoaded == false)
-                SceneManager.LoadSceneAsync("TimeTrialGameUI", LoadSceneMode.Additive);
+                SceneManager.LoadScene("TimeTrialGameUI", LoadSceneMode.Additive);
         }
     }
 }

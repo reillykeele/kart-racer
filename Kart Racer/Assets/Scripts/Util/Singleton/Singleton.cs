@@ -26,7 +26,10 @@ namespace Util.Singleton
         {
             if (Instance != null && Instance != this)
             {
-                Destroy(this);
+                if (transform.root != transform && transform.childCount <= 1)
+                    Destroy(transform.root.gameObject);
+                else
+                    Destroy(gameObject);
                 return;
             }
         }

@@ -607,6 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultUiPage: 2
+  MinLoadingScreenTime: 2
 --- !u!1 &104638229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,6 +1152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetUiPageType: 0
+  FadeIn: 0
 --- !u!114 &213747715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1870,7 +1872,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &337093492
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1997,6 +1999,7 @@ GameObject:
   m_Component:
   - component: {fileID: 354604959}
   - component: {fileID: 354604960}
+  - component: {fileID: 354604961}
   m_Layer: 5
   m_Name: StartGame
   m_TagString: Untagged
@@ -2041,6 +2044,18 @@ MonoBehaviour:
   ReturnUiPage: 0
   initialSelectedButton: {fileID: 0}
   TargetUiPageType: 3
+--- !u!225 &354604961
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354604958}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &367610723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2584,6 +2599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 414501639}
   - component: {fileID: 414501640}
+  - component: {fileID: 414501641}
   m_Layer: 5
   m_Name: MainMenu2
   m_TagString: Untagged
@@ -2627,6 +2643,18 @@ MonoBehaviour:
   UiPageType: 3
   ReturnUiPage: 2
   initialSelectedButton: {fileID: 0}
+--- !u!225 &414501641
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414501638}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &422606276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3138,6 +3166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetUiPageType: 0
+  FadeIn: 0
 --- !u!114 &491313890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3590,6 +3619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetUiPageType: 0
+  FadeIn: 0
 --- !u!114 &540751158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4229,6 +4259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 590849524}
   - component: {fileID: 590849525}
+  - component: {fileID: 590849526}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -4272,6 +4303,18 @@ MonoBehaviour:
   UiPageType: 4
   ReturnUiPage: 3
   initialSelectedButton: {fileID: 0}
+--- !u!225 &590849526
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590849523}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &602192087
 GameObject:
   m_ObjectHideFlags: 0
@@ -4976,6 +5019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetUiPageType: 0
+  FadeIn: 0
 --- !u!114 &714338527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5088,6 +5132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 764351976}
   - component: {fileID: 764351977}
+  - component: {fileID: 764351978}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -5131,6 +5176,18 @@ MonoBehaviour:
   UiPageType: 0
   ReturnUiPage: 0
   initialSelectedButton: {fileID: 0}
+--- !u!225 &764351978
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764351975}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &791534408
 GameObject:
   m_ObjectHideFlags: 0
@@ -5840,6 +5897,7 @@ GameObject:
   m_Component:
   - component: {fileID: 861238814}
   - component: {fileID: 861238815}
+  - component: {fileID: 861238816}
   m_Layer: 5
   m_Name: Loading
   m_TagString: Untagged
@@ -5883,6 +5941,18 @@ MonoBehaviour:
   UiPageType: 5
   ReturnUiPage: 0
   initialSelectedButton: {fileID: 0}
+--- !u!225 &861238816
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861238813}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &887176000
 GameObject:
   m_ObjectHideFlags: 0
@@ -15657,6 +15727,7 @@ GameObject:
   m_Component:
   - component: {fileID: 970534374}
   - component: {fileID: 970534375}
+  - component: {fileID: 970534376}
   m_Layer: 5
   m_Name: ModeSelect
   m_TagString: Untagged
@@ -15700,6 +15771,18 @@ MonoBehaviour:
   UiPageType: 7
   ReturnUiPage: 3
   initialSelectedButton: {fileID: 0}
+--- !u!225 &970534376
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970534373}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1041782085
 GameObject:
   m_ObjectHideFlags: 0
@@ -16113,6 +16196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetUiPageType: 0
+  FadeIn: 0
 --- !u!1 &1223581177
 GameObject:
   m_ObjectHideFlags: 0
@@ -16904,7 +16988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -22295,6 +22379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1555762187}
   - component: {fileID: 1555762188}
+  - component: {fileID: 1555762189}
   m_Layer: 5
   m_Name: MapSelect
   m_TagString: Untagged
@@ -22338,6 +22423,18 @@ MonoBehaviour:
   UiPageType: 10
   ReturnUiPage: 3
   initialSelectedButton: {fileID: 482452306}
+--- !u!225 &1555762189
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555762186}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1593420148
 GameObject:
   m_ObjectHideFlags: 0
@@ -22480,6 +22577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetUiPageType: 10
+  FadeIn: 0
 --- !u!114 &1598519807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22972,7 +23070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -28661,6 +28759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetUiPageType: 4
+  FadeIn: 0
 --- !u!114 &1962186409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29175,6 +29274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetUiPageType: 10
+  FadeIn: 1
 --- !u!114 &2040339076
 MonoBehaviour:
   m_ObjectHideFlags: 0

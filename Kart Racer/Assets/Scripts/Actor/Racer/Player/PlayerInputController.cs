@@ -1,4 +1,5 @@
 using Data.Racer.Player;
+using Manager;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -36,6 +37,12 @@ namespace Actor.Racer.Player
         {
             PlayerInput.IsLookingBehind = val.isPressed;
             OnLookBehindEvent.Invoke(PlayerInput.IsLookingBehind);
+        }
+
+        public void OnPause(InputValue val)
+        {
+            if (val.isPressed)
+                GameManager.Instance.TogglePaused();
         }
     }
 }

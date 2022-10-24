@@ -1,6 +1,7 @@
-using Actor.Racer;
-
-public class ComputerController : RacerController
+namespace Actor.Racer.Computer
 {
+    public class ComputerController : RacerController
+    {
     
+    }
 }

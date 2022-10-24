@@ -1,5 +1,6 @@
 using ScriptableObject.Config;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Util.Enums;
 using Util.Singleton;
 
@@ -21,9 +22,15 @@ namespace Manager
             base.Awake();
 
             DontDestroyOnLoad(transform.root.gameObject);
+
+            if (FindObjectOfType<LoadingManager>() == null)
+                SceneManager.LoadSceneAsync("Loading", LoadSceneMode.Additive);
         }
 
         public bool IsPlaying() => CurrentGameState == GameState.Playing;
+        public void PauseGame() => CurrentGameState = GameState.Paused;
+        public void ResumeGame() => CurrentGameState = GameState.Playing;
+        public void TogglePaused() { if (IsPlaying()) PauseGame(); else ResumeGame(); }
 
         public void InitRace()
         {

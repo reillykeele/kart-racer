@@ -21,7 +21,10 @@ namespace Manager
         public int NumLaps { get; private set; }
         public int NumCheckpoints { get; private set; }
         public int NumKeyCheckpoints { get; private set; }
+        
+        // Race information
         public float RaceStartTime { get; set; }
+        public float RaceTime { get; protected set; }
 
         // Racer information
         private List<RacerController> _racers;
@@ -51,6 +54,14 @@ namespace Manager
 
             _racers = FindObjectsOfType<RacerController>().ToList();
             CalculatePositions();
+        }
+
+        protected virtual void Update()
+        {
+            if (GameManager.Instance.IsPlaying() == false)
+                return;
+
+            RaceTime += Time.deltaTime;
         }
 
         public virtual void LoadUI()

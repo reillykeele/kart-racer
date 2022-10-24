@@ -14,15 +14,19 @@ namespace Environment.Scene
         {
             base.Awake();
 
+            GameManager.Instance.InitRace();
+
             Checkpoints = FindObjectsOfType<Checkpoint>().ToList();
         }
 
         protected override void OnSceneLoad()
         {
-            GameManager.Instance.InitRace();
-            GameManager.Instance.RaceManager.LoadUI();
-
             GameManager.Instance.RaceManager.StartCountdown();
+        }
+
+        void Start()
+        {
+            GameManager.Instance.RaceManager.LoadUI();
         }
 
         public Checkpoint GetFinishLine() => Checkpoints.Single(x => x.CheckpointIndex == 0);

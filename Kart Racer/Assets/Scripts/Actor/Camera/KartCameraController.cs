@@ -2,39 +2,42 @@ using Actor.Racer;
 using Actor.Racer.Player;
 using UnityEngine;
 
-public class KartCameraController : MonoBehaviour
+namespace Actor.Camera
 {
-    private Animator _animator;
-    private PlayerInputController _input;
-
-    void Awake()
+    public class KartCameraController : MonoBehaviour
     {
-        _animator = GetComponent<Animator>();
+        private Animator _animator;
+        private PlayerInputController _input;
 
-        _input = FindObjectOfType<PlayerInputController>();
-        if (_input != null)
+        void Awake()
         {
-            _input.OnLookBehindEvent.AddListener(SwitchFollowCamera);
+            _animator = GetComponent<Animator>();
+
+            _input = FindObjectOfType<PlayerInputController>();
+            if (_input != null)
+            {
+                _input.OnLookBehindEvent.AddListener(SwitchFollowCamera);
+            }
+
+            var bruh = FindObjectOfType<PlayerController>() ?? FindObjectOfType<RacerController>();
+            if (bruh != null)
+            {
+                bruh.FinishRaceEvent.AddListener(SwitchCinematic);
+            }
         }
 
-        var bruh = FindObjectOfType<PlayerController>() ?? FindObjectOfType<RacerController>();
-        if (bruh != null)
+        public void SwitchFollowCamera(bool lookingBehind)
         {
-            bruh.FinishRaceEvent.AddListener(SwitchCinematic);
+            if (lookingBehind)
+                _animator.Play("CameraFollowRear");
+            else
+                _animator.Play("CameraFollowFront");
         }
-    }
 
-    public void SwitchFollowCamera(bool lookingBehind)
-    {
-        if (lookingBehind)
-            _animator.Play("CameraFollowRear");
-        else
-            _animator.Play("CameraFollowFront");
-    }
+        public void SwitchCinematic(float _)
+        {
+            _animator.Play("CameraCinematic");
+        }
 
-    public void SwitchCinematic(float _)
-    {
-        _animator.Play("CameraCinematic");
     }
-
 }

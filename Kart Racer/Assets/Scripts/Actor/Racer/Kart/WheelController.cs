@@ -1,57 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
-using Actor.Racer;
 using UnityEngine;
 using Util.Helpers;
 
-public class WheelController : MonoBehaviour
+namespace Actor.Racer.Kart
 {
-    [SerializeField] private float _wheelTurnAmount = 45f;
-    [SerializeField] private float _wheelTurnSpeed = 1f;
-
-    private Transform _flWheel;
-    private Transform _frWheel;
-    private Transform _blWheel;
-    private Transform _brWheel;
-
-    private float _flWheelRotY;
-    private float _frWheelRotY;
-
-    private RacerMovementController _movement;
-
-    void Awake()
+    public class WheelController : MonoBehaviour
     {
-        var frontWheels = gameObject.GetChildObject("FrontWheels");
-        var backWheels = gameObject.GetChildObject("BackWheels");
+        [SerializeField] private float _wheelTurnAmount = 45f;
+        [SerializeField] private float _wheelTurnSpeed = 1f;
 
-        _flWheel = frontWheels.GetChildObject("FrontLeftWheel").transform;
-        _frWheel = frontWheels.GetChildObject("FrontRightWheel").transform;
+        private Transform _flWheel;
+        private Transform _frWheel;
+        private Transform _blWheel;
+        private Transform _brWheel;
 
-        _blWheel = backWheels.GetChildObject("BackLeftWheel").transform;
-        _brWheel = backWheels.GetChildObject("BackRightWheel").transform;
+        private float _flWheelRotY;
+        private float _frWheelRotY;
 
-        _flWheelRotY = _flWheel.localEulerAngles.y;
-        _frWheelRotY = _frWheel.localEulerAngles.y;
+        private RacerMovementController _movement;
 
-        Debug.Log(transform.parent.name);
-        _movement = GetComponentInParent<RacerMovementController>();
-    }
+        void Awake()
+        {
+            var frontWheels = gameObject.GetChildObject("FrontWheels");
+            var backWheels = gameObject.GetChildObject("BackWheels");
 
-    void Update()
-    {
-        var steering = _movement.Steering;
+            _flWheel = frontWheels.GetChildObject("FrontLeftWheel").transform;
+            _frWheel = frontWheels.GetChildObject("FrontRightWheel").transform;
 
-        var flEulers = _flWheel.localEulerAngles;
-        var frEulers = _frWheel.localEulerAngles;
+            _blWheel = backWheels.GetChildObject("BackLeftWheel").transform;
+            _brWheel = backWheels.GetChildObject("BackRightWheel").transform;
+
+            _flWheelRotY = _flWheel.localEulerAngles.y;
+            _frWheelRotY = _frWheel.localEulerAngles.y;
+
+            _movement = GetComponentInParent<RacerMovementController>();
+        }
+
+        void Update()
+        {
+            var steering = _movement.Steering;
+
+            var flEulers = _flWheel.localEulerAngles;
+            var frEulers = _frWheel.localEulerAngles;
 
         
-        _flWheel.localRotation = Quaternion.Slerp(
-            _flWheel.localRotation,
-            Quaternion.Euler(flEulers.x, _flWheelRotY + steering * _wheelTurnAmount, flEulers.z),
-            _wheelTurnSpeed * Time.deltaTime);
-        _frWheel.localRotation = Quaternion.Slerp(
-            _frWheel.localRotation,
-            Quaternion.Euler(frEulers.x, _frWheelRotY + steering * _wheelTurnAmount, frEulers.z),
-            _wheelTurnSpeed * Time.deltaTime);
+            _flWheel.localRotation = Quaternion.Slerp(
+                _flWheel.localRotation,
+                Quaternion.Euler(flEulers.x, _flWheelRotY + steering * _wheelTurnAmount, flEulers.z),
+                _wheelTurnSpeed * Time.deltaTime);
+            _frWheel.localRotation = Quaternion.Slerp(
+                _frWheel.localRotation,
+                Quaternion.Euler(frEulers.x, _frWheelRotY + steering * _wheelTurnAmount, frEulers.z),
+                _wheelTurnSpeed * Time.deltaTime);
+        }
     }
 }
