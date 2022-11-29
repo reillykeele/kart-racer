@@ -277,7 +277,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1336861267
 RectTransform:
@@ -380,4 +380,3 @@ MonoBehaviour:
   UiPageType: 0
   ReturnUiPage: 0
   initialSelectedButton: {fileID: 0}
-  CanvasGroup: {fileID: 0}

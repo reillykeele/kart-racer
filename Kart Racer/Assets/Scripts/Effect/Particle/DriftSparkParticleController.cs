@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Actor.Racer;
 using UnityEngine;
 
@@ -23,8 +22,6 @@ namespace Effect.Particle
             }
 
             _racerMovementController.OnDriftLevelChangedEvent.AddListener(SetDriftLevel);
-
-            _particleSystems = GetComponentsInChildren<ParticleSystem>().ToList();
         }
 
         private void SetDriftLevel(int level)

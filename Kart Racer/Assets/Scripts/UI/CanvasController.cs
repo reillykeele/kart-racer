@@ -5,6 +5,8 @@ using Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Util.Coroutine;
+using Util.Enums;
 using Scene = Util.Enums.Scene;
 
 namespace UI
@@ -50,6 +52,14 @@ namespace UI
             _lastActiveUiPage = target;
         }
 
+        public IEnumerator EnableUICoroutine(Util.Enums.UIPageType target, bool resetOnSwitch = false)
+        {
+            if (target == Util.Enums.UIPageType.None) yield break;
+
+            _lastActiveUiPage = target;
+            yield return GetUI(target)?.EnableCoroutine(resetOnSwitch);
+        }
+
         public void DisableUI(Util.Enums.UIPageType target, bool resetOnSwitch = false, bool fadeOut = false)
         {
             if (target == Util.Enums.UIPageType.None) return;
@@ -57,21 +67,33 @@ namespace UI
             GetUI(target)?.Disable(resetOnSwitch, fadeOut);
         }
 
+        public IEnumerator DisableUICoroutine(Util.Enums.UIPageType target, bool resetOnSwitch = false)
+        {
+            if (target == Util.Enums.UIPageType.None) yield break;
+
+            yield return GetUI(target)?.DisableCoroutine(resetOnSwitch);
+        }
+
+        public void DisplayUI(UIPageType target, bool fadeIn = false) => EnableUI(target, fadeIn: fadeIn);
+
         public void SwitchUI(Util.Enums.UIPageType target, bool resetCurrentOnSwitch = false, bool resetTargetOnSwitch = true, bool fadeIn = false, bool fadeOut = false)
         {
             if (_lastActiveUiPage == target) return;
 
-            DisableUI(_lastActiveUiPage, resetCurrentOnSwitch, fadeOut);
-            EnableUI(target, resetTargetOnSwitch, fadeIn);
-            _lastActiveUiPage = target;
+            StartCoroutine(CoroutineUtil.Sequence(
+                DisableUICoroutine(_lastActiveUiPage, resetCurrentOnSwitch),
+                EnableUICoroutine(target, resetTargetOnSwitch)
+                ));
+
+            // DisableUI(_lastActiveUiPage, resetCurrentOnSwitch, fadeOut);
+            // EnableUI(target, resetTargetOnSwitch, fadeIn);
+            // _lastActiveUiPage = target;
         }
 
         public void SwitchScene(Scene scene)
         {
             if (scene == Scene.None) return;
 
-            // SwitchUI(Util.Enums.UIPageType.LoadingScreen, fadeIn:true);
-            // StartCoroutine(LoadingScreen(scene));
             LoadingManager.Instance.LoadScene(scene);
         }
 

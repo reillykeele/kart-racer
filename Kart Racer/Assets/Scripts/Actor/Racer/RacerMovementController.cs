@@ -8,14 +8,14 @@ using Util.Coroutine;
 
 namespace Actor.Racer
 {
-    [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(BoxCollider))]
     public abstract class RacerMovementController : MonoBehaviour
     {
 
         [SerializeField] private RacerMovementScriptableObject _racerMovementData;
         public RacerMovementData RacerMovement { get; private set; }
 
-        protected Collider _collider;
+        protected BoxCollider _collider;
 
         // Movement
         public float Steering { get; protected set; }
@@ -73,7 +73,7 @@ namespace Actor.Racer
 
             RacerMovement = _racerMovementData?.RacerMovement ?? new RacerMovementData();
 
-            _collider = GetComponent<Collider>();
+            _collider = GetComponent<BoxCollider>();
 
             OnIsDriftingChangedEvent.AddListener(OnDriftChange);
         }

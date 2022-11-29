@@ -1,5 +1,5 @@
+using System;
 using Manager;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,7 +8,7 @@ namespace Actor.Racer
     [RequireComponent(typeof(Collider))]
     public class RacerPlane : MonoBehaviour
     {
-        private GUID _parentRacerId;
+        private Guid _parentRacerId;
 
         void Awake()
         {

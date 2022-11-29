@@ -1324,15 +1324,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743176, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.029124767
+      value: 0.029124761
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743176, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017672194
+      value: 0.000000016330933
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743176, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 5.1491694e-10
+      value: -4.758363e-10
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743177, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_Follow
@@ -1352,15 +1352,15 @@ PrefabInstance:
       objectReference: {fileID: 1796069728}
     - target: {fileID: 4122796143991509271, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000006911962
+      value: 0.0000000016931788
       objectReference: {fileID: 0}
     - target: {fileID: 4122796143991509271, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -1.3581532e-10
+      value: 3.3269797e-11
       objectReference: {fileID: 0}
     - target: {fileID: 4122796143991509271, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.019645523
+      value: -0.01964552
       objectReference: {fileID: 0}
     - target: {fileID: 4122796144226077748, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_BindingMode
@@ -2113,7 +2113,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088677440}
-  m_LocalRotation: {x: -1.3581532e-10, y: 0.999807, z: -0.019645523, w: -0.000000006911962}
+  m_LocalRotation: {x: 3.3269797e-11, y: 0.999807, z: -0.01964552, w: 0.0000000016931788}
   m_LocalPosition: {x: -0.2, y: 40.24, z: 493.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2164,7 +2164,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Config: {fileID: 11400000, guid: 3d84f3f617acad0499872e3042cf38bf, type: 2}
-  CurrentGameState: 0
+  OnPauseGameEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResumeGameEvent:
+    m_PersistentCalls:
+      m_Calls: []
   GameMode: 2
   RaceManager: {fileID: 0}
   NumComputerPlayers: 0
@@ -3509,6 +3514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786798583}
   - component: {fileID: 1786798584}
+  - component: {fileID: 1786798585}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -3545,7 +3551,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a8e0948d03faa4aa4e54d838e40c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Laps: 1
+  Laps: 3
+--- !u!114 &1786798585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786798582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0387e19dc4e06d49855b21fed399fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicAudioDataScriptableObject: {fileID: 11400000, guid: f9803c9aff524a745b2ad6db1ca73f6e, type: 2}
+  _musicFinalLapAudioDataScriptableObject: {fileID: 11400000, guid: 733060e1987925d4bad0bdd045aa2d86, type: 2}
+  _musicFinishedRaceAudioDataScriptableObject: {fileID: 11400000, guid: 8fba21547ce740744a56829d64e61954, type: 2}
+  _countdownAudioDataScriptableObject: {fileID: 11400000, guid: 9a373bcdee1a15841bf7c3da8107f7ee, type: 2}
+  _goAudioDataScriptableObject: {fileID: 11400000, guid: 6328b30eb9f3a33418e6f8aa0fedd556, type: 2}
+  _lapAudioDataScriptableObject: {fileID: 11400000, guid: 95a30a1dc92f19643b830c143cb0dd2a, type: 2}
+  _finalLapAudioDataScriptableObject: {fileID: 11400000, guid: bd185d39d48d2554a8961a8788c24510, type: 2}
+  _finishRaceAudioDataScriptableObject: {fileID: 11400000, guid: c33808281762370489f55c35f9dd4ad7, type: 2}
 --- !u!1001 &1796069727
 PrefabInstance:
   m_ObjectHideFlags: 0

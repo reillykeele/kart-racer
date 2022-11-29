@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ScriptableObject.Item
 {
-    [CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/Item", order = 2)]
+    [CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/Item/Item Data")]
     public class ItemDataScriptableObject : UnityEngine.ScriptableObject
     {
         public ItemData ItemData;

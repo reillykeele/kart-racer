@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Data.Audio;
 using Manager;
+using ScriptableObject.Audio;
 using UnityEngine;
 
 namespace Environment.Scene

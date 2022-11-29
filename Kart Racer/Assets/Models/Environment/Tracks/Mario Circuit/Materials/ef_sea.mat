@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ef_sea
-  m_Shader: {fileID: -6465566751694194690, guid: d304ff388e609ae4e8ffd36d9a208b9f, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 8842e84ca66f92f4988e6ade1c0eae6a, type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _METALLICSPECGLOSSMAP _NORMALMAP _PARALLAXMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
     _SPECULAR_SETUP
   m_LightmapFlags: 4
@@ -68,6 +68,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: e04cff8245e615241954c605c5a2b400, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_782f011b3ff843a3b6fb767868d7c146_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 014aefb1aab68f641a2879135051ac84, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_87699f57c1a74042b1953d43e4bc3a09_Texture_1:
         m_Texture: {fileID: 2800000, guid: a5a168e358e155a4993796b904af60f4, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -89,6 +93,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_f0983187ce99487e9899b40c647fa702: 0
+    - Vector1_28f5480599f8445f8a22083b79e0d1da: 1
+    - Vector1_62ac7944e5a24a5c868317e2b3cfc304: 7
+    - Vector1_9549647829ce4a848a85e4d42f96fe67: 5
+    - Vector1_c46caa969b89498691cb1e7e544e8e06: 1
     - _AlphaClip: 1
     - _Blend: 0
     - _BumpScale: 1
@@ -118,6 +127,8 @@ Material:
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
+    - Color_23b2e27824744c45a6b308a4d2f717fe: {r: 0.01495194, g: 0.0611377, b: 0.1764706, a: 1}
+    - Color_f64642a89ddd43e6ac5e8380e583e9b5: {r: 0.28924882, g: 0.35778233, b: 0.49056602, a: 0.54509807}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

@@ -1,6 +1,6 @@
+using System;
 using Data.Item;
 using Manager;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using Util.Helpers;
@@ -11,7 +11,7 @@ namespace Actor.Racer
     public abstract class RacerController : MonoBehaviour
     {
         public string Name;
-        public GUID RacerId;
+        public Guid RacerId;
 
         public RacerMovementController MovementController { get; private set; }
 
@@ -57,7 +57,7 @@ namespace Actor.Racer
 
         protected virtual void Awake()
         {
-            RacerId = GUID.Generate();
+            RacerId = Guid.NewGuid();
 
             MovementController = GetComponent<RacerMovementController>();
             CoursePlane = gameObject.GetChildObject("PositionPlane");

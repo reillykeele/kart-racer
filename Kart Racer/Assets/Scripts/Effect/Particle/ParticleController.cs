@@ -1,10 +1,12 @@
+using Effect.Particle.Interface;
+using Manager;
 using UnityEngine;
 using Util.Helpers;
 
 namespace Effect.Particle
 {
     [RequireComponent(typeof(ParticleSystem))]
-    public abstract class ParticleController : MonoBehaviour
+    public class ParticleController : MonoBehaviour, IParticleController
     {
         protected ParticleSystem _particleSystem;
         protected ParticleSystem.MainModule _main;
@@ -15,16 +17,39 @@ namespace Effect.Particle
 
         protected Color _startColor;
 
+        private bool _isEmitting = false;
+
         protected virtual void Awake()
         {
             _particleSystem = GetComponent<ParticleSystem>();
             _main = _particleSystem.main;
 
             _startColor = _main.startColor.color;
+
+            GameManager.Instance.OnPauseGameEvent.AddListener(PauseSystem);
+            GameManager.Instance.OnResumeGameEvent.AddListener(ResumeSystem);
         }
 
         public void StartSystem() => _particleSystem.Play();
         public void StopSystem() => _particleSystem.Stop();
+        public void PauseSystem()
+        {
+            _isEmitting = _particleSystem.isEmitting;
+            if (_isEmitting)
+            {
+                Debug.Log($"PAUSING {gameObject.name} isPaused={_particleSystem.isPaused}, isEmitting={_particleSystem.isEmitting}, isPlaying={_particleSystem.isPlaying}, isStopped={_particleSystem.isStopped}, isAlive={_particleSystem.IsAlive()}");
+                _particleSystem.Pause();
+            }
+        }
+
+        public void ResumeSystem()
+        {
+            if (_particleSystem.isPaused && _isEmitting)
+            {
+                Debug.Log($"RESUMING {gameObject.name} isPaused={_particleSystem.isPaused}, isEmitting={_particleSystem.isEmitting}, isPlaying={_particleSystem.isPlaying}, isStopped={_particleSystem.isStopped}, isAlive={_particleSystem.IsAlive()}");
+                _particleSystem.Play();
+            }
+        }
 
         public void SetStartSpeed(float percent)
         {

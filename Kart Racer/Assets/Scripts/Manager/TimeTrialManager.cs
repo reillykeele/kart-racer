@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using Actor.Item;
 using Actor.Racer.Player;
-using Data.Item;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Util.Enums;
 

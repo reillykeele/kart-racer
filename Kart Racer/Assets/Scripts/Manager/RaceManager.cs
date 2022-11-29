@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Actor.Item;
 using Actor.Racer;
+using Actor.Racer.Player;
 using Data.Environment;
 using Environment.Scene;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using Util.Enums;
 using Util.Helpers;
@@ -27,8 +29,9 @@ namespace Manager
         public float RaceTime { get; protected set; }
 
         // Racer information
-        private List<RacerController> _racers;
-        public int NumRacers => _racers.Count;
+        public List<RacerController> Racers;
+        public List<PlayerController> PlayerRacers;
+        public int NumRacers => Racers.Count;
 
         // Preferences
         private List<Item> _itemPool;
@@ -52,7 +55,9 @@ namespace Manager
             else 
                 Debug.LogWarning("No course controller found.");
 
-            _racers = FindObjectsOfType<RacerController>().ToList();
+            Racers = FindObjectsOfType<RacerController>().ToList();
+            PlayerRacers = FindObjectsOfType<PlayerController>().ToList();
+
             CalculatePositions();
         }
 
@@ -98,7 +103,7 @@ namespace Manager
         public void CalculatePositions()
         {
             var i = 1;
-            foreach (var racer in _racers
+            foreach (var racer in Racers
                          .OrderByDescending(x => x.CurrentLap)
                          .ThenByDescending(x => x.CheckpointsReached)
                          .ThenBy(x => MathHelper.Distance2(

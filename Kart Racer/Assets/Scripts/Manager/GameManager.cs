@@ -1,5 +1,6 @@
 using ScriptableObject.Config;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Util.Enums;
 using Util.Singleton;
@@ -9,7 +10,16 @@ namespace Manager
     public class GameManager : Singleton<GameManager>
     {
         public GameConfigScriptableObject Config;
-        public GameState CurrentGameState;
+
+        // Game state
+        public UnityEvent OnPauseGameEvent;
+        public UnityEvent OnResumeGameEvent;
+        private GameState _currentGameState;
+        public GameState CurrentGameState
+        {
+            get => _currentGameState;
+            set => _currentGameState = value;
+        }
 
         // Game mode  
         public GameMode GameMode = GameMode.Free;
@@ -28,8 +38,27 @@ namespace Manager
         }
 
         public bool IsPlaying() => CurrentGameState == GameState.Playing;
-        public void PauseGame() => CurrentGameState = GameState.Paused;
-        public void ResumeGame() => CurrentGameState = GameState.Playing;
+
+        public void PauseGame()
+        {
+            if (CurrentGameState == GameState.Paused) return;
+
+            Debug.Log("resume game");
+
+            CurrentGameState = GameState.Paused;
+            OnPauseGameEvent.Invoke();
+        }
+
+        public void ResumeGame()
+        {
+            if (CurrentGameState == GameState.Playing) return;
+
+            Debug.Log("resume game");
+
+            CurrentGameState = GameState.Playing;
+            OnResumeGameEvent.Invoke();
+        }
+
         public void TogglePaused() { if (IsPlaying()) PauseGame(); else ResumeGame(); }
 
         public void InitRace()

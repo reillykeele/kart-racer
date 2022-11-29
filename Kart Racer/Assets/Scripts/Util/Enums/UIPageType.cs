@@ -13,5 +13,7 @@ namespace Util.Enums
         CharacterSelect = 8,
         KartSelect = 9,
         MapSelect = 10,
+        PauseMenu = 11,
+        FinishRace = 12
     }
 }

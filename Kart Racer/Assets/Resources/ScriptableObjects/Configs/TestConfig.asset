@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f36a6ab3c9e5d846bc61723d5c62117, type: 3}
+  m_Name: TestConfig
+  m_EditorClassIdentifier: 
+  CountdownLength: 0
+  ItemConfig:
+    TimeToRespawn: 3
+    Items:
+    - {fileID: 11400000, guid: c6428ad164b0b0443bfdf2b82eb9f380, type: 2}
+    - {fileID: 11400000, guid: 54a2d4e11b909db48a07fa3a572122e3, type: 2}
+    MushroomBoostPower: 0.75
+    MushroomBoostDuration: 1.5
+  UIConfig:
+    NoneSprite: {fileID: 21300000, guid: 799305cc823f4d541bfb1a4d569ba83a, type: 3}
+    PositionSprites:
+    - {fileID: 21300000, guid: 799305cc823f4d541bfb1a4d569ba83a, type: 3}
+    - {fileID: 21300000, guid: 0aacf1b04df37b84193048f289c21f79, type: 3}
+    - {fileID: 21300000, guid: 541fc2680d93f40439f5842cbcfdab1b, type: 3}
+    - {fileID: 21300000, guid: 8a5133cd000dbf949baa48e46e716932, type: 3}
+    - {fileID: 21300000, guid: a0a6be185979e3f4bb44adc67a2d66ff, type: 3}
+    - {fileID: 21300000, guid: 1fc40aaae88457a40b2d4038fb03582c, type: 3}
+    - {fileID: 21300000, guid: d4191f01af2c8ad488892b33c5fbbfa0, type: 3}
+    - {fileID: 21300000, guid: b3d2393011ed40b45aa82d74176617f1, type: 3}
+    - {fileID: 21300000, guid: 8bd52bbb15a0b6d489f67ed3145778eb, type: 3}

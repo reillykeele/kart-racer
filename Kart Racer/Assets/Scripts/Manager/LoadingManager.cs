@@ -38,6 +38,14 @@ namespace Manager
             OnSceneLoadedEvent.Invoke();
         }
 
+        public void QuitGame()
+        {
+            StartCoroutine(CoroutineUtil.Sequence(
+                UIHelper.FadeInAndEnable(_uiController, _loadingCanvasGroup),
+                CoroutineUtil.CallAction(() =>Application.Quit(0)))
+            );
+        }
+
         public void LoadScene(Scene scene)
         {
             StartCoroutine(CoroutineUtil.Sequence(

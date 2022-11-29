@@ -140,16 +140,27 @@ namespace Actor.Racer.Player
 
             movement *= Time.fixedDeltaTime;
 
-            if (Physics.BoxCast(
-                    _collider.bounds.center + movement,
-                    _collider.bounds.extents,
-                    forward,
+            if (PhysicsHelper.BoxCastAndDraw(
+                    _collider.bounds.center,
+                    _collider.GetHalfExtents(),
+                    forward * Mathf.Sign(CurrSpeed),
                     out var boxHit,
                     transform.rotation,
-                    _collider.bounds.extents.z,
+                    Mathf.Max(1f, movement.magnitude),
                     LayerMask.GetMask("Walls")))
             {
-                Debug.Log(boxHit.transform.name);
+                Debug.Log($"Point: {boxHit.point}, distance: {boxHit.distance} | movement.magnitude: {movement.magnitude}, pos: {pos} ");
+                DebugDrawHelper.DrawBox(boxHit.point, new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, Color.cyan);
+
+                var hitAngle = (Vector3.Dot(forward, boxHit.normal) + 1) / 2;
+                CurrSpeed = Mathf.Clamp(CurrSpeed, -RacerMovement.MaxReverseSpeed * hitAngle, RacerMovement.MaxSpeed * hitAngle);
+                Debug.Log($"hitAngle: {hitAngle}, currSpeed: {CurrSpeed}");
+                
+                var newMove = movement - boxHit.normal * Vector3.Dot(boxHit.normal, movement);
+                Debug.DrawRay(pos, newMove, Color.green);
+
+                movement = Vector3.ProjectOnPlane(movement - boxHit.normal * Vector3.Dot(boxHit.normal, movement), boxHit.normal);
+                transform.position = pos + movement;
             }
             else
             {

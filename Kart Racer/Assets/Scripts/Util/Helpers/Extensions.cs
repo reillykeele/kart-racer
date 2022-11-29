@@ -179,6 +179,9 @@ namespace Util.Helpers
         public static void SetBottom(this RectTransform rt, float bottom) =>
             rt.offsetMin = new Vector2(rt.offsetMin.x, bottom);
 
+        public static Vector2 GetCentre(this RectTransform rt) =>
+            rt.pivot * new Vector2(rt.rect.width, -rt.rect.height);
+
         #endregion
 
         #region String
@@ -234,6 +237,12 @@ namespace Util.Helpers
         {
             if (animator.HasParam(name)) animator.SetTrigger(name);
         }
+
+        #endregion
+
+        #region BoxCollider
+
+        public static Vector3 GetHalfExtents(this BoxCollider collider) => collider.size / 2;
 
         #endregion
     }

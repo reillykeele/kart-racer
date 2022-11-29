@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Util.Coroutine;
+using Util.Enums;
 using Util.Helpers;
 
 namespace UI.UIControllers
@@ -26,8 +27,11 @@ namespace UI.UIControllers
         private TextMeshProUGUI _timeText;
         private TextMeshProUGUI _lapText;
 
-        void Awake()
+        // Pause Menu
+        protected override void Awake()
         {
+            base.Awake();
+
             _itemUiGroup = gameObject.GetChildObject("ItemGroup");
             _itemImage = _itemUiGroup.GetChildObject("ItemImage").GetComponent<Image>();
 
@@ -42,6 +46,8 @@ namespace UI.UIControllers
         {
             var racerController = FindObjectOfType<PlayerController>() ?? FindObjectOfType<RacerController>();
 
+            GameManager.Instance.OnPauseGameEvent.AddListener(PauseGame);
+            GameManager.Instance.OnResumeGameEvent.AddListener(ResumeGame);
             GameManager.Instance.RaceManager.CountdownTickEvent.AddListener(CountdownTick);
             GameManager.Instance.RaceManager.CountdownEndEvent.AddListener(CountdownEnd);
 
@@ -61,18 +67,19 @@ namespace UI.UIControllers
 
         void Update()
         {
-            // Update race timer
-            // var startTime = GameManager.Instance.RaceManager.RaceStartTime;
-            // if (DisplayTimer && startTime > 0)
-            // {
-            //     _timeText.text = TimeHelper.FormatTime(startTime, Time.time);
-            // }
-
             var raceTime = GameManager.Instance.RaceManager.RaceTime;
             if (DisplayTimer && raceTime > 0)
-            {
                 _timeText.text = TimeHelper.FormatTime(raceTime);
-            }
+        }
+
+        public void PauseGame()
+        {
+            _canvasController.DisplayUI(UIPageType.PauseMenu);
+        }
+
+        public void ResumeGame()
+        {
+            // _canvasController.SwitchUI(UIPageType.PauseMenu);
         }
 
         public void CountdownTick(int num)
@@ -111,6 +118,8 @@ namespace UI.UIControllers
         {
             _timeText.text = TimeHelper.FormatTime(GameManager.Instance.RaceManager.RaceStartTime, Time.time);
             DisplayTimer = false;
+
+            _canvasController.SwitchUI(UIPageType.FinishRace);
         }
     }
 }
