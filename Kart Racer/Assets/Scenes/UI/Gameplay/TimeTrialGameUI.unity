@@ -862,7 +862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UiPageType: 11
-  ReturnUiPage: 1
+  ReturnUiPage: 0
   initialSelectedButton: {fileID: 0}
 --- !u!1 &462680628
 GameObject:

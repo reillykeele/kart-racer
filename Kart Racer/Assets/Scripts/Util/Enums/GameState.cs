@@ -5,5 +5,7 @@ namespace Util.Enums
         None = 0,
         Paused = 1,
         Playing = 2,
+        Menu = 3,
+        Cutscene = 4,
     }
 }

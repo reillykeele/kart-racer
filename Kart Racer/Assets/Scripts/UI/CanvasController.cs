@@ -75,6 +75,7 @@ namespace UI
         }
 
         public void DisplayUI(UIPageType target, bool fadeIn = false) => EnableUI(target, fadeIn: fadeIn);
+        public void HideUI(UIPageType target, bool fadeOut = false) => DisableUI(target, fadeOut: fadeOut);
 
         public void SwitchUI(Util.Enums.UIPageType target, bool resetCurrentOnSwitch = false, bool resetTargetOnSwitch = true, bool fadeIn = false, bool fadeOut = false)
         {

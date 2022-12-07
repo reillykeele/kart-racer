@@ -1,3 +1,4 @@
+using System.Linq;
 using Actor.Racer;
 using Actor.Racer.Player;
 using Data.Item;
@@ -54,6 +55,7 @@ namespace UI.UIControllers
             if (racerController)
             {
                 racerController.PickupItemEvent.AddListener(PickupItem);
+                racerController.ChangeItemSpriteEvent.AddListener(ChangeItemSprite);
                 racerController.ClearItemEvent.AddListener(ClearItem);
                 racerController.ChangeLapEvent.AddListener(ChangeLap);
                 racerController.FinishRaceEvent.AddListener(FinishRace);
@@ -79,7 +81,7 @@ namespace UI.UIControllers
 
         public void ResumeGame()
         {
-            // _canvasController.SwitchUI(UIPageType.PauseMenu);
+            _canvasController.HideUI(UIPageType.PauseMenu);
         }
 
         public void CountdownTick(int num)
@@ -96,7 +98,12 @@ namespace UI.UIControllers
 
         public void PickupItem(ItemData item)
         {
-            _itemImage.sprite = item?.Icon ?? GameManager.Instance.Config.UIConfig.NoneSprite;
+            _itemImage.sprite = item?.Icon?.FirstOrDefault() ?? GameManager.Instance.Config.UIConfig.NoneSprite;
+        }
+
+        public void ChangeItemSprite(Sprite itemSprite)
+        {
+            _itemImage.sprite = itemSprite;
         }
 
         public void ClearItem()

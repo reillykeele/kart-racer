@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemData:
     Name: Triple Mushroom
-    Icon: {fileID: 21300000, guid: 80eaa429c9a50ec479c086bf67c0d277, type: 3}
+    Icon:
+    - {fileID: 21300000, guid: 80eaa429c9a50ec479c086bf67c0d277, type: 3}
+    - {fileID: 21300000, guid: 1888af5cfed49c9429eca28e5cd3f0da, type: 3}
+    - {fileID: 21300000, guid: 1263fa5116ab31c459dbc0221ebb3dcb, type: 3}
     ItemType: 2

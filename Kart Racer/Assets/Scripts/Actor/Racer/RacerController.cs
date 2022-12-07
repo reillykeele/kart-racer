@@ -74,6 +74,7 @@ namespace Actor.Racer
         }
 
         public UnityEvent<ItemData> PickupItemEvent;
+        public UnityEvent<Sprite> ChangeItemSpriteEvent;
         public virtual void PickupItem()
         {
             // Set item based on position

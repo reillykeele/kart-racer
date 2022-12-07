@@ -38,10 +38,11 @@ namespace Manager
         }
 
         public bool IsPlaying() => CurrentGameState == GameState.Playing;
+        public bool IsPaused() => CurrentGameState == GameState.Paused;
 
         public void PauseGame()
         {
-            if (CurrentGameState == GameState.Paused) return;
+            if (CurrentGameState != GameState.Playing) return;
 
             Debug.Log("resume game");
 
@@ -51,7 +52,7 @@ namespace Manager
 
         public void ResumeGame()
         {
-            if (CurrentGameState == GameState.Playing) return;
+            if (CurrentGameState != GameState.Paused) return;
 
             Debug.Log("resume game");
 
@@ -63,6 +64,8 @@ namespace Manager
 
         public void InitRace()
         {
+            CurrentGameState = GameState.Cutscene;
+
             SpawnRaceManager();
         }
 
