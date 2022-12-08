@@ -12,6 +12,28 @@ namespace Environment.Scene
         public int Laps = 3;
         public List<Checkpoint> Checkpoints { get; private set; }
 
+        public bool DrawCheckPointPath = true;
+
+        void OnDrawGizmos()
+        {
+            if (DrawCheckPointPath == false) return;
+
+            var checkpoints = GetComponentsInChildren<Checkpoint>();
+
+            for (var i = 0; i < checkpoints.Length; ++i)
+            {
+                Vector3 prev = Vector3.zero;
+                Vector3 curr = checkpoints[i].transform.position;
+
+                if (i > 0)
+                    prev = checkpoints[i - 1].transform.position;
+                else if (i == 0 && checkpoints.Length > 1)
+                    prev = checkpoints.Last().transform.position;
+
+                Gizmos.DrawLine(prev, curr);
+            }
+        }
+
         protected override void Awake()
         {
             base.Awake();
