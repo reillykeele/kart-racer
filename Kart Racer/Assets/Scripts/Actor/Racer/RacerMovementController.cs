@@ -1,10 +1,13 @@
 using System.Collections;
+using System.Linq;
 using Data.Racer;
+using Environment.Scene;
 using Manager;
 using ScriptableObject.Racer;
 using UnityEngine;
 using UnityEngine.Events;
 using Util.Coroutine;
+using Util.Helpers;
 
 namespace Actor.Racer
 {
@@ -64,8 +67,10 @@ namespace Actor.Racer
         public float CurrBoostPower { get; protected set; }
 
         // Autopilot
+        public float SteeringTolerance = 0.1f;
         protected RacerController _racerController;
         protected GameObject _target;
+        protected GameObject _lookaheadTarget;
 
         protected virtual void Awake()
         {
@@ -84,19 +89,52 @@ namespace Actor.Racer
 
             CurrSpeed = RacerMovement.MaxSpeed;
 
+            Vector3 targetDirection = Vector3.zero;
+
             var targetCheckpoint = GameManager.Instance.RaceManager.GetNextCheckpoint(_racerController.CheckpointsReached);
+            var lookaheadTargetCheckpoint = GameManager.Instance.RaceManager.GetNextCheckpoint(_racerController.CheckpointsReached + 1);
             _target = targetCheckpoint.gameObject;
+            _lookaheadTarget = lookaheadTargetCheckpoint.gameObject;
+            
+            var distToTarget = (targetCheckpoint.transform.position - transform.position).magnitude;
+            var targetTolookahead = (lookaheadTargetCheckpoint.transform.position - targetCheckpoint.transform.position);
 
-            var targetDirection = (_target.transform.position - transform.position);
-            targetDirection.y = 0;
-            targetDirection.Normalize();
-            Debug.DrawRay(transform.position, 3 * targetDirection, Color.red);
+            if (distToTarget <= targetTolookahead.magnitude)
+            { 
+                // var points = new[] { transform.position, targetCheckpoint.transform.position, lookaheadTargetCheckpoint.transform.position };
+                var points = new[] { transform.position, targetCheckpoint.Tight, lookaheadTargetCheckpoint.Tight };
+                var smoothedPath = PathHelper.SmoothPath(points, 6);
 
-            var forward = Vector3.Slerp(transform.forward, targetDirection, 0.05f);
+                for (var i = 0; i < smoothedPath.Length; i++)
+                {
+                    smoothedPath[i].y = transform.position.y;
+                    DebugDrawHelper.DrawBox(smoothedPath[i], new Vector3(0.25f, 0.25f, 0.25f), Quaternion.identity, Color.green);
+                }
 
-            transform.forward = forward;
+                targetDirection = smoothedPath[1] - transform.position;
+                targetDirection.y = 0;
+                targetDirection.Normalize();
+                Debug.DrawRay(transform.position, 4 * targetDirection, Color.green);
+            }
+            else
+            {
+                targetDirection = targetCheckpoint.transform.position - transform.position;
+                targetDirection.y = 0;
+                targetDirection.Normalize();
+                Debug.DrawRay(transform.position, 3 * targetDirection, Color.red);
+            }
 
-            // var forward = transform.forward;
+            var forward = transform.forward;
+
+            var angle = Vector3.Cross(transform.forward, targetDirection);
+            var dir = Vector3.Dot(angle, Vector3.up);
+
+            Steering = dir > SteeringTolerance ? 1f : dir < -SteeringTolerance ? -1f : dir;
+            var steeringDir = Steering * RacerMovement.TurningSpeed;
+            
+            if (!CurrSpeed.IsZero())
+                transform.Rotate(transform.up, steeringDir * Time.fixedDeltaTime);
+
             Debug.DrawRay(transform.position, 3 * forward, Color.yellow);
             var movement = forward * CurrSpeed * Time.fixedDeltaTime;
 
