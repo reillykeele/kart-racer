@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using Data.Environment;
 using Data.Racer;
 using Environment.Scene;
 using Manager;
@@ -18,9 +19,11 @@ namespace Actor.Racer
         [SerializeField] private RacerMovementScriptableObject _racerMovementData;
         public RacerMovementData RacerMovement { get; private set; }
 
+        protected Rigidbody _rb;
         protected BoxCollider _collider;
 
         // Movement
+        [SerializeField] public bool UseAutopilot = false;
         public float Steering { get; protected set; }
         public Vector3 ControllerForward { get; protected set; }
         public Vector3 ControllerRotation { get; protected set; }
@@ -78,6 +81,7 @@ namespace Actor.Racer
 
             RacerMovement = _racerMovementData?.RacerMovement ?? new RacerMovementData();
 
+            _rb = GetComponent<Rigidbody>();
             _collider = GetComponent<BoxCollider>();
 
             OnIsDriftingChangedEvent.AddListener(OnDriftChange);
@@ -87,43 +91,34 @@ namespace Actor.Racer
         {
             if (!GameManager.Instance.IsPlaying()) return;
 
-            CurrSpeed = RacerMovement.MaxSpeed;
+        }
 
-            Vector3 targetDirection = Vector3.zero;
+        public void Autopilot()
+        {
+            CurrSpeed = RacerMovement.MaxSpeed * 0.8f;
+
+            Vector3 targetDirection;
 
             var targetCheckpoint = GameManager.Instance.RaceManager.GetNextCheckpoint(_racerController.CheckpointsReached);
             var lookaheadTargetCheckpoint = GameManager.Instance.RaceManager.GetNextCheckpoint(_racerController.CheckpointsReached + 1);
             _target = targetCheckpoint.gameObject;
             _lookaheadTarget = lookaheadTargetCheckpoint.gameObject;
-            
-            var distToTarget = (targetCheckpoint.transform.position - transform.position).magnitude;
-            var targetTolookahead = (lookaheadTargetCheckpoint.transform.position - targetCheckpoint.transform.position);
 
-            if (distToTarget <= targetTolookahead.magnitude)
-            { 
-                // var points = new[] { transform.position, targetCheckpoint.transform.position, lookaheadTargetCheckpoint.transform.position };
-                var points = new[] { transform.position, targetCheckpoint.Tight, lookaheadTargetCheckpoint.Tight };
-                var smoothedPath = PathHelper.SmoothPath(points, 6);
+            // var points = new[] { transform.position, targetCheckpoint.transform.position, lookaheadTargetCheckpoint.transform.position };
+            var points = new[] { transform.position, targetCheckpoint.transform.position, lookaheadTargetCheckpoint.transform.position };
+            var smoothedPath = PathHelper.SmoothPath(points, 6);
 
-                for (var i = 0; i < smoothedPath.Length; i++)
-                {
-                    smoothedPath[i].y = transform.position.y;
-                    DebugDrawHelper.DrawBox(smoothedPath[i], new Vector3(0.25f, 0.25f, 0.25f), Quaternion.identity, Color.green);
-                }
-
-                targetDirection = smoothedPath[1] - transform.position;
-                targetDirection.y = 0;
-                targetDirection.Normalize();
-                Debug.DrawRay(transform.position, 4 * targetDirection, Color.green);
-            }
-            else
+            for (var i = 0; i < smoothedPath.Length; i++)
             {
-                targetDirection = targetCheckpoint.transform.position - transform.position;
-                targetDirection.y = 0;
-                targetDirection.Normalize();
-                Debug.DrawRay(transform.position, 3 * targetDirection, Color.red);
+                smoothedPath[i].y = transform.position.y;
+                DebugDrawHelper.DrawBox(smoothedPath[i], new Vector3(0.25f, 0.25f, 0.25f), Quaternion.identity, Color.green);
             }
 
+            targetDirection = smoothedPath[1] - transform.position;
+            targetDirection.y = 0;
+            targetDirection.Normalize();
+            Debug.DrawRay(transform.position, 4 * targetDirection, Color.green);
+            
             var forward = transform.forward;
 
             var angle = Vector3.Cross(transform.forward, targetDirection);
@@ -166,16 +161,54 @@ namespace Actor.Racer
         public bool IsGrounded() => IsGrounded(out _);
         public bool IsGrounded(out RaycastHit hitInfo)
         {
-            var dist = 0.15f;
-            Debug.DrawRay(_collider.bounds.center, Vector3.down * (_collider.bounds.extents.y/* + dist*/), Color.red);
+            var colliderCenter = transform.TransformPoint(_collider.center);
+            Debug.DrawRay(colliderCenter, Vector3.down * (_collider.size.y / 2 + RacerMovement.GroundCheckDist), Color.red);
             var hit = Physics.Raycast(
-                _collider.bounds.center, 
+                colliderCenter, 
                 Vector3.down, 
                 out hitInfo,
-                _collider.bounds.extents.y + dist,
+                _collider.size.y / 2 + RacerMovement.GroundCheckDist,
                 LayerMask.GetMask("Track"));
 
             return hit;
+        }
+
+        public float CalculateSpeed(float prevSpeed, bool isAccelerating, bool isBraking, TrackSurfaceModifierData trackSurfaceModifier)
+        {
+            var newSpeed = prevSpeed;
+
+            // Handle acceleration and deceleration 
+            if (IsBoosting)
+            {
+                // Boosting
+                newSpeed = RacerMovement.MaxSpeed + RacerMovement.MaxSpeed * CurrBoostPower;
+            }
+
+            if (isAccelerating == isBraking || newSpeed >= RacerMovement.MaxSpeed)
+            {
+                // Coasting
+                var newSpeed2 = newSpeed + (newSpeed > 0 ? -1 : 1) * RacerMovement.DecelerationSpeed * trackSurfaceModifier.DeccelerationModifier;
+                newSpeed = newSpeed.IsZero() || newSpeed * newSpeed2 < 0f ? 0f : newSpeed2;
+            }
+            else if (isAccelerating)
+            {
+                // Acceleration
+                newSpeed = newSpeed >= RacerMovement.MaxSpeed * trackSurfaceModifier.SpeedModifier
+                    ? RacerMovement.MaxSpeed * trackSurfaceModifier.SpeedModifier
+                    : newSpeed + RacerMovement.AccelerationSpeed * trackSurfaceModifier.AccelerationModifier;
+            }
+            else if (isBraking)
+            {
+                // Braking or reversing
+                if (newSpeed > 0)
+                    newSpeed = newSpeed <= 0 ? 0 : newSpeed - RacerMovement.BrakeSpeed;
+                else
+                    newSpeed = newSpeed <= -RacerMovement.MaxReverseSpeed
+                        ? -RacerMovement.MaxReverseSpeed
+                        : newSpeed - RacerMovement.ReverseAccelerationSpeed;
+            }
+
+            return newSpeed;
         }
 
         private IEnumerator _boostCoroutine;

@@ -21,7 +21,9 @@ namespace Data.Racer
         [Header("Handling")]
         public float TurningSpeed;
 
-        [Header("Gravity")]
+        [Header("Gravity")] 
+        public float GroundCheckDist;
+        public float GroundedDist;
         public float GravitySpeed;
         public float ConstantGravitySpeed;
 

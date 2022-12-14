@@ -12,7 +12,7 @@ namespace Environment.Scene
         [SerializeField] private Vector3 _tight;
         [SerializeField] private Vector3 _loose;
         public Vector3 Tight => transform.position + transform.rotation * _tight;
-        public Vector3 Loose => transform.position + transform.rotation * _loose;
+        public Vector3 Loose => transform.position + transform.rotation * -_tight; //_loose;
 
         protected virtual void OnTriggerEnter(Collider collider)
         {

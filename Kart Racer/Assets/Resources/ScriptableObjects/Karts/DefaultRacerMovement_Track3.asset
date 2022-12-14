@@ -21,6 +21,8 @@ MonoBehaviour:
     BrakeSpeed: 0.3
     OutwardDriftPercentage: 0.6
     TurningSpeed: 60
+    GroundCheckDist: 0.15
+    GroundedDist: 0
     GravitySpeed: 0.4
     ConstantGravitySpeed: 0
     BoostDuration: 1.5

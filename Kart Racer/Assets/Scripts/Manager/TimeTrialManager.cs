@@ -19,8 +19,10 @@ namespace Manager
 
             var player = FindObjectOfType<PlayerController>();
             if (player != null)
+            {
                 player.Item = new TripleMushroomItem(GameManager.Instance.Config.ItemConfig.Items
                     .SingleOrDefault(x => x.ItemData.ItemType == ItemType.TripleMushroom)?.ItemData);
+            }
         }
 
         public override void LoadUI()

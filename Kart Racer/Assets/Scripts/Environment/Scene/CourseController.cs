@@ -34,18 +34,26 @@ namespace Environment.Scene
                 var prevCheckpoint = i > 0 ? checkpoints[i - 1] : checkpoints.Last();
                 var currCheckpoint = checkpoints[i];
 
-                // Draw the default line
-                if (DrawCheckPointPath)
-                {
-                    Gizmos.color = CheckPointPathColor;
-                    Gizmos.DrawLine(prevCheckpoint.transform.position, currCheckpoint.transform.position);
-                }
-
                 // Draw the tight line
                 if (DrawTightCheckPointPath)
                 {
                     Gizmos.color = TightCheckPointPathColor;
                     Gizmos.DrawLine(prevCheckpoint.Tight, currCheckpoint.Tight);
+                }
+
+                // Draw the tight line
+                if (DrawLooseCheckPointPath)
+                {
+                    Gizmos.color = LooseCheckPointPathColor;
+                    Gizmos.DrawLine(prevCheckpoint.Loose, currCheckpoint.Loose);
+                }
+
+                
+                // Draw the default line
+                if (DrawCheckPointPath)
+                {
+                    Gizmos.color = CheckPointPathColor;
+                    Gizmos.DrawLine(prevCheckpoint.transform.position, currCheckpoint.transform.position);
                 }
             }
 

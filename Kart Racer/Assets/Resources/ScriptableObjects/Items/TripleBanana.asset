@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemData:
     Name: Triple Banana
-    Icon: {fileID: 21300000, guid: 1ae203811918947498feed4f6d9a0dd8, type: 3}
+    Icon:
+    - {fileID: 21300000, guid: 1ae203811918947498feed4f6d9a0dd8, type: 3}
+    - {fileID: 0}
+    - {fileID: 21300000, guid: 2be96fa0a07536444a1dffbd26917b02, type: 3}
     ItemType: 4

@@ -5,6 +5,7 @@ using Actor.Item;
 using Actor.Racer;
 using Actor.Racer.Player;
 using Data.Environment;
+using Data.Item;
 using Environment.Scene;
 using UnityEngine;
 using UnityEngine.Events;
@@ -34,7 +35,7 @@ namespace Manager
         public int NumRacers => Racers.Count;
 
         // Preferences
-        private List<Item> _itemPool;
+        private List<ItemData> _itemPool;
 
         protected override void Awake()
         {
@@ -57,6 +58,8 @@ namespace Manager
 
             Racers = FindObjectsOfType<RacerController>().ToList();
             PlayerRacers = FindObjectsOfType<PlayerController>().ToList();
+
+            _itemPool = GameManager.Instance.Config.ItemConfig.Items.Select(x => x.ItemData).ToList();
 
             CalculatePositions();
         }
@@ -114,7 +117,7 @@ namespace Manager
             }
         }
 
-        public Item GetRandomItem() => _itemPool.GetRandomElement();
+        public Item GetRandomItem() => Item.CreateItem(_itemPool.GetRandomElement());
 
         public Vector3 GetFinishLineForward() => CourseController.GetFinishLine().transform.forward;
 
