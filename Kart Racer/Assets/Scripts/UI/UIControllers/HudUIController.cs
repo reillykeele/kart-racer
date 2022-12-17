@@ -29,6 +29,8 @@ namespace UI.UIControllers
         private TextMeshProUGUI _lapText;
 
         // Pause Menu
+
+
         protected override void Awake()
         {
             base.Awake();

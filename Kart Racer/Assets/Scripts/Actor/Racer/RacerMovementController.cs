@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Linq;
 using Data.Environment;
 using Data.Racer;
-using Environment.Scene;
+using Environment.Track;
 using Manager;
 using ScriptableObject.Racer;
 using UnityEngine;
@@ -19,11 +18,13 @@ namespace Actor.Racer
         [SerializeField] private RacerMovementScriptableObject _racerMovementData;
         public RacerMovementData RacerMovement { get; private set; }
 
+        // Components
         protected Rigidbody _rb;
         protected BoxCollider _collider;
 
         // Movement
         [SerializeField] public bool UseAutopilot = false;
+        [SerializeField] public bool UseAverageGroundNormals = false;
         public float Steering { get; protected set; }
         public Vector3 ControllerForward { get; protected set; }
         public Vector3 ControllerRotation { get; protected set; }
@@ -75,6 +76,10 @@ namespace Actor.Racer
         protected GameObject _target;
         protected GameObject _lookaheadTarget;
 
+        protected virtual bool IsAccelerating => false;
+        protected virtual bool IsBraking => false;
+
+
         protected virtual void Awake()
         {
             _racerController = GetComponent<RacerController>();
@@ -91,6 +96,18 @@ namespace Actor.Racer
         {
             if (!GameManager.Instance.IsPlaying()) return;
 
+            if (UseAutopilot)
+            {
+                Autopilot();
+                return;
+            }
+            
+            var isGrounded = IsGrounded(out var groundedHitInfo, out var trackSurfaceModifier);
+
+            UpdateCurrSpeed(trackSurfaceModifier);
+            Steer(out var steerDirection, out var movement);
+            ApplyGravity(isGrounded, groundedHitInfo, ref movement);
+            MoveAndRotate(steerDirection, movement);
         }
 
         public void Autopilot()
@@ -135,7 +152,7 @@ namespace Actor.Racer
 
             // Apply gravity
             var pos = transform.position;
-            if (IsGrounded(out var hitInfo))
+            if (IsGrounded(out var hitInfo, out _))
             {
                 pos.y = hitInfo.point.y + 0.5f; // TODO: Change to some "dist to ground" var
 
@@ -158,19 +175,112 @@ namespace Actor.Racer
             transform.position = pos + movement;
         }
 
-        public bool IsGrounded() => IsGrounded(out _);
-        public bool IsGrounded(out RaycastHit hitInfo)
+        public virtual void UpdateCurrSpeed(TrackSurfaceModifierData trackSurfaceModifier)
+        {
+            var velocity = _rb.velocity;
+            velocity.y = 0;
+            CurrSpeed = velocity.magnitude * Mathf.Sign(CurrSpeed);
+            CurrSpeed = CalculateSpeed(CurrSpeed, IsAccelerating, IsBraking, trackSurfaceModifier);
+        }
+
+        public virtual void Steer(out float steerDirection, out Vector3 movement)
+        {
+            steerDirection = 0f;
+            movement = Vector3.zero;
+        }
+
+        public virtual void ApplyGravity(bool isGrounded, RaycastHit groundedHitInfo, ref Vector3 movement)
+        {
+            if (isGrounded)
+            {
+                var  cPos = transform.TransformPoint(_collider.center + new Vector3(0, -_collider.size.y,  0) / 2);
+                var tlPos = transform.TransformPoint(_collider.center + new Vector3(-_collider.size.x, -_collider.size.y,  _collider.size.z) / 2);
+                var trPos = transform.TransformPoint(_collider.center + new Vector3( _collider.size.x, -_collider.size.y,  _collider.size.z) / 2);
+                var blPos = transform.TransformPoint(_collider.center + new Vector3(-_collider.size.x, -_collider.size.y, -_collider.size.z) / 2);
+                var brPos = transform.TransformPoint(_collider.center + new Vector3( _collider.size.x, -_collider.size.y, -_collider.size.z) / 2);
+
+                # region Debug Draw Gravity Rays
+                Debug.DrawRay( cPos, Vector3.down * RacerMovement.GroundCheckDist, Color.green);
+                Debug.DrawRay(tlPos, Vector3.down * RacerMovement.GroundCheckDist, Color.green);
+                Debug.DrawRay(trPos, Vector3.down * RacerMovement.GroundCheckDist, Color.green);
+                Debug.DrawRay(blPos, Vector3.down * RacerMovement.GroundCheckDist, Color.green);
+                Debug.DrawRay(brPos, Vector3.down * RacerMovement.GroundCheckDist, Color.green);
+                // Debug.DrawRay(groundedHitInfo.point, groundedHitInfo.normal * (RacerMovement.GroundedDist + _collider.size.y / 2), Color.blue);
+                #endregion
+
+                Vector3 groundNormal = groundedHitInfo.normal;
+                if (UseAverageGroundNormals)
+                {
+
+                    var groundRays = new (bool isHit, RaycastHit hitInfo)[5];
+                    groundRays[0].isHit = Physics.Raycast(cPos, Vector3.down * RacerMovement.GroundCheckDist,
+                        out groundRays[0].hitInfo, LayerMask.NameToLayer("Track"));
+                    groundRays[1].isHit = Physics.Raycast(tlPos, Vector3.down * RacerMovement.GroundCheckDist,
+                        out groundRays[1].hitInfo, LayerMask.NameToLayer("Track"));
+                    groundRays[2].isHit = Physics.Raycast(trPos, Vector3.down * RacerMovement.GroundCheckDist,
+                        out groundRays[2].hitInfo, LayerMask.NameToLayer("Track"));
+                    groundRays[3].isHit = Physics.Raycast(blPos, Vector3.down * RacerMovement.GroundCheckDist,
+                        out groundRays[3].hitInfo, LayerMask.NameToLayer("Track"));
+                    groundRays[4].isHit = Physics.Raycast(brPos, Vector3.down * RacerMovement.GroundCheckDist,
+                        out groundRays[4].hitInfo, LayerMask.NameToLayer("Track"));
+
+                    var averageGroundNormal = Vector3.zero;
+                    var numGroundNormals = 0;
+                    for (var i = 0; i < groundRays.Length; ++i)
+                    {
+                        if (groundRays[i].isHit)
+                        {
+                            numGroundNormals++;
+                            averageGroundNormal += groundRays[i].hitInfo.normal;
+                        }
+                    }
+
+                    groundNormal = (averageGroundNormal / numGroundNormals).normalized;
+                }
+
+                var pos = transform.position;
+                pos.y = groundedHitInfo.point.y + RacerMovement.GroundedDist + (pos.y - cPos.y);
+                transform.position = pos;
+
+                // Project the forward & surface normal using the dot product
+                // Set the rotation w/ relative forward and up axes
+                // var groundNormal = groundedHitInfo.normal;
+                var rotForward = transform.forward - groundNormal * Vector3.Dot( transform.forward, groundNormal);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    Quaternion.LookRotation(rotForward.normalized, groundNormal),
+                    8f * Time.fixedDeltaTime);
+            }
+            else
+            {
+                movement.y -= RacerMovement.GravitySpeed;
+            }
+        }
+
+        public virtual void MoveAndRotate(float steerDirection, Vector3 movement)
+        {
+            if (CurrSpeed.IsZero() == false)
+                transform.Rotate(transform.up, steerDirection * Time.fixedDeltaTime);
+
+            var newVelocity = 50f * movement * Time.fixedDeltaTime;
+            _rb.velocity = newVelocity;
+        }
+
+        public bool IsGrounded() => IsGrounded(out _, out _);
+        public bool IsGrounded(out RaycastHit hitInfo, out TrackSurfaceModifierData trackSurfaceModifier)
         {
             var colliderCenter = transform.TransformPoint(_collider.center);
             Debug.DrawRay(colliderCenter, Vector3.down * (_collider.size.y / 2 + RacerMovement.GroundCheckDist), Color.red);
-            var hit = Physics.Raycast(
+            var isGrounded = Physics.Raycast(
                 colliderCenter, 
                 Vector3.down, 
                 out hitInfo,
                 _collider.size.y / 2 + RacerMovement.GroundCheckDist,
                 LayerMask.GetMask("Track"));
 
-            return hit;
+            trackSurfaceModifier = isGrounded ? hitInfo.collider.GetComponent<TrackSurface>()?.TrackSurfaceModifierData : new TrackSurfaceModifierData();
+
+            return isGrounded;
         }
 
         public float CalculateSpeed(float prevSpeed, bool isAccelerating, bool isBraking, TrackSurfaceModifierData trackSurfaceModifier)

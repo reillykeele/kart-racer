@@ -25,7 +25,7 @@ namespace Manager
         public GameMode GameMode = GameMode.Free;
         public RaceManager RaceManager;
 
-        public int NumComputerPlayers = 0;
+        public int NumComputerPlayers = 3;
 
         protected override void Awake()
         {
@@ -48,6 +48,8 @@ namespace Manager
 
             CurrentGameState = GameState.Paused;
             OnPauseGameEvent.Invoke();
+
+            Time.timeScale = 0;
         }
 
         public void ResumeGame()
@@ -58,6 +60,8 @@ namespace Manager
 
             CurrentGameState = GameState.Playing;
             OnResumeGameEvent.Invoke();
+
+            Time.timeScale = 1;
         }
 
         public void TogglePaused() { if (IsPlaying()) PauseGame(); else ResumeGame(); }

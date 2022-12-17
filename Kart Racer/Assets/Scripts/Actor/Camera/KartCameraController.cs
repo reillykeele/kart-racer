@@ -1,28 +1,51 @@
 using Actor.Racer;
 using Actor.Racer.Player;
+using Cinemachine;
 using UnityEngine;
 
 namespace Actor.Camera
 {
     public class KartCameraController : MonoBehaviour
     {
+        private CinemachineStateDrivenCamera _stateDrivenCamera;
         private Animator _animator;
         private PlayerInputController _input;
 
         void Awake()
         {
+            _stateDrivenCamera = GetComponent<CinemachineStateDrivenCamera>();
             _animator = GetComponent<Animator>();
+        }
 
-            _input = FindObjectOfType<PlayerInputController>();
-            if (_input != null)
+        void Start()
+        {
+            var player = FindObjectOfType<PlayerController>();
+            if (player != null)
             {
-                _input.OnLookBehindEvent.AddListener(SwitchFollowCamera);
+                player.FinishRaceEvent.AddListener(SwitchCinematic);
+
+                _input = player.GetComponent<PlayerInputController>();
+                _input?.OnLookBehindEvent.AddListener(SwitchFollowCamera);
+
+                foreach (var camera in _stateDrivenCamera.ChildCameras)
+                {
+                    camera.Follow = player.transform;
+                    camera.LookAt = player.transform;
+                }
             }
-
-            var bruh = FindObjectOfType<PlayerController>() ?? FindObjectOfType<RacerController>();
-            if (bruh != null)
+            else
             {
-                bruh.FinishRaceEvent.AddListener(SwitchCinematic);
+                var racer = FindObjectOfType<RacerController>();
+                if (racer != null)
+                {
+                    racer.FinishRaceEvent.AddListener(SwitchCinematic);
+
+                    foreach (var camera in _stateDrivenCamera.ChildCameras)
+                    {
+                        camera.Follow = racer.transform;
+                        camera.LookAt = racer.transform;
+                    }
+                }
             }
         }
 

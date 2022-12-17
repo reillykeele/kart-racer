@@ -42,7 +42,7 @@ namespace Manager
         {
             StartCoroutine(CoroutineUtil.Sequence(
                 UIHelper.FadeInAndEnable(_uiController, _loadingCanvasGroup),
-                CoroutineUtil.CallAction(() =>Application.Quit(0)))
+                CoroutineUtil.CallAction(() => Application.Quit(0)))
             );
         }
 
@@ -66,6 +66,8 @@ namespace Manager
 
         private IEnumerator LoadingScreen(Scene scene)
         {
+            Time.timeScale = 1;
+
             var minEndTime = Time.time + MinLoadingScreenTime;
             var result = SceneManager.LoadSceneAsync(scene.ToString());
             while (result.isDone == false || Time.time <= minEndTime)

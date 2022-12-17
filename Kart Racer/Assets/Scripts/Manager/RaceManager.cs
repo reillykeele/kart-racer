@@ -9,7 +9,6 @@ using Data.Item;
 using Environment.Scene;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using Util.Enums;
 using Util.Helpers;
@@ -56,11 +55,20 @@ namespace Manager
             else 
                 Debug.LogWarning("No course controller found.");
 
+            Racers = new List<RacerController>();
+            PlayerRacers = new List<PlayerController>();
+
+            if (GameManager.Instance.GameMode == GameMode.Race)
+                InitRace();
+
             Racers = FindObjectsOfType<RacerController>().ToList();
             PlayerRacers = FindObjectsOfType<PlayerController>().ToList();
 
-            _itemPool = GameManager.Instance.Config.ItemConfig.Items.Select(x => x.ItemData).ToList();
+            CourseController.CourseAudioController.InitPlayerAudio(PlayerRacers);
+        }
 
+        void LateStart()
+        {
             CalculatePositions();
         }
 
@@ -70,6 +78,27 @@ namespace Manager
                 return;
 
             RaceTime += Time.deltaTime;
+        }
+
+        public void InitRace()
+        {
+            _itemPool = GameManager.Instance.Config.ItemConfig.Items.Select(x => x.ItemData).ToList();
+
+            var actors = GameObject.Find("Actors");
+            for (var i = 0; i < Mathf.Min(CourseController.RacerSpawns.Length - 1, GameManager.Instance.NumComputerPlayers); i++)
+            {
+                var racerGameObject = Instantiate(CourseController.ComputerRacers[i], actors.transform);
+                var racer = racerGameObject.GetComponent<RacerController>();
+                racer.transform.position = CourseController.RacerSpawns[i];
+
+                Racers.Add(racer);
+            }
+
+            var playerGameObject = Instantiate(CourseController.PlayerRacers.First(), actors.transform);
+            var player = playerGameObject.GetComponent<PlayerController>();
+            player.transform.position = CourseController.RacerSpawns[Mathf.Min(CourseController.RacerSpawns.Length, GameManager.Instance.NumComputerPlayers)];
+
+            PlayerRacers.Add(player);
         }
 
         public virtual void LoadUI()

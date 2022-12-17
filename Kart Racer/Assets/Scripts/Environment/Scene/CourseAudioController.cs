@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
+using Actor.Racer.Player;
 using Data.Audio;
 using Manager;
 using ScriptableObject.Audio;
-using TMPro;
 using UnityEngine;
 
 namespace Environment.Scene
@@ -53,8 +52,11 @@ namespace Environment.Scene
 
             raceManager.CountdownTickEvent.AddListener(PlayCountdownEffect);
             raceManager.CountdownEndEvent.AddListener(PlayGoEffect);
+        }
 
-            foreach (var racer in raceManager.PlayerRacers)
+        public void InitPlayerAudio(IEnumerable<PlayerController> playerControllers)
+        {
+            foreach (var racer in playerControllers)
             {
                 racer.ChangeLapEvent.AddListener(PlayAdvanceLapEffect);
                 racer.FinishRaceEvent.AddListener(PlayFinishRaceEffect);

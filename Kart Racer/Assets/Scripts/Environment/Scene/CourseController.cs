@@ -1,17 +1,24 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Data.Audio;
 using Manager;
-using ScriptableObject.Audio;
 using UnityEngine;
-using Util.Helpers;
 
 namespace Environment.Scene
 {
     public class CourseController : AOnSceneLoad
     {
+        [Header("Course Properties")]
+        public string CourseName = "";
         public int Laps = 3;
+        public GameObject[] PlayerRacers;
+
+        [Header("Race Configuration")] 
+        public Vector3[] RacerSpawns;
+        public GameObject[] ComputerRacers;
+
+        [Header("Time Trial Configuration")] 
+        public Vector3 TimeTrialSpawn;
+
         public List<Checkpoint> Checkpoints { get; private set; }
 
         [Header("Debug")]
@@ -24,7 +31,8 @@ namespace Environment.Scene
         public bool DrawLooseCheckPointPath = true;
         public Color LooseCheckPointPathColor = Color.white;
 
-        private bool DrawSmoothedCheckpointPath = false;
+
+        [HideInInspector] public CourseAudioController CourseAudioController;
 
         void OnDrawGizmos()
         {
@@ -57,19 +65,19 @@ namespace Environment.Scene
                 }
             }
 
-            if (DrawSmoothedCheckpointPath)
-            {
-                var points = checkpoints.Select(x => x.transform.position).ToArray();
-                var smoothedPath = PathHelper.SmoothPath(points, checkpoints.Length);
-                Debug.Log(smoothedPath.Length);
-                for (var i = 0; i < smoothedPath.Length; ++i)
-                {
-                    var prev = i > 0 ? smoothedPath[i - 1] : smoothedPath.Last();
-                    var curr = smoothedPath[i];
-
-                    Gizmos.DrawLine(prev, curr);
-                }
-            }
+            // if (DrawSmoothedCheckpointPath)
+            // {
+            //     var points = checkpoints.Select(x => x.transform.position).ToArray();
+            //     var smoothedPath = PathHelper.SmoothPath(points, checkpoints.Length);
+            //     Debug.Log(smoothedPath.Length);
+            //     for (var i = 0; i < smoothedPath.Length; ++i)
+            //     {
+            //         var prev = i > 0 ? smoothedPath[i - 1] : smoothedPath.Last();
+            //         var curr = smoothedPath[i];
+            //
+            //         Gizmos.DrawLine(prev, curr);
+            //     }
+            // }
         }
 
         protected override void Awake()
@@ -81,14 +89,16 @@ namespace Environment.Scene
             Checkpoints = FindObjectsOfType<Checkpoint>().ToList();
         }
 
+        void Start()
+        {
+            CourseAudioController = GetComponent<CourseAudioController>();
+
+            GameManager.Instance.RaceManager.LoadUI();
+        }
+
         protected override void OnSceneLoad()
         {
             GameManager.Instance.RaceManager.StartCountdown();
-        }
-
-        void Start()
-        {
-            GameManager.Instance.RaceManager.LoadUI();
         }
 
         public Checkpoint GetFinishLine() => Checkpoints.Single(x => x.CheckpointIndex == 0);
