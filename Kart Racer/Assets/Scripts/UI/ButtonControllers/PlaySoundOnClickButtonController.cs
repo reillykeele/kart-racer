@@ -4,6 +4,6 @@ namespace UI.ButtonControllers
     {
         // public AudioDataScriptableObject AudioData;
 
-        public override void OnClick() => _audioController.Play(CanvasAudioController.CanvasAudioSoundType.Select);
+        public override void OnClick() => _canvasAudioController.Play(CanvasAudioController.CanvasAudioSoundType.Select);
     }
 }

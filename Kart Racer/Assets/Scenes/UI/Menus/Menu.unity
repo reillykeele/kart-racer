@@ -719,6 +719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundAudioData: {fileID: 11400000, guid: ade0eacb1736a3b49855cff9286b6ecc, type: 2}
+  BackgroundLoopingMusicAudioData: {fileID: 11400000, guid: 65076c13432798d4fadd4986376425ef, type: 2}
   AudioData:
   - {fileID: 0}
   - {fileID: 11400000, guid: 63967c0df8546cc4c81d0c08e465ae45, type: 2}

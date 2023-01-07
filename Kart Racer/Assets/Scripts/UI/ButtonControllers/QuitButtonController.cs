@@ -6,7 +6,7 @@ namespace UI.ButtonControllers
     {
         public override void OnClick()
         {
-            _audioController.FadeOutBackgroundMusic();
+            _canvasAudioController?.FadeOutBackgroundMusic();
             LoadingManager.Instance.QuitGame();
         }
     }

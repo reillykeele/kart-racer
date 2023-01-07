@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ba13bc60772e44aad21ccf9cb7cb48, type: 3}
+  m_Name: MainMenuMedleyLoopingMusic
+  m_EditorClassIdentifier: 
+  LoopingMusicAudioData:
+    IntroAudioClip: {fileID: 8300000, guid: bf2a6fdea073a0f4ebd69a46e3a06e86, type: 3}
+    LoopAudioClip: {fileID: 8300000, guid: f862659364b089b4da0928ac5907df72, type: 3}
+    MixingGroup: {fileID: 2489110483698856251, guid: 78d3087b074688241880b8921526a6cc, type: 2}
+    Volume: 1
+    PlayOnAwake: 0

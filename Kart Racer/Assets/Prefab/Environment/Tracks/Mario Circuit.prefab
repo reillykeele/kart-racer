@@ -1702,6 +1702,7 @@ Transform:
   - {fileID: 4243656157188074225}
   - {fileID: 2821426195428382175}
   - {fileID: 2239583897296356996}
+  - {fileID: 5503848226503917353}
   m_Father: {fileID: 5826398047541679029}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1743,7 +1744,6 @@ Transform:
   - {fileID: 1138466122122569737}
   - {fileID: 689514966312784146}
   - {fileID: 2030425523725237424}
-  - {fileID: 5503848226503917353}
   m_Father: {fileID: 5826398047541679029}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2004,8 +2004,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5503848226503917353}
   - component: {fileID: 6983849819020230375}
-  m_Layer: 6
-  m_Name: polygon27
+  - component: {fileID: 7302304320872671203}
+  m_Layer: 7
+  m_Name: Posts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2022,8 +2023,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
-  m_Father: {fileID: 6291879814390262138}
-  m_RootOrder: 11
+  m_Father: {fileID: 6291879814012832798}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &6983849819020230375
 SkinnedMeshRenderer:
@@ -2078,6 +2079,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -9499.705, y: 3528.3184, z: 28558.074}
     m_Extent: {x: 11752.834, y: 2314.4966, z: 19181.297}
   m_DirtyAABB: 0
+--- !u!64 &7302304320872671203
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960169296726054047}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5927615630177349428, guid: d584c0b2bb6aa274c810398ea7f03797, type: 3}
 --- !u!1 &8045533706927148569
 GameObject:
   m_ObjectHideFlags: 0

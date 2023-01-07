@@ -4,6 +4,7 @@ using Actor.Racer.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Util.Enums;
+using Util.Helpers;
 
 namespace Manager
 {
@@ -17,8 +18,11 @@ namespace Manager
         protected override void Start()
         {
             base.Start();
+        }
 
-            // Init Time Trial
+        public override void InitRace()
+        {
+            // Spawn in Player Racer
             var player = FindObjectOfType<PlayerController>();
             if (player == null)
             {
@@ -30,6 +34,8 @@ namespace Manager
             player.transform.position = CourseController.TimeTrialSpawn;
             player.Item = new TripleMushroomItem(GameManager.Instance.Config.ItemConfig.Items
                 .SingleOrDefault(x => x.ItemData.ItemType == ItemType.TripleMushroom)?.ItemData);
+
+            CourseController.ItemBoxes.ForEach(x => x.gameObject.Disable());
         }
 
         public override void LoadUI()

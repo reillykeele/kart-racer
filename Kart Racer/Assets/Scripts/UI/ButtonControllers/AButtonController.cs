@@ -8,13 +8,13 @@ namespace UI.ButtonControllers
     public abstract class AButtonController : MonoBehaviour, ISelectHandler
     {
         protected CanvasController _canvasController;
-        protected CanvasAudioController _audioController;
+        protected CanvasAudioController _canvasAudioController;
         protected Button _button;
 
         protected virtual void Awake()
         {
             _canvasController = GetComponentInParent<CanvasController>();
-            _audioController = GetComponentInParent<CanvasAudioController>();
+            _canvasAudioController = GetComponentInParent<CanvasAudioController>();
             _button = GetComponent<Button>();
 
             _button.onClick.AddListener(OnClick);

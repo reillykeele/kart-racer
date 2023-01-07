@@ -79,6 +79,8 @@ namespace Actor.Racer
         protected virtual bool IsAccelerating => false;
         protected virtual bool IsBraking => false;
 
+        public bool IsIdling => IsAccelerating == false && IsBraking == false && CurrSpeed.IsZero();
+        // public bool 
 
         protected virtual void Awake()
         {

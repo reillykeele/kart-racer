@@ -35,14 +35,18 @@ namespace UI.UIControllers
         {
             base.Awake();
 
-            _itemUiGroup = gameObject.GetChildObject("ItemGroup");
+            _itemUiGroup = gameObject.GetChildObject("ItemContainer").GetChildObject("ItemGroup");
             _itemImage = _itemUiGroup.GetChildObject("ItemImage").GetComponent<Image>();
 
             _countdownText = gameObject.GetChildObject("CountdownText").GetComponent<TextMeshProUGUI>();
 
-            _positionImage = gameObject.GetChildObject("PositionImage").GetComponent<Image>();
-            _timeText = gameObject.GetChildObject("TimeText").GetComponent<TextMeshProUGUI>();
-            _lapText = gameObject.GetChildObject("LapText").GetComponent<TextMeshProUGUI>();
+            var positionGroup = gameObject.GetChildObject("PositionContainer")?.GetChildObject("PositionGroup");
+            if (positionGroup != null)
+                _positionImage = positionGroup.GetChildObject("PositionImage").GetComponent<Image>();
+
+            var textGroup = gameObject.GetChildObject("TextContainer").GetChildObject("TextGroup");
+            _timeText = textGroup.GetChildObject("TimeText").GetComponent<TextMeshProUGUI>();
+            _lapText = textGroup.GetChildObject("LapText").GetComponent<TextMeshProUGUI>();
         }
 
         void Start()
@@ -115,7 +119,8 @@ namespace UI.UIControllers
 
         public void ChangePosition(int position)
         {
-            _positionImage.sprite = GameManager.Instance.Config.UIConfig.PositionSprites[position];
+            if (_positionImage != null)
+                _positionImage.sprite = GameManager.Instance.Config.UIConfig.PositionSprites[position];
         }
 
         public void ChangeLap(int lap)

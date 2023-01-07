@@ -17,8 +17,8 @@ namespace UI.UIControllers
 
         void Update()
         {
-            if (Keyboard.current.anyKey.wasPressedThisFrame ||
-                Gamepad.current.startButton.wasPressedThisFrame)
+            if (Keyboard.current?.anyKey.wasPressedThisFrame == true ||
+                Gamepad.current?.startButton.wasPressedThisFrame == true)
             {
                 _canvasController.SwitchUI(TargetUiPageType, true);
             }

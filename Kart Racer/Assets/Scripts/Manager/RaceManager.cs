@@ -52,19 +52,20 @@ namespace Manager
                 NumCheckpoints = CourseController.Checkpoints.Count();
                 NumKeyCheckpoints = CourseController.Checkpoints.Count(x => x.GetCheckpointType() == CheckpointType.KeyCheckpoint);
             }
-            else 
+            else
+            {
                 Debug.LogWarning("No course controller found.");
+            }
 
             Racers = new List<RacerController>();
             PlayerRacers = new List<PlayerController>();
 
-            if (GameManager.Instance.GameMode == GameMode.Race)
-                InitRace();
+            InitRace();
 
             Racers = FindObjectsOfType<RacerController>().ToList();
             PlayerRacers = FindObjectsOfType<PlayerController>().ToList();
 
-            CourseController.CourseAudioController.InitPlayerAudio(PlayerRacers);
+            CourseController?.CourseAudioController.InitPlayerAudio(PlayerRacers);
         }
 
         void LateStart()
@@ -80,10 +81,11 @@ namespace Manager
             RaceTime += Time.deltaTime;
         }
 
-        public void InitRace()
+        public virtual void InitRace()
         {
             _itemPool = GameManager.Instance.Config.ItemConfig.Items.Select(x => x.ItemData).ToList();
 
+            // Spawn in CPU Racers
             var actors = GameObject.Find("Actors");
             for (var i = 0; i < Mathf.Min(CourseController.RacerSpawns.Length - 1, GameManager.Instance.NumComputerPlayers); i++)
             {
@@ -94,6 +96,7 @@ namespace Manager
                 Racers.Add(racer);
             }
 
+            // Spawn in Player Racer
             var playerGameObject = Instantiate(CourseController.PlayerRacers.First(), actors.transform);
             var player = playerGameObject.GetComponent<PlayerController>();
             player.transform.position = CourseController.RacerSpawns[Mathf.Min(CourseController.RacerSpawns.Length, GameManager.Instance.NumComputerPlayers)];

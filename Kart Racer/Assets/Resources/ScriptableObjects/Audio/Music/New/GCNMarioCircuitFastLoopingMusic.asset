@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ba13bc60772e44aad21ccf9cb7cb48, type: 3}
+  m_Name: GCNMarioCircuitFastLoopingMusic
+  m_EditorClassIdentifier: 
+  LoopingMusicAudioData:
+    IntroAudioClip: {fileID: 8300000, guid: a3f51d925ee82324196ff8be73e19957, type: 3}
+    LoopAudioClip: {fileID: 8300000, guid: 16cce9c316d5b344a9038434dbefd353, type: 3}
+    MixingGroup: {fileID: 2489110483698856251, guid: 78d3087b074688241880b8921526a6cc, type: 2}
+    Volume: 1
+    PlayOnAwake: 0

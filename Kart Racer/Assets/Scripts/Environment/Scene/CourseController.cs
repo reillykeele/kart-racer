@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Environment.Item;
 using Manager;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ namespace Environment.Scene
         public Vector3 TimeTrialSpawn;
 
         public List<Checkpoint> Checkpoints { get; private set; }
+        public List<ItemBoxController> ItemBoxes { get; private set; }
 
         [Header("Debug")]
         public bool DrawCheckPointPath = true;
@@ -87,6 +89,7 @@ namespace Environment.Scene
             GameManager.Instance.InitRace();
 
             Checkpoints = FindObjectsOfType<Checkpoint>().ToList();
+            ItemBoxes = FindObjectsOfType<ItemBoxController>().ToList();
         }
 
         void Start()

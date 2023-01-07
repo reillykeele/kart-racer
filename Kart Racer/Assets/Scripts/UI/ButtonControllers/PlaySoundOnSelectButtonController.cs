@@ -6,6 +6,6 @@ namespace UI.ButtonControllers
     {
         // public AudioDataScriptableObject AudioData;
 
-        public override void OnSelect(BaseEventData eventData) => _audioController.Play(CanvasAudioController.CanvasAudioSoundType.Tick);
+        public override void OnSelect(BaseEventData eventData) => _canvasAudioController.Play(CanvasAudioController.CanvasAudioSoundType.Tick);
     }
 }

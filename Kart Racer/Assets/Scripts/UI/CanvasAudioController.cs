@@ -10,6 +10,7 @@ public class CanvasAudioController : MonoBehaviour
     private AudioSource _uiAudioSource;
 
     public AudioDataScriptableObject BackgroundAudioData;
+    public LoopingMusicAudioDataScriptableObject BackgroundLoopingMusicAudioData;
     public AudioDataScriptableObject[] AudioData = new AudioDataScriptableObject[4];
 
     public enum CanvasAudioSoundType 
@@ -31,9 +32,19 @@ public class CanvasAudioController : MonoBehaviour
 
     void Start()
     {
-        if (BackgroundAudioData != null)
+        if (BackgroundLoopingMusicAudioData != null)
         {
-            Debug.Log("backgroundaduiodata");
+            _backgroundAudioSource.Initialize(BackgroundLoopingMusicAudioData.LoopingMusicAudioData);
+            _backgroundAudioSource.Play();
+            StartCoroutine(_backgroundAudioSource.WaitForSound(() =>
+            {
+                _backgroundAudioSource.loop = true;
+                _backgroundAudioSource.clip = BackgroundLoopingMusicAudioData.LoopingMusicAudioData.LoopAudioClip;
+                _backgroundAudioSource.Play();
+            }));
+        }
+        else if (BackgroundAudioData != null)
+        {
             _backgroundAudioSource.Initialize(BackgroundAudioData.AudioData);
             _backgroundAudioSource.Play();
         }

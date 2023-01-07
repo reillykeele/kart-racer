@@ -34,5 +34,12 @@ namespace Util.Audio
                 yield return null;
             }
         }
+
+        public static IEnumerator WaitForSound(this AudioSource audioSource, Action onFinished = null)
+        {
+            yield return new WaitUntil(() => audioSource.isPlaying == false);
+
+            onFinished?.Invoke();
+        }
     }
 }

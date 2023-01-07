@@ -10,7 +10,7 @@ namespace UI.ButtonControllers
     
         public override void OnClick()
         {
-            _audioController?.FadeOutBackgroundMusic();
+            _canvasAudioController?.FadeOutBackgroundMusic();
             StartCoroutine(CoroutineUtil.WaitForExecute(() => _canvasController.SwitchScene(TargetScene), Delay));
         }
     }

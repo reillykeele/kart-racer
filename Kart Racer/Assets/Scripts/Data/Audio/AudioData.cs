@@ -15,7 +15,6 @@ namespace Data.Audio
 
         public bool PlayOnAwake = false;
         public bool Loop = false;
-        // public float FadeTime = 0f;
     }
 
     public static class AudioDataExtension
