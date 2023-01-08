@@ -108,3 +108,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2890f1a314e5d42a32006d6f656f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemBoxBreakAudioDataScriptableObject: {fileID: 11400000, guid: 0058e49bd68b4424db5a4af227bf1456, type: 2}

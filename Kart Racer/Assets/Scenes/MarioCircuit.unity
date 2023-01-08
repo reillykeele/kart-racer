@@ -1600,15 +1600,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743176, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.02912476
+      value: 0.029124755
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743176, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000019004604
+      value: -0.000000018477705
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743176, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -5.5373944e-10
+      value: 5.38387e-10
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743177, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_Follow
@@ -1640,11 +1640,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4122796143991509271, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000009608093
+      value: 0.000000004987392
       objectReference: {fileID: 0}
     - target: {fileID: 4122796143991509271, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 1.887924e-10
+      value: 9.799877e-11
       objectReference: {fileID: 0}
     - target: {fileID: 4122796143991509271, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1652,7 +1652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4122796143991509271, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.019645518
+      value: -0.01964551
       objectReference: {fileID: 0}
     - target: {fileID: 4122796144226077748, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_BindingMode
@@ -2679,7 +2679,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088677440}
-  m_LocalRotation: {x: 1.887924e-10, y: 0.999807, z: -0.019645518, w: 0.000000009608093}
+  m_LocalRotation: {x: 9.799877e-11, y: 0.999807, z: -0.01964551, w: 0.000000004987392}
   m_LocalPosition: {x: -4.5, y: 40.24, z: 506.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2736,7 +2736,7 @@ MonoBehaviour:
   OnResumeGameEvent:
     m_PersistentCalls:
       m_Calls: []
-  GameMode: 2
+  GameMode: 3
   RaceManager: {fileID: 0}
   NumComputerPlayers: 3
 --- !u!1001 &1165669005

@@ -11,13 +11,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 3766547062070900159, guid: f9b1cc5740134be4c9857bcd3099eb0e, type: 3}
+      propertyPath: _vehicleAudioDataScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: d2e9bf5a8be11014c9893adee14fe633, type: 2}
     - target: {fileID: 9113864802107751729, guid: f9b1cc5740134be4c9857bcd3099eb0e, type: 3}
       propertyPath: _racerMovementData
       value: 
       objectReference: {fileID: 11400000, guid: e4709ae242195d942a7acade832f07b7, type: 2}
     - target: {fileID: 9113864802107751737, guid: f9b1cc5740134be4c9857bcd3099eb0e, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player Racer (Default)
       objectReference: {fileID: 0}
     - target: {fileID: 9113864802107751737, guid: f9b1cc5740134be4c9857bcd3099eb0e, type: 3}
       propertyPath: m_IsActive

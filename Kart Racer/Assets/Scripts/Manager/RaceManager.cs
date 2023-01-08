@@ -65,7 +65,7 @@ namespace Manager
             Racers = FindObjectsOfType<RacerController>().ToList();
             PlayerRacers = FindObjectsOfType<PlayerController>().ToList();
 
-            CourseController?.CourseAudioController.InitPlayerAudio(PlayerRacers);
+            CourseController?.CourseAudioController?.InitPlayerAudio(PlayerRacers);
         }
 
         void LateStart()

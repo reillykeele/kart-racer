@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24318
+  m_Name: pb_Mesh111308
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -441,6 +441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 210864873}
   - component: {fileID: 210864872}
+  - component: {fileID: 210864874}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -460,13 +461,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a8e0948d03faa4aa4e54d838e40c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CourseName: 
   Laps: 1
+  PlayerRacers:
+  - {fileID: 756050175016197065, guid: f6c2b89f665253a40b77df5cc0e74bac, type: 3}
+  RacerSpawns:
+  - {x: 0, y: 1.89, z: -12.39}
+  ComputerRacers: []
+  TimeTrialSpawn: {x: 0, y: 0, z: 0}
   DrawCheckPointPath: 0
   CheckPointPathColor: {r: 1, g: 1, b: 1, a: 1}
   DrawTightCheckPointPath: 0
   TightCheckPointPathColor: {r: 1, g: 1, b: 1, a: 1}
   DrawLooseCheckPointPath: 0
   LooseCheckPointPathColor: {r: 1, g: 1, b: 1, a: 1}
+  CourseAudioController: {fileID: 0}
 --- !u!4 &210864873
 Transform:
   m_ObjectHideFlags: 0
@@ -485,6 +494,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &210864874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210864871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0387e19dc4e06d49855b21fed399fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicAudioDataScriptableObject: {fileID: 11400000, guid: 6ceb861242eab7743a1b19332f5ec113, type: 2}
+  _musicFinalLapAudioDataScriptableObject: {fileID: 0}
+  _musicFinishedRaceAudioDataScriptableObject: {fileID: 11400000, guid: 8fba21547ce740744a56829d64e61954, type: 2}
+  _countdownAudioDataScriptableObject: {fileID: 11400000, guid: 9a373bcdee1a15841bf7c3da8107f7ee, type: 2}
+  _goAudioDataScriptableObject: {fileID: 11400000, guid: 6328b30eb9f3a33418e6f8aa0fedd556, type: 2}
+  _lapAudioDataScriptableObject: {fileID: 11400000, guid: 95a30a1dc92f19643b830c143cb0dd2a, type: 2}
+  _finalLapAudioDataScriptableObject: {fileID: 11400000, guid: bd185d39d48d2554a8961a8788c24510, type: 2}
+  _finishRaceAudioDataScriptableObject: {fileID: 11400000, guid: c33808281762370489f55c35f9dd4ad7, type: 2}
 --- !u!1 &231332599
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +780,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24430
+  m_Name: pb_Mesh111420
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1455,7 +1484,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24302
+  m_Name: pb_Mesh111292
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2087,6 +2116,7 @@ GameObject:
   - component: {fileID: 845916608}
   - component: {fileID: 845916607}
   - component: {fileID: 845916606}
+  - component: {fileID: 845916610}
   m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
@@ -2694,6 +2724,23 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &845916610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845916604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ee783dfcbf534e80b1753dcdefd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackSurfaceModifierScriptableObject: {fileID: 11400000, guid: d07b2d028b6e06d448115a27332c914e, type: 2}
+  TrackSurfaceModifierData:
+    SpeedModifier: 1
+    AccelerationModifier: 1
+    DeccelerationModifier: 1
 --- !u!1001 &862758730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3318,7 +3365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9113864802107751737, guid: f9b1cc5740134be4c9857bcd3099eb0e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9113864802107751741, guid: f9b1cc5740134be4c9857bcd3099eb0e, type: 3}
       propertyPath: m_RootOrder
@@ -5321,7 +5368,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24262
+  m_Name: pb_Mesh111252
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5639,7 +5686,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735627891}
-  m_LocalRotation: {x: 5.1849077e-11, y: 0.999807, z: -0.019645343, w: 0.0000000026387459}
+  m_LocalRotation: {x: -5.1849077e-11, y: 0.999807, z: -0.019645343, w: -0.0000000026387459}
   m_LocalPosition: {x: 0, y: 5.39, z: -1.8400002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5867,15 +5914,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743176, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.029124778
+      value: 0.029124785
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743176, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017496177
+      value: -0.000000017387016
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743176, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 5.0978854e-10
+      value: 5.06608e-10
       objectReference: {fileID: 0}
     - target: {fileID: 3623083526285743177, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_Follow
@@ -5907,11 +5954,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4122796143991509271, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0000000026387459
+      value: -0.0000000026387459
       objectReference: {fileID: 0}
     - target: {fileID: 4122796143991509271, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 5.1849077e-11
+      value: -5.1849077e-11
       objectReference: {fileID: 0}
     - target: {fileID: 4122796143991509271, guid: 9e3f52849bad53c408ef9a34e739bb12, type: 3}
       propertyPath: m_LocalRotation.z

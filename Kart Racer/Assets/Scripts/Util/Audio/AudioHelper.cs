@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Data.Audio;
 using UnityEngine;
 
 namespace Util.Audio
@@ -33,6 +34,19 @@ namespace Util.Audio
                 audioSource.volume += Time.deltaTime / fadeTime;
                 yield return null;
             }
+        }
+
+        public static IEnumerator PlayLoopingAudioData(AudioSource audioSource, LoopingMusicAudioData audioData)
+        {
+            audioSource.loop = false;
+            audioSource.clip = audioData.IntroAudioClip;
+            audioSource.Play();
+
+            yield return new WaitUntil(() => audioSource.isPlaying == false);
+            
+            audioSource.loop = true;
+            audioSource.clip = audioData.LoopAudioClip;
+            audioSource.Play();
         }
 
         public static IEnumerator WaitForSound(this AudioSource audioSource, Action onFinished = null)

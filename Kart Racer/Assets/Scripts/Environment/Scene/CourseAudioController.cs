@@ -39,7 +39,7 @@ namespace Environment.Scene
         {
             _courseController = GetComponent<CourseController>();
 
-            _musicAudioSource = _musicFinishedRaceAudioDataScriptableObject.AudioData.CreateNewAudioSource(gameObject);
+            _musicAudioSource = _musicAudioDataScriptableObject.LoopingMusicAudioData.CreateNewAudioSource(gameObject);
             _countdownAudioSource = _countdownAudioDataScriptableObject.AudioData.CreateNewAudioSource(gameObject);
             _goAudioSource = _goAudioDataScriptableObject.AudioData.CreateNewAudioSource(gameObject);
             _lapAudioSource = _lapAudioDataScriptableObject.AudioData.CreateNewAudioSource(gameObject);
