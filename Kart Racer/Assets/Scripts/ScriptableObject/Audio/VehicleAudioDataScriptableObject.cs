@@ -8,23 +8,4 @@ namespace ScriptableObject.Audio
     {
         public VehicleAudioData VehicleAudioData;
     }
-
-    public static class VehicleAudioDataExtension
-    {
-        public static AudioSource Initialize(this AudioSource audioSource, VehicleAudioData audioData)
-        {
-            audioSource.clip = audioData.IdleAudioClip;
-            audioSource.outputAudioMixerGroup = audioData.MixingGroup;
-            audioSource.volume = audioData.Volume;
-            audioSource.playOnAwake = false;
-            audioSource.loop = true;
-
-            return audioSource;
-        }
-
-        public static AudioSource CreateNewAudioSource(this VehicleAudioData audioData, GameObject gameObject)
-        {
-            return gameObject.AddComponent<AudioSource>().Initialize(audioData);
-        }
-    }
 }

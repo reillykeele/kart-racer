@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: ComputerRacerMovement
   m_EditorClassIdentifier: 
   RacerMovement:
-    AccelerationSpeed: 1
+    AccelerationSpeed: 1.15
     MaxSpeed: 30
     ReverseAccelerationSpeed: 0.3
     MaxReverseSpeed: 10
     DecelerationSpeed: 0.2
     BrakeSpeed: 0.3
     OutwardDriftPercentage: 0.6
+    MinSpeedToDrift: 7.5
     TurningSpeed: 60
     GroundCheckDist: 0.5
     GroundedDist: 0.3

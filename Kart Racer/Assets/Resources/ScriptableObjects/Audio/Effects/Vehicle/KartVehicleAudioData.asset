@@ -19,3 +19,4 @@ MonoBehaviour:
     DownAudioClip: {fileID: 8300000, guid: 7230fdc3e2bbfd848bb35aab18db2106, type: 3}
     MixingGroup: {fileID: 1708506529828396996, guid: 78d3087b074688241880b8921526a6cc, type: 2}
     Volume: 1
+    SpatialBlend: 1

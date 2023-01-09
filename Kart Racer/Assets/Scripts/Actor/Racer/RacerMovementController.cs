@@ -30,6 +30,18 @@ namespace Actor.Racer
         public Vector3 ControllerRotation { get; protected set; }
         public float CurrSpeed { get; protected set; }
 
+        // Control
+        public bool CanDrive => !UseAutopilot && !IsSpunout && !IsBumped && !IsStalled;
+        public bool IsIdling => IsAccelerating == false && IsBraking == false && CurrSpeed.IsZero();
+        protected virtual bool IsAccelerating => false;
+        protected virtual bool IsBraking => false;
+
+        // Collisions
+        public bool IsBumped { get; private set; }
+        public bool IsSpunout { get; private set; } = false;
+        public bool IsStalled { get; private set; } = false;
+
+
         // Drift
         public UnityEvent<bool> OnIsDriftingChangedEvent;
         protected bool _isDrifting;
@@ -38,7 +50,7 @@ namespace Actor.Racer
             get => _isDrifting;
             protected set
             {
-                _isDrifting = value;
+                _isDrifting = value && CurrSpeed > RacerMovement.MinSpeedToDrift;
                 OnIsDriftingChangedEvent.Invoke(_isDrifting);
             }
         }
@@ -76,12 +88,6 @@ namespace Actor.Racer
         protected GameObject _target;
         protected GameObject _lookaheadTarget;
 
-        protected virtual bool IsAccelerating => false;
-        protected virtual bool IsBraking => false;
-
-        public bool IsIdling => IsAccelerating == false && IsBraking == false && CurrSpeed.IsZero();
-        // public bool 
-
         protected virtual void Awake()
         {
             _racerController = GetComponent<RacerController>();
@@ -101,30 +107,37 @@ namespace Actor.Racer
             if (UseAutopilot)
             {
                 Autopilot();
-                return;
             }
-            
-            var isGrounded = IsGrounded(out var groundedHitInfo, out var trackSurfaceModifier);
-
-            UpdateCurrSpeed(trackSurfaceModifier);
-            Steer(out var steerDirection, out var movement);
-            ApplyGravity(isGrounded, groundedHitInfo, ref movement);
-            MoveAndRotate(steerDirection, movement);
+            else
+            {
+                Drive();
+            }
         }
 
         public void Autopilot()
         {
-            CurrSpeed = RacerMovement.MaxSpeed * 0.8f;
+            var isGrounded = IsGrounded(out var groundedHitInfo, out var trackSurfaceModifier);
 
-            Vector3 targetDirection;
+            var newSpeed = CurrSpeed;
+            if (IsBoosting)
+            {
+                // Boosting
+                newSpeed = RacerMovement.MaxSpeed + RacerMovement.MaxSpeed * CurrBoostPower;
+            }
 
+            // Coasting
+            var newSpeed2 = newSpeed + (newSpeed > 0 ? -1 : 1) * RacerMovement.DecelerationSpeed * trackSurfaceModifier.DeccelerationModifier;
+            newSpeed = newSpeed.IsZero() || newSpeed * newSpeed2 < 0f ? RacerMovement.MaxSpeed * 0.6f : newSpeed2;
+            
+            CurrSpeed = Mathf.Max(newSpeed, RacerMovement.MaxSpeed * 0.6f);
+
+            // Calculate and apply steering
             var targetCheckpoint = GameManager.Instance.RaceManager.GetNextCheckpoint(_racerController.CheckpointsReached);
             var lookaheadTargetCheckpoint = GameManager.Instance.RaceManager.GetNextCheckpoint(_racerController.CheckpointsReached + 1);
-            _target = targetCheckpoint.gameObject;
-            _lookaheadTarget = lookaheadTargetCheckpoint.gameObject;
 
-            // var points = new[] { transform.position, targetCheckpoint.transform.position, lookaheadTargetCheckpoint.transform.position };
-            var points = new[] { transform.position, targetCheckpoint.transform.position, lookaheadTargetCheckpoint.transform.position };
+            var targetPoint = targetCheckpoint.transform.position;
+            var lookaheadPoint = lookaheadTargetCheckpoint.transform.position;
+            var points = new[] { transform.position, targetPoint, lookaheadPoint };
             var smoothedPath = PathHelper.SmoothPath(points, 6);
 
             for (var i = 0; i < smoothedPath.Length; i++)
@@ -133,48 +146,34 @@ namespace Actor.Racer
                 DebugDrawHelper.DrawBox(smoothedPath[i], new Vector3(0.25f, 0.25f, 0.25f), Quaternion.identity, Color.green);
             }
 
-            targetDirection = smoothedPath[1] - transform.position;
+            var targetDirection = smoothedPath[1] - transform.position;
             targetDirection.y = 0;
             targetDirection.Normalize();
             Debug.DrawRay(transform.position, 4 * targetDirection, Color.green);
-            
-            var forward = transform.forward;
 
-            var angle = Vector3.Cross(transform.forward, targetDirection);
-            var dir = Vector3.Dot(angle, Vector3.up);
+            _target = targetCheckpoint.gameObject;
+            _lookaheadTarget = lookaheadTargetCheckpoint.gameObject;
 
-            Steering = dir > SteeringTolerance ? 1f : dir < -SteeringTolerance ? -1f : dir;
-            var steeringDir = Steering * RacerMovement.TurningSpeed;
-            
-            if (!CurrSpeed.IsZero())
-                transform.Rotate(transform.up, steeringDir * Time.fixedDeltaTime);
+            var movement = transform.forward * CurrSpeed;
 
-            Debug.DrawRay(transform.position, 3 * forward, Color.yellow);
-            var movement = forward * CurrSpeed * Time.fixedDeltaTime;
-
-            // Apply gravity
-            var pos = transform.position;
-            if (IsGrounded(out var hitInfo, out _))
-            {
-                pos.y = hitInfo.point.y + 0.5f; // TODO: Change to some "dist to ground" var
-
-                var groundNormal = hitInfo.normal;
-                var forwardDirection = forward.normalized;
-                
-                // Project the forward & surface normal using the dot product
-                // Set the rotation w/ relative forward and up axes
-                var rotForward = forwardDirection - groundNormal * Vector3.Dot (forwardDirection, groundNormal);
-                transform.rotation = Quaternion.Slerp(
-                    transform.rotation, 
-                    Quaternion.LookRotation(rotForward.normalized, groundNormal), 
-                    2f * Time.fixedDeltaTime);
-            }
-            else
-                movement.y -= RacerMovement.GravitySpeed;
+            ApplyGravity(isGrounded, groundedHitInfo, ref movement);
 
             // Move player
-            // transform.Rotate(transform.up, steerDirection * Time.fixedDeltaTime);
-            transform.position = pos + movement;
+            transform.forward = Vector3.Slerp(transform.forward, targetDirection, Time.fixedDeltaTime);
+            
+            var newVelocity = 50f * movement * Time.fixedDeltaTime;
+            _rb.velocity = newVelocity;
+            
+        }
+
+        public virtual void Drive()
+        {
+            var isGrounded = IsGrounded(out var groundedHitInfo, out var trackSurfaceModifier);
+
+            UpdateCurrSpeed(trackSurfaceModifier);
+            Steer(out var steerDirection, out var movement);
+            ApplyGravity(isGrounded, groundedHitInfo, ref movement);
+            MoveAndRotate(steerDirection, movement);
         }
 
         public virtual void UpdateCurrSpeed(TrackSurfaceModifierData trackSurfaceModifier)
@@ -264,8 +263,11 @@ namespace Actor.Racer
             if (CurrSpeed.IsZero() == false)
                 transform.Rotate(transform.up, steerDirection * Time.fixedDeltaTime);
 
-            var newVelocity = 50f * movement * Time.fixedDeltaTime;
-            _rb.velocity = newVelocity;
+            if (CanDrive)
+            {
+                var newVelocity = 50f * movement * Time.fixedDeltaTime;
+                _rb.velocity = newVelocity;
+            }
         }
 
         public bool IsGrounded() => IsGrounded(out _, out _);
@@ -296,28 +298,35 @@ namespace Actor.Racer
                 newSpeed = RacerMovement.MaxSpeed + RacerMovement.MaxSpeed * CurrBoostPower;
             }
 
-            if (isAccelerating == isBraking || newSpeed >= RacerMovement.MaxSpeed)
+            if (CanDrive)
             {
-                // Coasting
-                var newSpeed2 = newSpeed + (newSpeed > 0 ? -1 : 1) * RacerMovement.DecelerationSpeed * trackSurfaceModifier.DeccelerationModifier;
-                newSpeed = newSpeed.IsZero() || newSpeed * newSpeed2 < 0f ? 0f : newSpeed2;
+                if (isAccelerating == isBraking || newSpeed >= RacerMovement.MaxSpeed)
+                {
+                    // Coasting
+                    var newSpeed2 = newSpeed + (newSpeed > 0 ? -1 : 1) * RacerMovement.DecelerationSpeed * trackSurfaceModifier.DeccelerationModifier;
+                    newSpeed = newSpeed.IsZero() || newSpeed * newSpeed2 < 0f ? 0f : newSpeed2;
+                }
+                else if (isAccelerating)
+                {
+                    // Acceleration
+                    newSpeed = newSpeed >= RacerMovement.MaxSpeed * trackSurfaceModifier.SpeedModifier
+                        ? RacerMovement.MaxSpeed * trackSurfaceModifier.SpeedModifier
+                        : newSpeed + RacerMovement.AccelerationSpeed * trackSurfaceModifier.AccelerationModifier;
+                }
+                else if (isBraking)
+                {
+                    // Braking or reversing
+                    if (newSpeed > 0)
+                        newSpeed = newSpeed <= 0 ? 0 : newSpeed - RacerMovement.BrakeSpeed;
+                    else
+                        newSpeed = newSpeed <= -RacerMovement.MaxReverseSpeed
+                            ? -RacerMovement.MaxReverseSpeed
+                            : newSpeed - RacerMovement.ReverseAccelerationSpeed;
+                }
             }
-            else if (isAccelerating)
+            else
             {
-                // Acceleration
-                newSpeed = newSpeed >= RacerMovement.MaxSpeed * trackSurfaceModifier.SpeedModifier
-                    ? RacerMovement.MaxSpeed * trackSurfaceModifier.SpeedModifier
-                    : newSpeed + RacerMovement.AccelerationSpeed * trackSurfaceModifier.AccelerationModifier;
-            }
-            else if (isBraking)
-            {
-                // Braking or reversing
-                if (newSpeed > 0)
-                    newSpeed = newSpeed <= 0 ? 0 : newSpeed - RacerMovement.BrakeSpeed;
-                else
-                    newSpeed = newSpeed <= -RacerMovement.MaxReverseSpeed
-                        ? -RacerMovement.MaxReverseSpeed
-                        : newSpeed - RacerMovement.ReverseAccelerationSpeed;
+
             }
 
             return newSpeed;
@@ -350,5 +359,47 @@ namespace Actor.Racer
             _driftProgress = 0;
             DriftLevel = 0;
         }
+
+        private void OnCollisionStay(Collision collision)
+	    {
+            if (IsBumped) return;
+
+            var layer = collision.gameObject.layer;
+
+		    if (layer == GameManager.TrackLayer) return;
+		    if (layer == GameManager.RacerLayer && collision.gameObject.TryGetComponent(out RacerMovementController otherRacer))
+		    {
+			    //
+			    // Collision with another kart - if we are going slower than them, then we should bump!  
+			    //
+
+			    if (CurrSpeed < otherRacer.CurrSpeed /*AppliedSpeed < otherKart.Controller.AppliedSpeed*/)
+			    {
+                    IsBumped = true;
+                    StartCoroutine(CoroutineUtil.WaitForExecute(() => IsBumped = false, 0.2f));
+
+                    var delta = (transform.position - otherRacer.transform.position).normalized;
+                    var cross = Vector3.Cross(delta, otherRacer.transform.forward);
+                    var dir = cross.y > 0 ? -1 : 1;
+
+                    _rb.AddForce(3f * dir * transform.right, ForceMode.Impulse);
+                }
+		    }
+		    else
+		    {
+			    //
+			    // Collision with a wall of some sort - We should get the angle impact and apply a force backwards, only if 
+			    // we are going above 'speedToDrift' speed.
+			    //
+			    // if (CurrSpeed > RacerMovement.MinSpeedToDrift)
+			    // {
+				   //  var contact = collision.GetContact(0);
+				   //  var dot = Mathf.Max(0.25f, Mathf.Abs(Vector3.Dot(contact.normal, Rigidbody.transform.forward)));
+				   //  Rigidbody.AddForceAtPosition(contact.normal * AppliedSpeed * dot, contact.point, ForceMode.VelocityChange);
+			    //
+				   //  BumpTimer = TickTimer.CreateFromSeconds(Runner, 0.8f * dot);
+			    // }
+		    }
+	    }
     }
 }

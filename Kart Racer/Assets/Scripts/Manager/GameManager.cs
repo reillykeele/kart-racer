@@ -27,6 +27,11 @@ namespace Manager
 
         public int NumComputerPlayers = 3;
 
+        // Layers
+        public static int RacerLayer => LayerMask.NameToLayer("Racer");
+        public static int TrackLayer => LayerMask.NameToLayer("Track");
+        public static int WallsLayer => LayerMask.NameToLayer("Walls");
+
         protected override void Awake()
         {
             base.Awake();

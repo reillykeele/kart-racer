@@ -17,4 +17,5 @@ MonoBehaviour:
     LoopAudioClip: {fileID: 8300000, guid: 16cce9c316d5b344a9038434dbefd353, type: 3}
     MixingGroup: {fileID: 2489110483698856251, guid: 78d3087b074688241880b8921526a6cc, type: 2}
     Volume: 0.25
+    SpatialBlend: 0
     PlayOnAwake: 0

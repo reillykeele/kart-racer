@@ -16,12 +16,16 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 923461616, guid: 1dd3be7e61113e747a0ed30f6dd1ab7f, type: 3}
+      propertyPath: _racerMovementData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3714fef3d2089a34a870b1f895ec1fef, type: 2}
+    - target: {fileID: 923461616, guid: 1dd3be7e61113e747a0ed30f6dd1ab7f, type: 3}
       propertyPath: _computerRacerBehaviourScriptableObject
       value: 
       objectReference: {fileID: 11400000, guid: 3b17e152d12032f4baf36b42d3b7322b, type: 2}
     - target: {fileID: 9113864802107751737, guid: 1dd3be7e61113e747a0ed30f6dd1ab7f, type: 3}
       propertyPath: m_Name
-      value: Computer (Default)
+      value: Computer Racer (Default)
       objectReference: {fileID: 0}
     - target: {fileID: 9113864802107751737, guid: 1dd3be7e61113e747a0ed30f6dd1ab7f, type: 3}
       propertyPath: m_IsActive

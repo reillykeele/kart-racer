@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using Util.Audio;
 
 namespace Data.Audio
 {
@@ -10,8 +11,8 @@ namespace Data.Audio
         public AudioClip AudioClip;
         public AudioMixerGroup MixingGroup;
 
-        [Range(0f, 1f)]
-        public float Volume = 1f;
+        [Range(0f, 1f)] public float Volume = 1f;
+        [Range(0f, 1f)] public float SpatialBlend = 1f;
 
         public bool PlayOnAwake = false;
         public bool Loop = false;
@@ -24,8 +25,11 @@ namespace Data.Audio
             audioSource.clip = audioData.AudioClip;
             audioSource.outputAudioMixerGroup = audioData.MixingGroup;
             audioSource.volume = audioData.Volume;
+            audioSource.spatialBlend = audioData.SpatialBlend;
             audioSource.playOnAwake = audioData.PlayOnAwake;
             audioSource.loop = audioData.Loop;
+            if (audioData.SpatialBlend > 0f)
+                audioSource.Set3DSoundSettings();
 
             return audioSource;
         }

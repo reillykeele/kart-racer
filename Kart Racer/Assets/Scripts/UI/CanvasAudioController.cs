@@ -1,9 +1,9 @@
+using System.Linq;
 using Data.Audio;
 using ScriptableObject.Audio;
 using UnityEngine;
 using Util.Audio;
 
-[RequireComponent(typeof(AudioSource))]
 public class CanvasAudioController : MonoBehaviour
 {
     private AudioSource _backgroundAudioSource;
@@ -11,7 +11,7 @@ public class CanvasAudioController : MonoBehaviour
 
     public AudioDataScriptableObject BackgroundAudioData;
     public LoopingMusicAudioDataScriptableObject BackgroundLoopingMusicAudioData;
-    public AudioDataScriptableObject[] AudioData = new AudioDataScriptableObject[4];
+    public AudioDataScriptableObject[] AudioData = new AudioDataScriptableObject[6];
 
     public enum CanvasAudioSoundType 
     {
@@ -19,15 +19,16 @@ public class CanvasAudioController : MonoBehaviour
         Tick,
         Select,
         Back,
+        Pause,
+        Resume
     }
 
 
     void Awake()
     {
-        var audioSources = GetComponents<AudioSource>();
-
-        _backgroundAudioSource = audioSources[0];
-        _uiAudioSource = audioSources[1];
+        _backgroundAudioSource = BackgroundLoopingMusicAudioData?.LoopingMusicAudioData.CreateNewAudioSource(gameObject) ??
+                                 BackgroundAudioData?.AudioData.CreateNewAudioSource(gameObject);
+        _uiAudioSource = AudioData.FirstOrDefault(x => x != null)?.AudioData.CreateNewAudioSource(gameObject);
     }
 
     void Start()
@@ -60,5 +61,9 @@ public class CanvasAudioController : MonoBehaviour
 
     public void Play(CanvasAudioSoundType audioSoundType) => Play(AudioData[(int) audioSoundType]?.AudioData);
 
-    public void FadeOutBackgroundMusic() => StartCoroutine(AudioHelper.FadeOut(_backgroundAudioSource, 1f));
+    public void FadeOutBackgroundMusic()
+    {
+        if (_backgroundAudioSource != null)
+            StartCoroutine(AudioHelper.FadeOut(_backgroundAudioSource, 1f));
+    }
 }

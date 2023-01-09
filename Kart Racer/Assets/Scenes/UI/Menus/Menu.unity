@@ -721,10 +721,10 @@ MonoBehaviour:
   BackgroundAudioData: {fileID: 11400000, guid: ade0eacb1736a3b49855cff9286b6ecc, type: 2}
   BackgroundLoopingMusicAudioData: {fileID: 11400000, guid: 65076c13432798d4fadd4986376425ef, type: 2}
   AudioData:
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 63967c0df8546cc4c81d0c08e465ae45, type: 2}
-  - {fileID: 11400000, guid: f1b6ce7345e950a46b420ac33d8bc7d0, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 4e55a05f02eca2345bf459286d6259e2, type: 2}
+  - {fileID: 11400000, guid: 20b94cab13ce5e5498a975c2e0ddb459, type: 2}
+  - {fileID: 11400000, guid: 41fb37892f805c446be44a82e2097602, type: 2}
+  - {fileID: 11400000, guid: a5e40328684743e419e04a0ed7d27830, type: 2}
 --- !u!82 &103007262
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2495,7 +2495,7 @@ MonoBehaviour:
   m_VerticalFit: 1
 --- !u!95 &404235598
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2508,10 +2508,11 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &410297283
 GameObject:
   m_ObjectHideFlags: 0
@@ -3066,6 +3067,7 @@ GameObject:
   - component: {fileID: 482452306}
   - component: {fileID: 482452305}
   - component: {fileID: 482452307}
+  - component: {fileID: 482452309}
   - component: {fileID: 482452304}
   m_Layer: 5
   m_Name: MarioCircuitButton
@@ -3193,6 +3195,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482452302}
   m_CullTransparentMesh: 1
+--- !u!114 &482452309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482452302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41898d44f5188b24484c1cd38533f68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &491313887
 GameObject:
   m_ObjectHideFlags: 0
@@ -3965,6 +3979,7 @@ MonoBehaviour:
   m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!114 &542106815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5409,7 +5424,7 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 --- !u!95 &791534412
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5422,10 +5437,11 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &797801462
 PrefabInstance:
   m_ObjectHideFlags: 0

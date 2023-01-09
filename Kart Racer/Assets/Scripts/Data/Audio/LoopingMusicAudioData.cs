@@ -12,8 +12,8 @@ namespace Data.Audio
         public AudioClip LoopAudioClip;
         public AudioMixerGroup MixingGroup;
 
-        [Range(0f, 1f)]
-        public float Volume = 1f;
+        [Range(0f, 1f)] public float Volume = 1f;
+        [Range(0f, 1f)] public float SpatialBlend = 1f;
 
         public bool PlayOnAwake = false;
     }
@@ -25,8 +25,10 @@ namespace Data.Audio
             audioSource.clip = audioData.IntroAudioClip;
             audioSource.outputAudioMixerGroup = audioData.MixingGroup;
             audioSource.volume = audioData.Volume;
+            audioSource.spatialBlend = audioData.SpatialBlend;
             audioSource.playOnAwake = audioData.PlayOnAwake;
             audioSource.loop = false;
+            audioSource.Set3DSoundSettings();
 
             return audioSource;
         }

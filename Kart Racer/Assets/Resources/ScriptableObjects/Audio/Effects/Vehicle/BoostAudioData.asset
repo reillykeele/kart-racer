@@ -16,5 +16,6 @@ MonoBehaviour:
     AudioClip: {fileID: 8300000, guid: 9df428b5ac8cedf44bd228489eb6abf2, type: 3}
     MixingGroup: {fileID: 1708506529828396996, guid: 78d3087b074688241880b8921526a6cc, type: 2}
     Volume: 0.65
+    SpatialBlend: 1
     PlayOnAwake: 0
     Loop: 0

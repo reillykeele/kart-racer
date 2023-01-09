@@ -51,6 +51,8 @@ namespace Environment.Scene
         {
             var raceManager = GameManager.Instance.RaceManager;
 
+            GameManager.Instance.OnPauseGameEvent.AddListener(PauseMusic);
+            GameManager.Instance.OnResumeGameEvent.AddListener(ResumeMusic);
             raceManager.CountdownTickEvent.AddListener(PlayCountdownEffect);
             raceManager.CountdownEndEvent.AddListener(PlayGoEffect);
         }

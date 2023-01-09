@@ -82,11 +82,13 @@ namespace UI.UIControllers
 
         public void PauseGame()
         {
+            _canvasAudioController.Play(CanvasAudioController.CanvasAudioSoundType.Pause);
             _canvasController.DisplayUI(UIPageType.PauseMenu);
         }
 
         public void ResumeGame()
         {
+            _canvasAudioController.Play(CanvasAudioController.CanvasAudioSoundType.Resume);
             _canvasController.HideUI(UIPageType.PauseMenu);
         }
 

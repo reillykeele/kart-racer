@@ -51,6 +51,7 @@ namespace Actor.Racer
                 }
             }
         }
+        public bool HasItem => _item != null;
 
         protected Vector3 CourseForward { get; set; }
         protected GameObject CoursePlane { get; private set; }

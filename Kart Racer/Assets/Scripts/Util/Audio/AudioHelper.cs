@@ -51,9 +51,14 @@ namespace Util.Audio
 
         public static IEnumerator WaitForSound(this AudioSource audioSource, Action onFinished = null)
         {
-            yield return new WaitUntil(() => audioSource.isPlaying == false);
+            yield return new WaitUntil(() => audioSource.isPlaying == false && Time.timeScale > 0f);
 
             onFinished?.Invoke();
+        }
+
+        public static void Set3DSoundSettings(this AudioSource audioSource)
+        {
+            audioSource.minDistance = 15f;
         }
     }
 }

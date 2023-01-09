@@ -18,12 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/Gameplay/TimeTrialGameUI.unity
     guid: 1d85a7ee3104356419851b3ea8e9e3d0
   - enabled: 1
-    path: Assets/Scenes/Track1.unity
-    guid: 869f693744df95a428bc6259549ee599
-  - enabled: 1
     path: Assets/Scenes/MarioCircuit.unity
     guid: 571c35da8d8e2e944a15d6f3250333c5
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/Track1.unity
+    guid: 869f693744df95a428bc6259549ee599
+  - enabled: 0
     path: Assets/Scenes/Track2.unity
     guid: 58078067cd89abf4aa025885e757b125
   - enabled: 0

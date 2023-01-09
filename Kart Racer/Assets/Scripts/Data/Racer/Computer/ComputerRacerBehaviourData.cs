@@ -8,5 +8,7 @@ namespace Data.Racer.Computer
     {
         [Range(0f, 1f)] public float Tightness = 1f;
         [Range(0f, 1f)] public float Variance = 0f;
+
+        [Range(0f, 1f)] public float ItemSpamminess = 0.5f;
     }
 }

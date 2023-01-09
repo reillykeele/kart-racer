@@ -37,7 +37,6 @@ namespace Effect.Particle
             _isEmitting = _particleSystem.isEmitting;
             if (_isEmitting)
             {
-                Debug.Log($"PAUSING {gameObject.name} isPaused={_particleSystem.isPaused}, isEmitting={_particleSystem.isEmitting}, isPlaying={_particleSystem.isPlaying}, isStopped={_particleSystem.isStopped}, isAlive={_particleSystem.IsAlive()}");
                 _particleSystem.Pause();
             }
         }

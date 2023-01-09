@@ -1,5 +1,6 @@
 using System;
 using Data.Audio;
+using Manager;
 using ScriptableObject.Audio;
 using UnityEngine;
 using Util.Audio;
@@ -49,12 +50,16 @@ namespace Actor.Racer
             ChangeVehicleAudioClip(VehicleAudioClipType.Loop);
 
             // Set Events
+            GameManager.Instance.OnPauseGameEvent.AddListener(PauseAudio);
+            GameManager.Instance.OnResumeGameEvent.AddListener(ResumeAudio);
             _racerMovementController.OnIsBoostingChangedEvent.AddListener(PlayBoostSoundEffect);
             _racerMovementController.OnIsDriftingChangedEvent.AddListener(PlayDriftSoundEffect);
         }
 
         void Update()
         {
+            if (GameManager.Instance.IsPaused()) return;
+
             if (_racerMovementController.CurrSpeed < 0.0f)
             {
                 var speedPercentage = _racerMovementController.CurrSpeed / -_racerMovementController.RacerMovement.MaxReverseSpeed;
@@ -108,13 +113,27 @@ namespace Actor.Racer
             Loop
         }
 
-        public void PlayBoostSoundEffect(bool isBoosting) { if (isBoosting) PlayBoostSoundEffect(); else _boostAudioSource.Stop(); }
+        public void PlayBoostSoundEffect(bool isBoosting) { if (isBoosting) PlayBoostSoundEffect(); /*else _boostAudioSource.Stop();*/ }
         public void PlayBoostSoundEffect() => _boostAudioSource.Play();
 
-        public void PlayDriftSoundEffect(bool isDrifting) { if (isDrifting) PlayDriftSoundEffect(); }
+        public void PlayDriftSoundEffect(bool isDrifting) { if (isDrifting) PlayDriftSoundEffect(); else _driftAudioSource.Stop(); }
 
         public void PlayDriftSoundEffect() => StartCoroutine(AudioHelper.PlayLoopingAudioData(_driftAudioSource, _driftAudioDataScriptableObject.LoopingMusicAudioData));
 
         public void PlayMiniTurboChangeSoundEffect(int level) => _miniTurboChangeAudioSource.Play();
+
+        public void PauseAudio()
+        {
+            _vehicleAudioSource.Pause();
+            _boostAudioSource.Pause();
+            _driftAudioSource.Pause();
+        }
+
+        public void ResumeAudio()
+        {
+            _vehicleAudioSource.UnPause();
+            _boostAudioSource.UnPause();
+            _driftAudioSource.UnPause();
+        }
     }
 }

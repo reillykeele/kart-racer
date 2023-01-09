@@ -20,6 +20,7 @@ namespace UI.UIControllers
             if (Keyboard.current?.anyKey.wasPressedThisFrame == true ||
                 Gamepad.current?.startButton.wasPressedThisFrame == true)
             {
+                _canvasAudioController.Play(CanvasAudioController.CanvasAudioSoundType.Start);
                 _canvasController.SwitchUI(TargetUiPageType, true);
             }
         }

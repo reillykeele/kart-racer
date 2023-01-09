@@ -21,6 +21,7 @@ namespace UI
 
         private CanvasGroup _canvasGroup;
         protected CanvasController _canvasController;
+        protected CanvasAudioController _canvasAudioController;
         protected List<AButtonController> _buttonControllers;
 
         protected Button lastSelectedButton = null;
@@ -32,6 +33,7 @@ namespace UI
         protected virtual void Awake()
         {
             _canvasController = GetComponentInParent<CanvasController>();
+            _canvasAudioController = GetComponentInParent<CanvasAudioController>();
             _buttonControllers = GetComponentsInChildren<AButtonController>().ToList();
 
             _tweens = GetComponentsInChildren<BaseTween>();
@@ -116,7 +118,11 @@ namespace UI
 
         public virtual void ReturnToUI()
         {
-            if (ReturnUiPage != UIPageType.None) {_canvasController.SwitchUI(ReturnUiPage, resetTargetOnSwitch: false, fadeOut: true);}
+            if (ReturnUiPage != UIPageType.None)
+            {
+                _canvasAudioController.Play(CanvasAudioController.CanvasAudioSoundType.Back);
+                _canvasController.SwitchUI(ReturnUiPage, resetTargetOnSwitch: false, fadeOut: true);
+            }
         }
 
         public IEnumerator FadeIn()
