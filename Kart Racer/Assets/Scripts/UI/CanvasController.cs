@@ -32,7 +32,8 @@ namespace UI
 
         void Update()
         {
-            if (Gamepad.current?.buttonEast.wasPressedThisFrame == true)
+            if (Keyboard.current?.escapeKey.wasPressedThisFrame == true ||
+                Gamepad.current?.buttonEast.wasPressedThisFrame == true)
                 GetUI(_lastActiveUiPage)?.ReturnToUI();
         }
 

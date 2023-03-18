@@ -5,8 +5,8 @@ using Util.Enums;
 
 namespace UI.Tween
 {
-    [RequireComponent(typeof(Image))]
-    public class FadeImageTween : BaseTween
+    [RequireComponent(typeof(CanvasGroup))]
+    public class FadeCanvasGroupTween : BaseTween
     {
         [Header("Move Tween")]
         [SerializeField] private float _fadeFrom = 0f;
@@ -14,18 +14,18 @@ namespace UI.Tween
 
         [SerializeField] private LeanTweenType _easeType = LeanTweenType.notUsed;
 
-        private Image _image;
+        private CanvasGroup _canvasGroup;
 
         protected override void Awake()
         {
             base.Awake();
-            _image = GetComponent<Image>();
+            _canvasGroup = GetComponent<CanvasGroup>();
         }
 
         public override void Tween()
         {
-            _image.color = new Color(_image.color.r, _image.color.g, _image.color.b, _fadeFrom);
-            LeanTween.value(_image.gameObject, _fadeFrom, _fadeTo, _duration)
+            _canvasGroup.alpha = _fadeFrom;
+            LeanTween.value(_canvasGroup.gameObject, _fadeFrom, _fadeTo, _duration)
                 .setOnUpdate(SetAlphaOnUpdate)
                 .setDelay(_delay + _delayIn)
                 .setEase(_easeType);
@@ -33,16 +33,16 @@ namespace UI.Tween
 
         public override void TweenOut()
         {
-            if (ShouldTweenOut() == false)
+            if (_tweenDirection != TweenDirection.Out && _tweenDirection != TweenDirection.InAndOut)
                 return;
 
-            _image.color = new Color(_image.color.r, _image.color.g, _image.color.b, _fadeTo);
+            _canvasGroup.alpha = _fadeTo;
             LeanTween.value(gameObject, _fadeTo, _fadeFrom, _duration)
                 .setOnUpdate(SetAlphaOnUpdate)
                 .setDelay(_delay + _delayOut)
                 .setEase(_easeType);
         }
 
-        private void SetAlphaOnUpdate(float a) => _image.color = new Color(_image.color.r, _image.color.g, _image.color.b, a);
+        private void SetAlphaOnUpdate(float a) => _canvasGroup.alpha = a;
     }
 }

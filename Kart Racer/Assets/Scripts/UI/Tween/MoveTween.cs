@@ -15,12 +15,12 @@ namespace UI.Tween
         public override void Tween()
         {
             _rectTransform.anchoredPosition = _moveFrom;
-            LeanTween.move(_rectTransform, _moveTo, _duration).setDelay(_delay).setEase(_easeType);
+            LeanTween.move(_rectTransform, _moveTo, _duration).setDelay(_delay + _delayIn).setEase(_easeType);
         }
 
         public override void TweenOut()
         {
-            if (_tweenDirection != TweenDirection.Out && _tweenDirection != TweenDirection.InAndOut)
+            if (ShouldTweenOut() == false)
                 return;
 
             if (!_reverseOnOut)
@@ -30,7 +30,7 @@ namespace UI.Tween
             }
 
             _rectTransform.anchoredPosition = _moveTo;
-            LeanTween.move(_rectTransform, _moveFrom, _duration).setDelay(_delay).setEase(_easeType);
+            LeanTween.move(_rectTransform, _moveFrom, _duration).setDelay(_delay + _delayOut).setEase(_easeType);
         }
     }
 }

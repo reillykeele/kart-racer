@@ -16,7 +16,7 @@ namespace UI.Tween
             _tweens = GetComponentsInChildren<BaseTween>();
 
             for (var i = 0; i < _tweens.Count(); ++i)
-                _tweens.ElementAt(i)._delay = _delay + (i * _delayBetweenElements);
+                _tweens.ElementAt(i).SetDelay(_delay + (i * _delayBetweenElements));
         }
     }
 }

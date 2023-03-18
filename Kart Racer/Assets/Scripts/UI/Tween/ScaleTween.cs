@@ -16,7 +16,7 @@ namespace UI.Tween
         public override void Tween()
         {
             _rectTransform.localScale = _scaleFrom;
-            LeanTween.scale(_rectTransform, _scaleTo, _duration).setDelay(_delay).setDelay(_delay).setEase(_easeType);
+            LeanTween.scale(_rectTransform, _scaleTo, _duration).setDelay(_delay + _delayIn).setEase(_easeType);
         }
 
         public override void TweenOut()
@@ -31,7 +31,7 @@ namespace UI.Tween
             }
 
             _rectTransform.localScale = _scaleTo;
-            LeanTween.scale(_rectTransform, _scaleFrom, _duration).setDelay(_delay).setEase(_easeType);
+            LeanTween.scale(_rectTransform, _scaleFrom, _duration).setDelay(_delay + _delayOut).setEase(_easeType);
         }
     }
 }

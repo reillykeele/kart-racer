@@ -85,7 +85,7 @@ namespace UI
 
 
             if (transition)
-                foreach (var tween in _tweens.Where(x =>/* x.gameObject.activeInHierarchy && */ !x._tweenInOnEnable && x.ShouldTweenIn()))
+                foreach (var tween in _tweens.Where(x =>/* x.gameObject.activeInHierarchy && */ x.ShouldTweenInOnEnable() == false && x.ShouldTweenIn()))
                     tween.TweenIn();
 
             gameObject.Enable();
@@ -107,7 +107,7 @@ namespace UI
             var transitionDuration = 0f;
             foreach (var tween in _tweens.Where(x => x.gameObject.activeInHierarchy && x.ShouldTweenOut()))
             {
-                transitionDuration = Mathf.Max(transitionDuration, tween._delay + tween._duration);
+                transitionDuration = Mathf.Max(transitionDuration, tween.GetDurationOut());
                 tween.TweenOut();
             }
 
