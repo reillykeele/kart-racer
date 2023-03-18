@@ -71,7 +71,7 @@ namespace UI
             //         animator.TrySetBool("transitionIn", resetOnSwitch);
         }
 
-        public virtual IEnumerator EnableCoroutine(bool resetOnSwitch = false)
+        public virtual IEnumerator EnableCoroutine(bool resetOnSwitch = false, bool transition = true)
         {
             if (resetOnSwitch)
                 Reset();
@@ -84,7 +84,7 @@ namespace UI
                 _buttonControllers?.FirstOrDefault()?.Select();
 
 
-            if (resetOnSwitch)
+            if (transition)
                 foreach (var tween in _tweens.Where(x =>/* x.gameObject.activeInHierarchy && */ !x._tweenInOnEnable && x.ShouldTweenIn()))
                     tween.TweenIn();
 
@@ -100,14 +100,14 @@ namespace UI
             gameObject.Disable();
         }
 
-        public virtual IEnumerator DisableCoroutine(bool resetOnSwitch = false, bool fadeOut = false)
+        public virtual IEnumerator DisableCoroutine(bool resetOnSwitch = false)
         {
             lastSelectedButton = EventSystem.current?.currentSelectedGameObject?.GetComponent<Button>();
 
             var transitionDuration = 0f;
             foreach (var tween in _tweens.Where(x => x.gameObject.activeInHierarchy && x.ShouldTweenOut()))
             {
-                transitionDuration = Mathf.Max(transitionDuration, tween._duration);
+                transitionDuration = Mathf.Max(transitionDuration, tween._delay + tween._duration);
                 tween.TweenOut();
             }
 
@@ -121,7 +121,7 @@ namespace UI
             if (ReturnUiPage != UIPageType.None)
             {
                 _canvasAudioController.Play(CanvasAudioController.CanvasAudioSoundType.Back);
-                _canvasController.SwitchUI(ReturnUiPage, resetTargetOnSwitch: false, fadeOut: true);
+                _canvasController.SwitchUI(ReturnUiPage, resetTargetOnSwitch: false, transition: true);
             }
         }
 

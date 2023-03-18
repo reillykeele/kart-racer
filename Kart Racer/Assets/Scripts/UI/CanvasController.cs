@@ -52,12 +52,12 @@ namespace UI
             _lastActiveUiPage = target;
         }
 
-        public IEnumerator EnableUICoroutine(Util.Enums.UIPageType target, bool resetOnSwitch = false)
+        public IEnumerator EnableUICoroutine(Util.Enums.UIPageType target, bool resetOnSwitch = false, bool transition = true)
         {
             if (target == Util.Enums.UIPageType.None) yield break;
 
             _lastActiveUiPage = target;
-            yield return GetUI(target)?.EnableCoroutine(resetOnSwitch);
+            yield return GetUI(target)?.EnableCoroutine(resetOnSwitch, transition);
         }
 
         public void DisableUI(Util.Enums.UIPageType target, bool resetOnSwitch = false, bool fadeOut = false)
@@ -77,13 +77,13 @@ namespace UI
         public void DisplayUI(UIPageType target, bool fadeIn = false) => EnableUI(target, fadeIn: fadeIn);
         public void HideUI(UIPageType target, bool fadeOut = false) => DisableUI(target, fadeOut: fadeOut);
 
-        public void SwitchUI(Util.Enums.UIPageType target, bool resetCurrentOnSwitch = false, bool resetTargetOnSwitch = true, bool fadeIn = false, bool fadeOut = false)
+        public void SwitchUI(Util.Enums.UIPageType target, bool resetCurrentOnSwitch = false, bool resetTargetOnSwitch = true, bool transition = true)
         {
             if (_lastActiveUiPage == target) return;
 
             StartCoroutine(CoroutineUtil.Sequence(
                 DisableUICoroutine(_lastActiveUiPage, resetCurrentOnSwitch),
-                EnableUICoroutine(target, resetTargetOnSwitch)
+                EnableUICoroutine(target, resetTargetOnSwitch, transition)
                 ));
 
             // DisableUI(_lastActiveUiPage, resetCurrentOnSwitch, fadeOut);

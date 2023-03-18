@@ -10,7 +10,7 @@ namespace UI.ButtonControllers
     
         public override void OnClick()
         {
-            _canvasController.SwitchUI(TargetUiPageType, fadeIn: FadeIn, fadeOut: FadeOut);
+            _canvasController.SwitchUI(TargetUiPageType);
         }
     }
 }
