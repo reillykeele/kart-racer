@@ -25,12 +25,14 @@ namespace UI.ButtonControllers
             {
                 bool updated = false;
 
-                if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+                if (Keyboard.current?.leftArrowKey.wasPressedThisFrame == true ||
+                    Gamepad.current?.dpad.left.wasPressedThisFrame == true)
                 {
                     Decrease();
                     updated = true;
                 }
-                else if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+                else if (Keyboard.current?.rightArrowKey.wasPressedThisFrame == true ||
+                         Gamepad.current?.dpad.right.wasPressedThisFrame == true)
                 {
                     Increase();
                     updated = true;

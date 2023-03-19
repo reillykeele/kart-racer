@@ -42,7 +42,7 @@ namespace Actor.Racer.Player
         public void OnPause(InputValue val)
         {
             if (val.isPressed)
-                GameManager.Instance.TogglePaused();
+                GameManager.Instance.PauseGame();
         }
     }
 }

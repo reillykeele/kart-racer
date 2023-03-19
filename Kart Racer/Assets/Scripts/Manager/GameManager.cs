@@ -60,8 +60,6 @@ namespace Manager
         {
             if (CurrentGameState != GameState.Playing) return;
 
-            Debug.Log("resume game");
-
             CurrentGameState = GameState.Paused;
             OnPauseGameEvent.Invoke();
 
@@ -71,8 +69,6 @@ namespace Manager
         public void ResumeGame()
         {
             if (CurrentGameState != GameState.Paused) return;
-
-            Debug.Log("resume game");
 
             CurrentGameState = GameState.Playing;
             OnResumeGameEvent.Invoke();

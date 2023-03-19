@@ -111,7 +111,7 @@ namespace UI
                 tween.TweenOut();
             }
 
-            yield return new WaitForSeconds(transitionDuration);
+            yield return new WaitForSecondsRealtime(transitionDuration);
 
             gameObject.Disable();
         }

@@ -1,3 +1,4 @@
+using Effect.Particle;
 using UnityEngine;
 using Util.Enums;
 
@@ -15,7 +16,10 @@ namespace UI.Tween
         public override void Tween()
         {
             _rectTransform.anchoredPosition = _moveFrom;
-            LeanTween.move(_rectTransform, _moveTo, _duration).setDelay(_delay + _delayIn).setEase(_easeType);
+            LeanTween.move(_rectTransform, _moveTo, _duration)
+                .setDelay(_delay + _delayIn)
+                .setEase(_easeType)
+                .setIgnoreTimeScale(true);
         }
 
         public override void TweenOut()
@@ -30,7 +34,10 @@ namespace UI.Tween
             }
 
             _rectTransform.anchoredPosition = _moveTo;
-            LeanTween.move(_rectTransform, _moveFrom, _duration).setDelay(_delay + _delayOut).setEase(_easeType);
+            LeanTween.move(_rectTransform, _moveFrom, _duration)
+                .setDelay(_delay + _delayOut)
+                .setEase(_easeType)
+                .setIgnoreTimeScale(true);
         }
     }
 }

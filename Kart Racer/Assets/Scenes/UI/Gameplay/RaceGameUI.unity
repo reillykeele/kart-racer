@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UiPageType: 12
   ReturnUiPage: 0
-  initialSelectedButton: {fileID: 0}
+  initialSelected: {fileID: 0}
 --- !u!225 &53491117
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UiPageType: 11
   ReturnUiPage: 0
-  initialSelectedButton: {fileID: 0}
+  initialSelected: {fileID: 0}
 --- !u!225 &187661404
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -875,7 +875,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 10
+  m_Spacing: 12
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -2716,7 +2716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UiPageType: 1
   ReturnUiPage: 0
-  initialSelectedButton: {fileID: 0}
+  initialSelected: {fileID: 0}
   DisplayTimer: 1
 --- !u!225 &1300790843
 CanvasGroup:

@@ -34,7 +34,7 @@ namespace UI
         {
             if (Keyboard.current?.escapeKey.wasPressedThisFrame == true ||
                 Gamepad.current?.buttonEast.wasPressedThisFrame == true)
-                GetUI(_lastActiveUiPage)?.ReturnToUI();
+                ReturnToPrevious();
         }
 
         void Start()
@@ -44,6 +44,8 @@ namespace UI
 
             EnableUI(DefaultUiPage);
         }
+
+        public void ReturnToPrevious() => GetUI(_lastActiveUiPage)?.ReturnToUI();
 
         public void EnableUI(Util.Enums.UIPageType target, bool resetOnSwitch = false, bool fadeIn = false)
         {
