@@ -5,24 +5,23 @@ using UnityEngine.UI;
 namespace UI.ButtonControllers
 {
     [RequireComponent(typeof(Button))]
-    public abstract class AButtonController : MonoBehaviour, ISelectHandler
+    public abstract class AButtonController : ASelectableController
     {
-        protected CanvasController _canvasController;
-        protected CanvasAudioController _canvasAudioController;
         protected Button _button;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
-            _canvasController = GetComponentInParent<CanvasController>();
-            _canvasAudioController = GetComponentInParent<CanvasAudioController>();
+            base.Awake();
+
             _button = GetComponent<Button>();
 
             _button.onClick.AddListener(OnClick);
         }
 
-        public virtual void Select() => _button.Select();
+        public override void Select() => _button.Select();
+
+        public override void OnSelect(BaseEventData eventData) { }
 
         public virtual void OnClick() { }
-        public virtual void OnSelect(BaseEventData eventData) { }
     }
 }

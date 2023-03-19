@@ -10,7 +10,7 @@ namespace UI.Tween
         [SerializeField] private Vector3 _scaleTo = Vector3.one;
 
         [SerializeField] private LeanTweenType _easeType = LeanTweenType.notUsed;
-        [SerializeField] private bool _reverseOnOut = false;
+        [SerializeField] private bool _reverseOnOut = true;
 
         
         public override void Tween()

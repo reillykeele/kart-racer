@@ -17,14 +17,14 @@ namespace UI
         public UIPageType UiPageType;
         public UIPageType ReturnUiPage;
 
-        public Button initialSelectedButton = null;
+        public Selectable initialSelected = null;
 
         private CanvasGroup _canvasGroup;
         protected CanvasController _canvasController;
         protected CanvasAudioController _canvasAudioController;
-        protected List<AButtonController> _buttonControllers;
+        protected List<ASelectableController> _selectableControllers;
 
-        protected Button lastSelectedButton = null;
+        protected Selectable lastSelected = null;
 
         // Children
         protected IEnumerable<BaseTween> _tweens;
@@ -34,7 +34,7 @@ namespace UI
         {
             _canvasController = GetComponentInParent<CanvasController>();
             _canvasAudioController = GetComponentInParent<CanvasAudioController>();
-            _buttonControllers = GetComponentsInChildren<AButtonController>().ToList();
+            _selectableControllers = GetComponentsInChildren<ASelectableController>().ToList();
 
             _tweens = GetComponentsInChildren<BaseTween>();
             _animators = GetComponentsInChildren<Animator>();
@@ -44,7 +44,7 @@ namespace UI
 
         public virtual void Reset()
         {
-            lastSelectedButton = null;
+            lastSelected = null;
         }
 
         public virtual void Enable(bool resetOnSwitch = false, bool fadeIn = false)
@@ -52,12 +52,12 @@ namespace UI
             if (resetOnSwitch)
                 Reset();
 
-            if (lastSelectedButton != null)
-                lastSelectedButton.Select();
-            else if (initialSelectedButton != null)
-                initialSelectedButton.Select();
+            if (lastSelected != null)
+                lastSelected.Select();
+            else if (initialSelected != null)
+                initialSelected.Select();
             else
-                _buttonControllers?.FirstOrDefault()?.Select();
+                _selectableControllers?.FirstOrDefault()?.Select();
 
             gameObject.Enable();
 
@@ -76,12 +76,12 @@ namespace UI
             if (resetOnSwitch)
                 Reset();
 
-            if (lastSelectedButton != null)
-                lastSelectedButton.Select();
-            else if (initialSelectedButton != null)
-                initialSelectedButton.Select();
+            if (lastSelected != null)
+                lastSelected.Select();
+            else if (initialSelected != null)
+                initialSelected.Select();
             else
-                _buttonControllers?.FirstOrDefault()?.Select();
+                _selectableControllers?.FirstOrDefault()?.Select();
 
 
             if (transition)
@@ -95,14 +95,14 @@ namespace UI
 
         public virtual void Disable(bool resetOnSwitch = false, bool fadeOut = false)
         {
-            lastSelectedButton = EventSystem.current?.currentSelectedGameObject?.GetComponent<Button>();
+            lastSelected = EventSystem.current?.currentSelectedGameObject?.GetComponent<Selectable>();
 
             gameObject.Disable();
         }
 
         public virtual IEnumerator DisableCoroutine(bool resetOnSwitch = false)
         {
-            lastSelectedButton = EventSystem.current?.currentSelectedGameObject?.GetComponent<Button>();
+            lastSelected = EventSystem.current?.currentSelectedGameObject?.GetComponent<Selectable>();
 
             var transitionDuration = 0f;
             foreach (var tween in _tweens.Where(x => x.gameObject.activeInHierarchy && x.ShouldTweenOut()))

@@ -42,7 +42,7 @@ namespace Manager
         {
             StartCoroutine(CoroutineUtil.Sequence(
                 UIHelper.FadeInAndEnable(_uiController, _loadingCanvasGroup),
-                CoroutineUtil.CallAction(() => Application.Quit(0)))
+                CoroutineUtil.CallAction(() => GameManager.Instance.Quit()))
             );
         }
 

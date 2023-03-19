@@ -1,17 +1,23 @@
 using ScriptableObject.Config;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Util.Enums;
 using Util.Singleton;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace Manager
 {
     public class GameManager : Singleton<GameManager>
     {
+        [Header("Configuration")]
         public GameConfigScriptableObject Config;
 
-        // Game state
+        [Header("Game State")]
         public UnityEvent OnPauseGameEvent;
         public UnityEvent OnResumeGameEvent;
         private GameState _currentGameState;
@@ -21,7 +27,7 @@ namespace Manager
             set => _currentGameState = value;
         }
 
-        // Game mode  
+        [Header("Game Mode")]
         public GameMode GameMode = GameMode.Free;
         public RaceManager RaceManager;
 
@@ -31,6 +37,11 @@ namespace Manager
         public static int RacerLayer => LayerMask.NameToLayer("Racer");
         public static int TrackLayer => LayerMask.NameToLayer("Track");
         public static int WallsLayer => LayerMask.NameToLayer("Walls");
+
+        // Audio
+        // TODO: Should this be elsewhere?
+        [Header("Audio")]
+        public AudioMixer Mixer;
 
         protected override void Awake()
         {
@@ -93,6 +104,15 @@ namespace Manager
                     RaceManager = raceManagerGameObject.AddComponent<TimeTrialManager>();
                     break;
             }
+        }
+
+        public void Quit()
+        {
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+#else
+                Application.Quit(0);
+#endif
         }
     }
 }
