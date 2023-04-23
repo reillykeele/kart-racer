@@ -1,10 +1,11 @@
 using System.Collections.Generic;
-using Actor.Racer.Player;
 using Data.Audio;
-using Manager;
-using ScriptableObject.Audio;
+using KartRacer.Actor.Racer.Player;
+using KartRacer.Manager;
+using KartRacer.ScriptableObject.Audio;
 using UnityEngine;
 using Util.Audio;
+using Util.Systems;
 
 namespace Environment.Scene
 {
@@ -51,8 +52,9 @@ namespace Environment.Scene
         {
             var raceManager = GameManager.Instance.RaceManager;
 
-            GameManager.Instance.OnPauseGameEvent.AddListener(PauseMusic);
-            GameManager.Instance.OnResumeGameEvent.AddListener(ResumeMusic);
+            GameSystem.Instance.OnPauseGameEvent.AddListener(PauseMusic);
+            GameSystem.Instance.OnResumeGameEvent.AddListener(ResumeMusic);
+            
             raceManager.CountdownTickEvent.AddListener(PlayCountdownEffect);
             raceManager.CountdownEndEvent.AddListener(PlayGoEffect);
         }

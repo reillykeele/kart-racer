@@ -1,0 +1,3 @@
+[submodule "Kart Racer/Assets/Scripts/Util"]
+	path = Kart Racer/Assets/Scripts/Util
+	url = https://github.com/reillykeele/unity-util

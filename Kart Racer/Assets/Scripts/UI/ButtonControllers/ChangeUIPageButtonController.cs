@@ -1,16 +1,15 @@
-using Util.Enums;
+using Util.UI;
+using Util.UI.Controllers.Selectables.Buttons;
 
-namespace UI.ButtonControllers
+namespace KartRacer.UI.ButtonControllers
 {
     public class ChangeUIPageButtonController : AButtonController
     {
-        public UIPageType TargetUiPageType;
-        public bool FadeIn = false;
-        public bool FadeOut = false;
-    
-        public override void OnClick()
+        public UIPage TargetUiPage;
+
+        protected override void OnClick()
         {
-            _canvasController.SwitchUI(TargetUiPageType);
+            _canvasController.SwitchUI(TargetUiPage);
         }
     }
 }

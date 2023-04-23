@@ -1,15 +1,16 @@
-using Manager;
 using Util.Enums;
+using Util.Systems;
+using Util.UI.Controllers.Selectables.Buttons;
 
-namespace UI.ButtonControllers
+namespace KartRacer.UI.ButtonControllers
 {
     public class SetGameStateButtonController : AButtonController
     {
         public GameState TargetGameState;
-    
-        public override void OnClick()
+
+        protected override void OnClick()
         {
-            GameManager.Instance.CurrentGameState = TargetGameState;
+            GameSystem.Instance.ChangeGameState(TargetGameState);
         }
     }
 }

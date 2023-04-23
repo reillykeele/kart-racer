@@ -1,8 +1,8 @@
 using Data.Item;
 
-namespace Actor.Item
+namespace KartRacer.Actor.Item
 {
-    public class BananaItem : Item
+    public class BananaItem : global::Actor.Item.Item
     {
         public BananaItem(ItemData data) : base(data) { }
 

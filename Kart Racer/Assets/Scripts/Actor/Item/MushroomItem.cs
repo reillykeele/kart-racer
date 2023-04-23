@@ -1,5 +1,5 @@
 using Data.Item;
-using Manager;
+using KartRacer.Manager;
 
 namespace Actor.Item
 {

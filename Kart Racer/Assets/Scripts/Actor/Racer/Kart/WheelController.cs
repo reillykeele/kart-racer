@@ -1,7 +1,7 @@
 using UnityEngine;
 using Util.Helpers;
 
-namespace Actor.Racer.Kart
+namespace KartRacer.Actor.Racer.Kart
 {
     public class WheelController : MonoBehaviour
     {

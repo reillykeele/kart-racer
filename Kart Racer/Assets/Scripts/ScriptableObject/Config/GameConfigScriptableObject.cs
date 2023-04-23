@@ -2,7 +2,7 @@ using Data.Config;
 using Data.Item;
 using UnityEngine;
 
-namespace ScriptableObject.Config
+namespace KartRacer.ScriptableObject.Config
 {
     [CreateAssetMenu(fileName = "GameConfig", menuName = "ScriptableObjects/Configuration/Game Config")]
     public class GameConfigScriptableObject : UnityEngine.ScriptableObject

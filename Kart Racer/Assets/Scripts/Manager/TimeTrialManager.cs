@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using Actor.Item;
-using Actor.Racer.Player;
+using Data.Item;
+using KartRacer.Actor.Racer.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Util.Enums;
 using Util.Helpers;
+using Util.Systems;
 
-namespace Manager
+namespace KartRacer.Manager
 {
     public class TimeTrialManager : RaceManager
     {

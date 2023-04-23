@@ -1,9 +1,9 @@
-using Actor.Racer;
-using Actor.Racer.Player;
 using Cinemachine;
+using KartRacer.Actor.Racer;
+using KartRacer.Actor.Racer.Player;
 using UnityEngine;
 
-namespace Actor.Camera
+namespace KartRacer.Actor.Camera
 {
     public class KartCameraController : MonoBehaviour
     {

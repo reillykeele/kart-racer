@@ -1,7 +1,7 @@
 using Data.Item;
 using UnityEngine;
 
-namespace ScriptableObject.Item
+namespace KartRacer.ScriptableObject.Item
 {
     [CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/Item/Item Data")]
     public class ItemDataScriptableObject : UnityEngine.ScriptableObject

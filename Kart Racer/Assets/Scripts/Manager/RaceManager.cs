@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using Actor.Item;
-using Actor.Racer;
-using Actor.Racer.Player;
 using Data.Environment;
 using Data.Item;
 using Environment.Scene;
+using KartRacer.Actor.Racer;
+using KartRacer.Actor.Racer.Player;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Util.Enums;
 using Util.Helpers;
 using Util.Singleton;
+using Util.Systems;
 
-namespace Manager
+namespace KartRacer.Manager
 {
     public class RaceManager : Singleton<RaceManager>
     {
@@ -75,7 +76,7 @@ namespace Manager
 
         protected virtual void Update()
         {
-            if (GameManager.Instance.IsPlaying() == false)
+            if (GameSystem.Instance.IsPlaying() == false)
                 return;
 
             RaceTime += Time.deltaTime;
@@ -132,7 +133,7 @@ namespace Manager
             // Start Event
             CountdownEndEvent.Invoke();
             RaceStartTime = Time.time;
-            GameManager.Instance.CurrentGameState = GameState.Playing;
+            GameSystem.Instance.ChangeGameState(GameState.Playing);
         }
 
         public void CalculatePositions()

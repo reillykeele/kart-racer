@@ -1,13 +1,13 @@
 using System;
+using Data.Item;
 using Data.Racer.Computer;
-using Manager;
-using ScriptableObject.Racer.Computer;
+using KartRacer.Manager;
+using KartRacer.ScriptableObject.Racer.Computer;
 using UnityEngine;
-using Util.Enums;
 using Util.Helpers;
 using Random = UnityEngine.Random;
 
-namespace Actor.Racer.Computer
+namespace KartRacer.Actor.Racer.Computer
 {
     [RequireComponent(typeof(ComputerController))]
     public class ComputerMovementController : RacerMovementController
