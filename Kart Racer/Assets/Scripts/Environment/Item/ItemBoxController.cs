@@ -1,11 +1,11 @@
-using Actor.Racer;
 using Data.Audio;
-using Manager;
-using ScriptableObject.Audio;
+using KartRacer.Actor.Racer;
+using KartRacer.Manager;
+using KartRacer.ScriptableObject.Audio;
 using UnityEngine;
 using Util.Helpers;
 
-namespace Environment.Item
+namespace KartRacer.Environment.Item
 {
     [RequireComponent(typeof(Collider))]
     public class ItemBoxController : MonoBehaviour

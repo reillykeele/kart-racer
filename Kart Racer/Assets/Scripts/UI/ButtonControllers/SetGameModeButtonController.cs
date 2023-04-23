@@ -1,13 +1,15 @@
-using Manager;
-using Util.Enums;
+using KartRacer.Data.Config;
+using KartRacer.Manager;
+using UnityEngine;
+using Util.UI.Controllers.Selectables.Buttons;
 
-namespace UI.ButtonControllers
+namespace KartRacer.UI.ButtonControllers
 {
     public class SetGameModeButtonController : AButtonController
     {
-        public GameMode TargetGameMode;
-    
-        public override void OnClick()
+        [SerializeField] public GameMode TargetGameMode;
+
+        protected override void OnClick()
         {
             GameManager.Instance.GameMode = TargetGameMode;
         }

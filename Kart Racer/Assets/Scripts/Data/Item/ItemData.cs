@@ -4,6 +4,17 @@ using Util.Enums;
 
 namespace Data.Item
 {
+    public enum ItemType
+    {
+        None,
+        Mushroom,
+        TripleMushroom,
+        Banana,
+        TripleBanana,
+        GreenShell,
+        RedShell
+    }
+
     [Serializable]
     public class ItemData
     {

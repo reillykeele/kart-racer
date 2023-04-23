@@ -1,17 +1,19 @@
 using Util.Coroutine;
-using Util.Enums;
+using Util.Systems;
+using Util.UI.Controllers.Selectables.Buttons;
 
-namespace UI.ButtonControllers
+namespace KartRacer.UI.ButtonControllers
 {
     public class ChangeSceneButtonController : AButtonController
     {
-        public Scene TargetScene;
+        public string TargetScene;
         public float Delay = 0f;
-    
-        public override void OnClick()
+
+        protected override void OnClick()
         {
-            _canvasAudioController?.FadeOutBackgroundMusic();
-            StartCoroutine(CoroutineUtil.WaitForExecute(() => _canvasController.SwitchScene(TargetScene), Delay));
+            // _canvasAudioController?.FadeOutBackgroundMusic();
+            // StartCoroutine(CoroutineUtil.WaitForExecute(() => LoadingSystem.Instance.LoadSceneCoroutine(TargetScene), Delay));
+            LoadingSystem.Instance.LoadScene(TargetScene);
         }
     }
 }

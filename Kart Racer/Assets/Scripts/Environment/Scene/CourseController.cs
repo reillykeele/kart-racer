@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Environment.Item;
-using Manager;
+using KartRacer.Environment.Item;
+using KartRacer.Environment.Scene;
+using KartRacer.Manager;
 using UnityEngine;
 
 namespace Environment.Scene
@@ -82,10 +83,8 @@ namespace Environment.Scene
             // }
         }
 
-        protected override void Awake()
+        void Awake()
         {
-            base.Awake();
-
             GameManager.Instance.InitRace();
 
             Checkpoints = FindObjectsOfType<Checkpoint>().ToList();

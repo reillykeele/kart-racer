@@ -1,5 +1,5 @@
-using Actor.Racer;
 using Data.Environment;
+using KartRacer.Actor.Racer;
 using UnityEngine;
 
 namespace Environment.Scene

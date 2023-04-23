@@ -1,11 +1,11 @@
 using System;
 using Data.Item;
-using Manager;
+using KartRacer.Manager;
 using UnityEngine;
 using UnityEngine.Events;
 using Util.Helpers;
 
-namespace Actor.Racer
+namespace KartRacer.Actor.Racer
 {
     [RequireComponent(typeof(RacerMovementController))]
     public abstract class RacerController : MonoBehaviour
@@ -34,8 +34,8 @@ namespace Actor.Racer
 
         public float RaceFinishTime { get; private set; }
 
-        private Item.Item _item;
-        public Item.Item Item
+        private global::Actor.Item.Item _item;
+        public global::Actor.Item.Item Item
         {
             get => _item;
             set

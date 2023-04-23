@@ -1,7 +1,7 @@
 using Effect.Particle.Interface;
-using Manager;
 using UnityEngine;
 using Util.Helpers;
+using Util.Systems;
 
 namespace Effect.Particle
 {
@@ -26,8 +26,8 @@ namespace Effect.Particle
 
             _startColor = _main.startColor.color;
 
-            GameManager.Instance.OnPauseGameEvent.AddListener(PauseSystem);
-            GameManager.Instance.OnResumeGameEvent.AddListener(ResumeSystem);
+            GameSystem.Instance.OnPauseGameEvent.AddListener(PauseSystem);
+            GameSystem.Instance.OnResumeGameEvent.AddListener(ResumeSystem);
         }
 
         public void StartSystem() => _particleSystem.Play();

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Actor.Racer;
+using KartRacer.Actor.Racer;
 using UnityEngine;
 
 namespace Effect.Particle

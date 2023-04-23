@@ -1,10 +1,10 @@
 using Data.Racer.Player;
-using Manager;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Util.Systems;
 
-namespace Actor.Racer.Player
+namespace KartRacer.Actor.Racer.Player
 {
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerInputController : MonoBehaviour
@@ -42,7 +42,7 @@ namespace Actor.Racer.Player
         public void OnPause(InputValue val)
         {
             if (val.isPressed)
-                GameManager.Instance.PauseGame();
+                GameSystem.Instance.PauseGame();
         }
     }
 }
