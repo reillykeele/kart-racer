@@ -1,11 +1,9 @@
-using System;
 using Data.Audio;
-using Manager;
-using ScriptableObject.Audio;
+using KartRacer.ScriptableObject.Audio;
 using UnityEngine;
-using Util.Audio;
+using Util.Systems;
 
-namespace Actor.Racer
+namespace KartRacer.Actor.Racer
 {
     [RequireComponent(typeof(RacerMovementController))]
     public class RacerAudioController : MonoBehaviour
@@ -50,15 +48,15 @@ namespace Actor.Racer
             ChangeVehicleAudioClip(VehicleAudioClipType.Loop);
 
             // Set Events
-            GameManager.Instance.OnPauseGameEvent.AddListener(PauseAudio);
-            GameManager.Instance.OnResumeGameEvent.AddListener(ResumeAudio);
+            GameSystem.Instance.OnPauseGameEvent.AddListener(PauseAudio);
+            GameSystem.Instance.OnResumeGameEvent.AddListener(ResumeAudio);
             _racerMovementController.OnIsBoostingChangedEvent.AddListener(PlayBoostSoundEffect);
             _racerMovementController.OnIsDriftingChangedEvent.AddListener(PlayDriftSoundEffect);
         }
 
         void Update()
         {
-            if (GameManager.Instance.IsPaused()) return;
+            if (GameSystem.Instance.IsPaused()) return;
 
             if (_racerMovementController.CurrSpeed < 0.0f)
             {
@@ -118,7 +116,11 @@ namespace Actor.Racer
 
         public void PlayDriftSoundEffect(bool isDrifting) { if (isDrifting) PlayDriftSoundEffect(); else _driftAudioSource.Stop(); }
 
-        public void PlayDriftSoundEffect() => StartCoroutine(AudioHelper.PlayLoopingAudioData(_driftAudioSource, _driftAudioDataScriptableObject.LoopingMusicAudioData));
+        public void PlayDriftSoundEffect()
+        {
+            // StartCoroutine(AudioHelper.PlayLoopingAudioData(_driftAudioSource,
+            //     _driftAudioDataScriptableObject.LoopingMusicAudioData));
+        }
 
         public void PlayMiniTurboChangeSoundEffect(int level) => _miniTurboChangeAudioSource.Play();
 

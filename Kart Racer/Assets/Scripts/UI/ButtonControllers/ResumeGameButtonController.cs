@@ -1,9 +1,10 @@
-using Manager;
+using Util.Systems;
+using Util.UI.Controllers.Selectables.Buttons;
 
-namespace UI.ButtonControllers
+namespace KartRacer.UI.ButtonControllers
 {
     public class ResumeGameButtonController : AButtonController
     {
-        public override void OnClick() => GameManager.Instance.ResumeGame();
+        protected override void OnClick() => GameSystem.Instance.ResumeGame();
     }
 }

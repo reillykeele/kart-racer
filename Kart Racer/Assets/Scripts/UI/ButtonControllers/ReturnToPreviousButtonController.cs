@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UI.ButtonControllers;
-using UnityEngine;
+using Util.UI.Controllers.Selectables.Buttons;
 
-public class ReturnToPreviousButtonController : AButtonController
+namespace KartRacer.UI.ButtonControllers
 {
-    public override void OnClick()
+    public class ReturnToPreviousButtonController : AButtonController
     {
-        _canvasController.ReturnToPrevious();
+        protected override void OnClick()
+        {
+            _canvasController.ReturnToPrevious();
+        }
     }
 }

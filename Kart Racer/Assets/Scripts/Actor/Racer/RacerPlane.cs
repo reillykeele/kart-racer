@@ -1,9 +1,9 @@
 using System;
-using Manager;
+using KartRacer.Manager;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Actor.Racer
+namespace KartRacer.Actor.Racer
 {
     [RequireComponent(typeof(Collider))]
     public class RacerPlane : MonoBehaviour

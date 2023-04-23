@@ -8,12 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/Menus/Menu.unity
     guid: a05d7cbffdd2e9e4292acf9ea7f49e0b
-  - enabled: 0
-    path: Assets/Scenes/UI/Menus/MenuOld.unity
-    guid: d43020735384d1d47949572aa4d94024
   - enabled: 1
     path: Assets/Scenes/UI/Menus/Loading.unity
-    guid: 0a3b6ee557456024dae2ea99ca0f6e08
+    guid: 4684e6e1804ba9d4e91da437a7917d7e
   - enabled: 1
     path: Assets/Scenes/UI/Gameplay/RaceGameUI.unity
     guid: beef1f0f7435f944ebab165b902d59a6
@@ -32,4 +29,5 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 6fa874589bd614f42abbadd31356994c, type: 2}

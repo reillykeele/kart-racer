@@ -1,4 +1,4 @@
-using Actor.Racer;
+using KartRacer.Actor.Racer;
 using UnityEngine;
 using Util.Helpers;
 

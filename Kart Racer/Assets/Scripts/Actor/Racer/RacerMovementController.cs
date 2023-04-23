@@ -1,15 +1,16 @@
 using System.Collections;
 using Data.Environment;
 using Data.Racer;
-using Environment.Track;
-using Manager;
-using ScriptableObject.Racer;
+using KartRacer.Environment.Track;
+using KartRacer.Manager;
+using KartRacer.ScriptableObject.Racer;
 using UnityEngine;
 using UnityEngine.Events;
 using Util.Coroutine;
 using Util.Helpers;
+using Util.Systems;
 
-namespace Actor.Racer
+namespace KartRacer.Actor.Racer
 {
     [RequireComponent(typeof(BoxCollider))]
     public abstract class RacerMovementController : MonoBehaviour
@@ -102,7 +103,7 @@ namespace Actor.Racer
 
         protected virtual void FixedUpdate()
         {
-            if (!GameManager.Instance.IsPlaying()) return;
+            if (!GameSystem.Instance.IsPlaying()) return;
 
             if (UseAutopilot)
             {

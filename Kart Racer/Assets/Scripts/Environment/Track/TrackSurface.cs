@@ -1,8 +1,8 @@
 using Data.Environment;
-using ScriptableObject.Track;
+using KartRacer.ScriptableObject.Track;
 using UnityEngine;
 
-namespace Environment.Track
+namespace KartRacer.Environment.Track
 {
     public class TrackSurface : MonoBehaviour
     {

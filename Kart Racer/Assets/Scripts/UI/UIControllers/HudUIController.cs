@@ -1,14 +1,17 @@
 using System.Linq;
-using Actor.Racer;
-using Actor.Racer.Player;
 using Data.Item;
-using Manager;
+using KartRacer.Actor.Racer;
+using KartRacer.Actor.Racer.Player;
+using KartRacer.Manager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Util.Coroutine;
 using Util.Enums;
 using Util.Helpers;
+using Util.Systems;
+using Util.UI;
+using Util.UI.Controllers;
 
 namespace UI.UIControllers
 {
@@ -28,8 +31,9 @@ namespace UI.UIControllers
         private TextMeshProUGUI _timeText;
         private TextMeshProUGUI _lapText;
 
-        // Pause Menu
-
+        [Header("UI Pages")] 
+        [SerializeField] private UIPage _pauseMenu;
+        [SerializeField] private UIPage _finishRace;
 
         protected override void Awake()
         {
@@ -53,8 +57,9 @@ namespace UI.UIControllers
         {
             var racerController = FindObjectOfType<PlayerController>() ?? FindObjectOfType<RacerController>();
 
-            GameManager.Instance.OnPauseGameEvent.AddListener(PauseGame);
-            GameManager.Instance.OnResumeGameEvent.AddListener(ResumeGame);
+            GameSystem.Instance.OnPauseGameEvent.AddListener(PauseGame);
+            GameSystem.Instance.OnResumeGameEvent.AddListener(ResumeGame);
+            
             GameManager.Instance.RaceManager.CountdownTickEvent.AddListener(CountdownTick);
             GameManager.Instance.RaceManager.CountdownEndEvent.AddListener(CountdownEnd);
 
@@ -82,14 +87,14 @@ namespace UI.UIControllers
 
         public void PauseGame()
         {
-            _canvasAudioController.Play(CanvasAudioController.CanvasAudioSoundType.Pause);
-            _canvasController.DisplayUI(UIPageType.PauseMenu);
+            // _canvasAudioController.Play(CanvasAudioController.CanvasAudioSoundType.Pause);
+            _canvasController.DisplayUI(_pauseMenu);
         }
 
         public void ResumeGame()
         {
-            _canvasAudioController.Play(CanvasAudioController.CanvasAudioSoundType.Resume);
-            _canvasController.HideUI(UIPageType.PauseMenu);
+            // _canvasAudioController.Play(CanvasAudioController.CanvasAudioSoundType.Resume);
+            _canvasController.HideUI(_pauseMenu);
         }
 
         public void CountdownTick(int num)
@@ -135,7 +140,7 @@ namespace UI.UIControllers
             _timeText.text = TimeHelper.FormatTime(GameManager.Instance.RaceManager.RaceStartTime, Time.time);
             DisplayTimer = false;
 
-            _canvasController.SwitchUI(UIPageType.FinishRace);
+            _canvasController.SwitchUI(_finishRace);
         }
     }
 }

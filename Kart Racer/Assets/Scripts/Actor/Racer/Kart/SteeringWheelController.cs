@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Actor.Racer.Kart
+namespace KartRacer.Actor.Racer.Kart
 {
     public class SteeringWheelController : MonoBehaviour
     {

@@ -1,6 +1,7 @@
 using System;
-using Actor.Racer;
 using Data.Item;
+using KartRacer.Actor.Item;
+using KartRacer.Actor.Racer;
 using Util.Enums;
 
 namespace Actor.Item

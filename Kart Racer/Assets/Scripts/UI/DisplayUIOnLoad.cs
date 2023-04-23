@@ -1,6 +1,8 @@
 using Environment.Scene;
-using Manager;
+using KartRacer.Environment.Scene;
 using UnityEngine;
+using Util.Systems;
+using Util.UI.Controllers;
 
 namespace UI
 {
@@ -9,18 +11,20 @@ namespace UI
     {
         private UIController _uiController;
 
-        protected override void Awake()
+        void Awake()
         {
-            base.Awake();
-
             _uiController = GetComponent<UIController>();
-            
-            if (LoadingManager.Instance.IsLoading)
+        }
+
+        void Start()
+        {
+            if (LoadingSystem.Instance.IsLoading)
                 _uiController.Disable();
         }
 
         protected override void OnSceneLoad()
         {
+            Debug.Log("bruh");
             _uiController.Enable();
         }
     }

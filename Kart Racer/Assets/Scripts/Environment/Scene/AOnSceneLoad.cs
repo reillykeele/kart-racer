@@ -1,13 +1,20 @@
-using Manager;
 using UnityEngine;
+using Util.GameEvents;
 
-namespace Environment.Scene
+namespace KartRacer.Environment.Scene
 {
     public abstract class AOnSceneLoad : MonoBehaviour
     {
-        protected virtual void Awake()
+        [SerializeField] protected VoidGameEventSO _onSceneLoadedEvent = default;
+
+        protected virtual void OnEnable()
         {
-            LoadingManager.Instance.OnSceneLoadedEvent.AddListener(OnSceneLoad);
+            _onSceneLoadedEvent.OnEventRaised += OnSceneLoad;
+        }
+
+        protected virtual void OnDisable()
+        {
+            _onSceneLoadedEvent.OnEventRaised -= OnSceneLoad;
         }
 
         protected abstract void OnSceneLoad();

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Actor.Racer.Player
+namespace KartRacer.Actor.Racer.Player
 {
     [RequireComponent(typeof(PlayerInputController))]
     [RequireComponent(typeof(PlayerMovementController))]

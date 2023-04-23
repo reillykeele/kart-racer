@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using ScriptableObject.Item;
+using KartRacer.ScriptableObject.Item;
 
 namespace Data.Item
 {

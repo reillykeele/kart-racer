@@ -15,8 +15,8 @@ namespace Effect.Particle
         {
             _particleControllers = GetComponentsInChildren<ParticleController>().ToList();
 
-            // GameManager.Instance.OnPauseGameEvent.AddListener(PauseSystem);
-            // GameManager.Instance.OnResumeGameEvent.AddListener(ResumeSystem);
+            // GameSystem.Instance.OnPauseGameEvent.AddListener(PauseSystem);
+            // GameSystem.Instance.OnResumeGameEvent.AddListener(ResumeSystem);
         }
 
         public void StartSystem() => _particleControllers.ForEach(x => x.StartSystem());
