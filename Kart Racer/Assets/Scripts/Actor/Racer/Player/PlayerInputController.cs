@@ -1,48 +1,69 @@
-using Data.Racer.Player;
+using KartRacer.Input;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
+using Util.Attributes;
 using Util.Systems;
 
 namespace KartRacer.Actor.Racer.Player
 {
-    [RequireComponent(typeof(PlayerInput))]
     public class PlayerInputController : MonoBehaviour
     {
-        public PlayerInputData PlayerInput;
+        [SerializeField] private InputReader _inputReader;
 
-        public void OnAccelerate(InputValue val) => PlayerInput.IsAccelerating = val.isPressed;
+        // Player State Values
+        [SerializeField, ReadOnly] public Vector2 Steering;
+        [SerializeField, ReadOnly] public bool IsAccelerating;
+        [SerializeField, ReadOnly] public bool IsBraking;
+        [SerializeField, ReadOnly] public bool IsDrifting;
+        [SerializeField, ReadOnly] public bool IsUsingItem;
+        [SerializeField, ReadOnly] public bool IsLookingBehind;
 
-        public void OnBrakeReverse(InputValue val) => PlayerInput.IsBraking = val.isPressed;
-
-        public UnityEvent<bool> OnDriftEvent;
-        public void OnDrift(InputValue val)
+        void OnEnable()
         {
-            PlayerInput.IsDrifting = val.isPressed;
-            OnDriftEvent.Invoke(PlayerInput.IsDrifting);
+            _inputReader.SteerEvent += OnSteer;
+            _inputReader.AccelerateEvent += OnAccelerateStarted;
+            _inputReader.AccelerateCancelledEvent += OnAccelerateCancelled;
+            _inputReader.BrakeEvent += OnBrakeStarted;
+            _inputReader.BrakeCancelledEvent += OnBrakeCancelled;
+            _inputReader.DriftEvent += OnDriftStarted;
+            _inputReader.DriftCancelledEvent += OnDriftCancelled;
+            _inputReader.ItemEvent += OnItemStarted;
+            _inputReader.ItemCancelledEvent += OnItemCancelled;
+            _inputReader.RearCameraEvent += OnRearCameraStarted;
+            _inputReader.RearCameraCancelledEvent += OnRearCameraCancelled;
         }
 
-        public UnityEvent OnItemEvent;
-        public void OnItem(InputValue val)
+        void OnDisable()
         {
-            PlayerInput.IsUsingItem = val.isPressed;
-            if (val.isPressed)
-                OnItemEvent.Invoke();
+            _inputReader.SteerEvent -= OnSteer;
+            _inputReader.AccelerateEvent -= OnAccelerateStarted;
+            _inputReader.AccelerateCancelledEvent -= OnAccelerateCancelled;
+            _inputReader.BrakeEvent -= OnBrakeStarted;
+            _inputReader.BrakeCancelledEvent -= OnBrakeCancelled;
+            _inputReader.DriftEvent -= OnDriftStarted;
+            _inputReader.DriftCancelledEvent -= OnDriftCancelled;
+            _inputReader.ItemEvent -= OnItemStarted;
+            _inputReader.ItemCancelledEvent -= OnItemCancelled;
+            _inputReader.RearCameraEvent -= OnRearCameraStarted;
+            _inputReader.RearCameraCancelledEvent -= OnRearCameraCancelled;
         }
 
-        public void OnSteer(InputValue val) => PlayerInput.Steering = val.Get<Vector2>();
+        public void OnSteer(Vector2 val) => Steering = val;
 
-        public UnityEvent<bool> OnLookBehindEvent;
-        public void OnLookBehind(InputValue val)
-        {
-            PlayerInput.IsLookingBehind = val.isPressed;
-            OnLookBehindEvent.Invoke(PlayerInput.IsLookingBehind);
-        }
+        public void OnAccelerateStarted() => IsAccelerating = true;
+        public void OnAccelerateCancelled() => IsAccelerating = false;
 
-        public void OnPause(InputValue val)
-        {
-            if (val.isPressed)
-                GameSystem.Instance.PauseGame();
-        }
+        public void OnBrakeStarted() => IsBraking = true;
+        public void OnBrakeCancelled() => IsBraking = false;
+
+        public void OnDriftStarted() => IsDrifting = true;
+        public void OnDriftCancelled() => IsDrifting = false;
+
+        public void OnItemStarted() => IsUsingItem = true;   
+        public void OnItemCancelled() => IsUsingItem = false;
+
+        public void OnRearCameraStarted() => IsLookingBehind = true;
+        public void OnRearCameraCancelled() => IsLookingBehind = false;
+
+        public void OnPause() => GameSystem.Instance.PauseGame();
     }
 }

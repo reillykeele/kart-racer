@@ -16,7 +16,7 @@ namespace KartRacer.Actor.Racer.Player
             _input = GetComponent<PlayerInputController>();
             _movement = GetComponent<PlayerMovementController>();
 
-            _input.OnItemEvent.AddListener(UseItem);
+            // _input.OnItemEvent.AddListener(UseItem);
 
 
 

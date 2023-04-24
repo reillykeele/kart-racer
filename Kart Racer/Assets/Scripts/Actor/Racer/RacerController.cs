@@ -61,7 +61,7 @@ namespace KartRacer.Actor.Racer
             RacerId = Guid.NewGuid();
 
             MovementController = GetComponent<RacerMovementController>();
-            CoursePlane = gameObject.GetChildObject("PositionPlane");
+            // CoursePlane = gameObject.GetChildObject("PositionPlane");
         }
 
         protected virtual void Start()
@@ -71,7 +71,7 @@ namespace KartRacer.Actor.Racer
 
         protected virtual void LateUpdate()
         {
-            CoursePlane.transform.forward = CourseForward;
+            // CoursePlane.transform.forward = CourseForward;
         }
 
         public UnityEvent<ItemData> PickupItemEvent;

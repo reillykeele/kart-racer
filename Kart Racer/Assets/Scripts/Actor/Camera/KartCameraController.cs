@@ -25,7 +25,7 @@ namespace KartRacer.Actor.Camera
                 player.FinishRaceEvent.AddListener(SwitchCinematic);
 
                 _input = player.GetComponent<PlayerInputController>();
-                _input?.OnLookBehindEvent.AddListener(SwitchFollowCamera);
+                // _input?.OnLookBehindEvent.AddListener(SwitchFollowCamera);
 
                 foreach (var camera in _stateDrivenCamera.ChildCameras)
                 {

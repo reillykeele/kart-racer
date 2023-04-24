@@ -12,9 +12,17 @@ namespace KartRacer.Input
 
 		#region Gameplay Events
 		
-        public event UnityAction<Vector2> MoveEvent = delegate { };
-        public event UnityAction ExampleEvent = delegate { };
-        public event UnityAction ExampleCancelledEvent = delegate { };
+        public event UnityAction<Vector2> SteerEvent = delegate { };
+        public event UnityAction AccelerateEvent = delegate { };
+        public event UnityAction AccelerateCancelledEvent = delegate { };
+        public event UnityAction BrakeEvent = delegate { };
+        public event UnityAction BrakeCancelledEvent = delegate { };
+        public event UnityAction DriftEvent = delegate { };
+        public event UnityAction DriftCancelledEvent = delegate { };
+        public event UnityAction ItemEvent = delegate { };
+        public event UnityAction ItemCancelledEvent = delegate { };
+        public event UnityAction RearCameraEvent = delegate { };
+        public event UnityAction RearCameraCancelledEvent = delegate { };
 
         #endregion
 
@@ -40,9 +48,9 @@ namespace KartRacer.Input
 				_gameInput.Menu.SetCallbacks(this);
 
 				// Default
-				// EnableGameplayInput();
-                EnableMenuInput();
-			}
+				EnableGameplayInput();
+                // EnableMenuInput();
+            }
         }
 
 		private void OnDisable()
@@ -64,29 +72,80 @@ namespace KartRacer.Input
 			_gameInput.Gameplay.Enable();
 		}
 
-        public void OnMove(InputAction.CallbackContext context)
+        public void OnSteer(InputAction.CallbackContext context)
         {
-            MoveEvent.Invoke(context.ReadValue<Vector2>());
+            SteerEvent.Invoke(context.ReadValue<Vector2>());
+        }
+
+        public void OnAccelerate(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Performed:
+                    AccelerateEvent.Invoke();
+                    break;
+                case InputActionPhase.Canceled:
+                    AccelerateCancelledEvent.Invoke();
+                    break;
+            }
+        }
+
+        public void OnBrake(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Performed:
+                    BrakeEvent.Invoke();
+                    break;
+                case InputActionPhase.Canceled:
+                    BrakeCancelledEvent.Invoke();
+                    break;
+            }
+        }
+
+        public void OnDrift(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Performed:
+                    DriftEvent.Invoke();
+                    break;
+                case InputActionPhase.Canceled:
+                    DriftCancelledEvent.Invoke();
+                    break;
+            }
+        }
+
+        public void OnItem(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Performed:
+                    ItemEvent.Invoke();
+                    break;
+                case InputActionPhase.Canceled:
+                    ItemCancelledEvent.Invoke();
+                    break;
+            }
+        }
+
+        public void OnRearCamera(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Performed:
+                    RearCameraEvent.Invoke();
+                    break;
+                case InputActionPhase.Canceled:
+                    RearCameraCancelledEvent.Invoke();
+                    break;
+            }
         }
 
         public void OnPause(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed)
                 MenuPauseEvent.Invoke();
-        }
-
-        // TODO: Remove
-        public void OnExample(InputAction.CallbackContext context)
-        {
-            switch (context.phase)
-		    {
-			    case InputActionPhase.Performed:
-				    ExampleEvent.Invoke();
-				    break;
-			    case InputActionPhase.Canceled:
-				    ExampleCancelledEvent.Invoke();
-				    break;
-		    }
         }
 
         #endregion
