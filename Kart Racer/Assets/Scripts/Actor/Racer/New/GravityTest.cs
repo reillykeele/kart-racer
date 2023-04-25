@@ -2,7 +2,6 @@ using System.Linq;
 using KartRacer.Actor.Racer.Player;
 using UnityEngine;
 using Util.Attributes;
-using Util.Helpers;
 
 namespace KartRacer
 {
@@ -14,25 +13,31 @@ namespace KartRacer
 
         [Header("Move")] 
         [SerializeField, Min(0f)] private float _turnSpeed = 1f;
-        [SerializeField, Min(0f)] private float _speed = 1f;
-        [SerializeField, Min(0f)] private float _topSpeed = 10f;
+        [SerializeField, Range(0f, 1f)] private float _linearDrag = 0.5f;
         [SerializeField, Range(0f, 1f)] private float _gripiness = 0.5f;
-        [SerializeField, Range(0f, 1f)] private float _torqiness = 1.0f;
+        [SerializeField, Range(0f, 1f)] private float _angularDrag = 1.0f;
         [SerializeField] private AnimationCurve _accelerationCurve;
+
+        [SerializeField, Min(0f)] private float _topReverseSpeed = 5f;
+        [SerializeField, Min(0f)] private float _reverseAccel = 1f;
+
+        [SerializeField, Min(0f)] private float _driftMagnitude = 1f;
+        [SerializeField, Min(0f)] private float _driftGrip = 0.01f;
 
         [Header("Suspension")]
         [SerializeField, Min(0f)] private float _groundCheckDist = 1f;
         [SerializeField, Min(0f)] private float _maxOffset = 0.4f;
         [SerializeField, Min(0f)] private float _strength = 10f;
         [SerializeField, Min(0f)] private float _damping = 10f;
-        [SerializeField, Min(0f)] private float _scale = 1f;
 
         [Header("Debug")] 
-        [SerializeField, ReadOnly] private Vector3 _horizontalVelocity;
+        [SerializeField, ReadOnly] private Vector3 _velocity;
         [SerializeField, ReadOnly] private float _forwardSpeed;
         [SerializeField, ReadOnly] private float _rightSpeed;
         [SerializeField, ReadOnly] private float _torque;
-
+        [SerializeField, ReadOnly] private Vector3 _groundNormal;
+        [SerializeField, ReadOnly] private int _driftDirection;
+        [SerializeField, ReadOnly] private bool _isDrifting;
         private float _accelCurveTopSpeed => _accelerationCurve.keys.Last().value;
 
         void Awake()
@@ -44,13 +49,22 @@ namespace KartRacer
 
         void FixedUpdate()
         {
+            // return;
+
             var isGrounded = CheckGround();
 
-            if (isGrounded)
+            if (true)
             {
-                _horizontalVelocity = _rb.velocity.GetHorizontal();
-                _forwardSpeed = Vector3.Dot(transform.forward, _horizontalVelocity);
-                _rightSpeed = Vector3.Dot(transform.right, _horizontalVelocity);
+                // rotate towards ground normal
+                var rotForward = transform.forward - _groundNormal * Vector3.Dot(transform.forward, _groundNormal);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    Quaternion.LookRotation(rotForward.normalized, _groundNormal),
+                    8f * Time.fixedDeltaTime);
+
+                _velocity = _rb.velocity;
+                _forwardSpeed = Vector3.Dot(transform.forward, _velocity);
+                _rightSpeed = Vector3.Dot(transform.right, _velocity);
 
                 // calculate forward motion
                 if (_kartInput.IsAccelerating)
@@ -69,25 +83,68 @@ namespace KartRacer
                 }
                 else if (_kartInput.IsBraking)
                 {
-                    if (_forwardSpeed > -10f)
-                        _rb.AddForce(-5f * transform.forward);
-                }
-
-                // calculate sliding motion 
-                var slip = -_rightSpeed * _gripiness;
-                _rb.AddForce(slip / Time.deltaTime * transform.right);
-
-
-                if (_kartInput.Steering.x != 0f && Mathf.Abs(_forwardSpeed) >= 1.0f)
-                {
-                    var torque = _kartInput.Steering.x * _turnSpeed;
-                    _rb.AddTorque(torque * transform.up);
+                    if (_forwardSpeed > -_topReverseSpeed)
+                    {
+                        _rb.AddForce(_reverseAccel * transform.forward);
+                    }
                 }
                 else
                 {
-                    var torque = Vector3.Dot(_rb.angularVelocity, _rb.inertiaTensor);
-                    if (torque != 0f)
-                        _rb.AddTorque(-torque * _torqiness * transform.up);
+                    // deceleration
+                    var forwardDrag = -_forwardSpeed * _linearDrag;
+                    _rb.AddForce(forwardDrag / Time.fixedDeltaTime * transform.forward);
+                }
+
+
+                if (_kartInput.IsDrifting)
+                {
+                    if (_isDrifting == false)
+                    {
+                        _driftDirection = _kartInput.Steering.x < 0.05f ? 1 : _kartInput.Steering.x > 0.05f ? -1 : 0;
+
+                        _isDrifting = _driftDirection != 0;
+                    }
+                }
+                else
+                {
+                    _driftDirection = 0;
+                    _isDrifting = false;
+                }
+
+                // Apply horizonal movement
+                if (_isDrifting)
+                {
+                    // // add horizonal force
+                    _rb.AddForce(_driftMagnitude * _driftDirection * transform.right);
+
+                    // calculate sliding motion 
+                    var rightDrag = -_rightSpeed * _driftGrip;
+                    _rb.AddForce(rightDrag / Time.fixedDeltaTime * transform.right);
+                }
+                else
+                {
+                    // calculate sliding motion 
+                    var rightDrag = -_rightSpeed * _gripiness;
+                    _rb.AddForce(rightDrag / Time.fixedDeltaTime * transform.right);
+                }
+
+                if (_kartInput.Steering.x != 0f /*&& Mathf.Abs(_forwardSpeed) >= 1.0f*/)
+                {
+                    var prevTorque = Vector3.Dot(_rb.angularVelocity, _rb.inertiaTensor);
+                    
+                    var nextTorque = _kartInput.Steering.x * _turnSpeed;
+                    
+                    var deltaTorque = nextTorque - prevTorque;
+                    
+                    _rb.AddTorque(deltaTorque * transform.up);
+                    // _rb.AddTorque(_kartInput.Steering.x * _turnSpeed * transform.up);
+                }
+                else
+                {
+                    _torque = Vector3.Dot(_rb.angularVelocity, _rb.inertiaTensor);
+                    var oppTorque = -_torque * _angularDrag;
+                    if (oppTorque != 0f)
+                        _rb.AddTorque(oppTorque / Time.fixedDeltaTime * transform.up);
                 }
             }
         }
@@ -108,7 +165,7 @@ namespace KartRacer
             else 
                 time = BinarySearchCurve(currSpeed , leftTime, rightTime, 0);
 
-            return _accelerationCurve.Evaluate(time + Time.deltaTime);
+            return _accelerationCurve.Evaluate(time + Time.fixedDeltaTime);
         }
 
         private const float _maxRuns = 100;
@@ -141,7 +198,7 @@ namespace KartRacer
             var pos = new[] { cPos, tlPos, trPos, blPos, brPos };
 
             var groundRays = new (bool isHit, RaycastHit hitInfo)[5];
-            groundRays[0].isHit = Physics.Raycast(cPos, -transform.up * _groundCheckDist,
+            groundRays[0].isHit = Physics.Raycast(cPos, -transform.up * 100f,
                 out groundRays[0].hitInfo, LayerMask.NameToLayer("Track"));
             groundRays[1].isHit = Physics.Raycast(tlPos, -transform.up * _groundCheckDist,
                 out groundRays[1].hitInfo, LayerMask.NameToLayer("Track"));
@@ -151,6 +208,11 @@ namespace KartRacer
                 out groundRays[3].hitInfo, LayerMask.NameToLayer("Track"));
             groundRays[4].isHit = Physics.Raycast(brPos, -transform.up * _groundCheckDist,
                 out groundRays[4].hitInfo, LayerMask.NameToLayer("Track"));
+
+            if (groundRays[0].isHit)
+            {
+                _groundNormal = groundRays[0].hitInfo.normal;
+            }
 
             var isGrounded = false;
             for (var i = 1; i < groundRays.Length; ++i)

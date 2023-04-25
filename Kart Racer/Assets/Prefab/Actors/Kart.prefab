@@ -94,14 +94,13 @@ GameObject:
   - component: {fileID: 1416068618623238136}
   - component: {fileID: 8057295163331092358}
   - component: {fileID: 2362020512599309492}
-  - component: {fileID: 7594959790011171703}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1416068618623238136
 Transform:
   m_ObjectHideFlags: 0
@@ -167,27 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7594959790011171703
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171212882220041834}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &375851392243954692
 GameObject:
   m_ObjectHideFlags: 0
@@ -39463,7 +39441,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7197654178313288530}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 364fe231b8da6014fa9b51619bcd81b3, type: 3}
   m_Name: 
@@ -39659,7 +39637,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7654942225697347103}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d2f4ce4e9347454bb70313ed3404e28, type: 3}
   m_Name: 
@@ -49371,7 +49349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6992763463451386548
 Transform:
   m_ObjectHideFlags: 0
@@ -49380,7 +49358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8158439391138296895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.671, z: 0}
+  m_LocalPosition: {x: 0, y: -1.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -54393,7 +54371,7 @@ Transform:
   - {fileID: 1416068618623238136}
   - {fileID: 6992763463451386548}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7681491460480103933
 Rigidbody:
@@ -54404,8 +54382,8 @@ Rigidbody:
   m_GameObject: {fileID: 8670822672812293308}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 10
+  m_Drag: 0
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -54420,7 +54398,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &2407259212613961199
 BoxCollider:
@@ -54474,39 +54452,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c197322da27ad4598de04e16d5f336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turnSpeed: 20
+  _turnSpeed: 3
   _speed: 15
-  _topSpeed: 20
+  _topSpeed: 0
+  _linearDrag: 0.5
   _gripiness: 0.5
+  _angularDrag: 0.5
   _accelerationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      value: 75
+      inSlope: 90.7734
+      outSlope: 90.7734
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.58241415
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _groundCheckDist: 0.5
+  _groundCheckDist: 1
   _maxOffset: 0.4
-  _strength: 50
+  _strength: 100
   _damping: 2
   _scale: 20
+  _velocity: {x: 0, y: 0, z: 0}
+  _forwardSpeed: 0
+  _rightSpeed: 0
+  _torque: 0
 --- !u!1 &8703936696733234605
 GameObject:
   m_ObjectHideFlags: 0
