@@ -54383,7 +54383,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -54452,45 +54452,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c197322da27ad4598de04e16d5f336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rotateToGroundNormal: 1
+  _useLinearDrag: 1
+  _useGrip: 1
+  _useAngularDrag: 1
   _turnSpeed: 3
-  _speed: 15
-  _topSpeed: 0
-  _linearDrag: 0.5
-  _gripiness: 0.5
-  _angularDrag: 0.5
+  _linearDrag: 0.1
+  _gripiness: 0.25
+  _angularDrag: 0.99
   _accelerationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
+      inSlope: 158.97717
+      outSlope: 158.97717
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.017208412
+    - serializedVersion: 3
+      time: 1
+      value: 50
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 75
-      inSlope: 90.7734
-      outSlope: 90.7734
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.58241415
-      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _groundCheckDist: 1
+  _topReverseSpeed: 5
+  _reverseAccel: 1
+  _minSpeedToDrift: 0
+  _driftMagnitude: 20
+  _driftGrip: 0.1
+  _driftAngularDrag: 0.1
+  _driftNeutralTurnMultiplier: 1.25
+  _driftSteerTurnMultiplier: 0.75
+  _suspensionOffsetX: 0.5
+  _suspensionOffsetY: 0.1
+  _suspensionOffsetZ: 0.5
+  _groundCheckDist: 1.2
+  _suspensionHeight: 1
   _maxOffset: 0.4
-  _strength: 100
-  _damping: 2
-  _scale: 20
+  _strength: 10
+  _damping: 5
+  _isGrounded: 0
+  _groundNormal: {x: 0, y: 0, z: 0}
   _velocity: {x: 0, y: 0, z: 0}
   _forwardSpeed: 0
   _rightSpeed: 0
   _torque: 0
+  _driftDirection: 0
+  _isDrifting: 0
 --- !u!1 &8703936696733234605
 GameObject:
   m_ObjectHideFlags: 0
