@@ -6065,6 +6065,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: course
       objectReference: {fileID: 0}
+    - target: {fileID: 7377045792205822829, guid: 57c902fc1ff6b094eb5f66dfec9b9e52, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c70d1bc29ae313349b281ea55ab51455, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
